@@ -1,14 +1,17 @@
-//import liraries
+
 import React, {Component} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// import OfferScreen from '../screens/OfferScreen';
-// import ShoppingCartScreen from '../../src/screens/ShoppingCartScreen';
-// import ExploreScreen from '../screens/ExploreScreen';
-// import ProfileScreen from '../screens/ProfileScreen';
+
 import Feather from 'react-native-vector-icons/Feather';
-import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import HomeScreen from '../screens/HomeScreen';
-//import HomeStack from './HomeStack';
+import ProfileScreen from '../screens/ProfileScreen';
+import ExploreScreen from '../screens/ExploreScreen';
+import MediaScreen from '../screens/MediaScreen';
+
+import { theme } from '../components/LoginComponents/theme';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -18,8 +21,8 @@ const BottomTabNav = () => {
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
-        activeTintColor: '#40BFFF',
-        inactiveTintColor: '#9098B1',
+        activeTintColor: theme.colors.primary,
+        inactiveTintColor: theme.colors.secondary,
       }}>
       <Tab.Screen
         component={ HomeScreen }
@@ -31,7 +34,7 @@ const BottomTabNav = () => {
         }}
       />
 
-      {/* <Tab.Screen
+       <Tab.Screen
         name="Explore"
         component={ExploreScreen}
         options={{
@@ -41,14 +44,14 @@ const BottomTabNav = () => {
         }}
       />
       <Tab.Screen
-        name="Cart"
-        component={ShoppingCartScreen}
+        name="Media"
+        component={MediaScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Feather name="shopping-cart" color={color} size={20} />
+            <MaterialIcons name="personal-video" color={color} size={20} />
           ),
         }}
-      />
+      />{/*
       <Tab.Screen
         name="Offer"
         component={OfferScreen}
@@ -57,7 +60,7 @@ const BottomTabNav = () => {
             <Feather name="tag" color={color} size={20} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
@@ -66,7 +69,7 @@ const BottomTabNav = () => {
             <Feather name="user" color={color} size={20} />
           ),
         }}
-      /> */}
+      /> 
     </Tab.Navigator>
   );
 };

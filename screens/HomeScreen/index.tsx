@@ -12,16 +12,40 @@ import {
 import styles from './styles';
 import HomeImageCarousel from '../../components/HomeImageCarousel';
 import ImageCarousal from '../../data/ImageCarousal';
+import Background from '../../components/LoginComponents/Background';
+import Header from '../../components/LoginComponents/Header';
+import { theme } from '../../components/LoginComponents/theme';
+import SleepDuration from '../../components/DailyLogs/Sleep';
 
 
 const HomeScreen = ({searchValue}: {searchValue: string}) => {
   console.log(searchValue);
   return (
-    <View style={styles.page}>
+    <View style = {styles.container} >
+      <View>
 
-      <Text>
-        Welcome to homescreen
-      </Text>
+        <Text style = {styles.header}>
+          My FND Australia
+        </Text>
+
+        <Text style = {styles.name}>
+          <Text style = {{color : theme.colors.secondary}}>
+            Welcome 
+          </Text>
+          {" "}
+          <Text style = {{color : theme.colors.primary}}>
+              Anup ! 
+          </Text>
+        </Text>
+
+        <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', marginBottom:50}}>
+          How are you feeling today?
+        </Text>
+        
+        <SleepDuration/>
+
+      </View>
+      
       {/* <ScrollView>
         <CarouselCards />
         <ScrollView>

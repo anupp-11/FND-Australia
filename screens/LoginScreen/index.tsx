@@ -13,6 +13,7 @@ import {
   emailValidator,
   passwordValidator,
 } from '../../components/LoginComponents/utils';
+import { authUser } from '../../service/AccountService';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -26,15 +27,16 @@ const LoginScreen = () => {
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
 
-  const _onLoginPressed = () => {
+  const _onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
-
-    if (emailError || passwordError) {
-      setEmail({...email, error: emailError});
-      setPassword({...password, error: passwordError});
-      return;
-    }
+    const response = await authUser(email.value, password.value);
+    // if (emailError || passwordError) {
+    //   setEmail({...email, error: emailError});
+    //   setPassword({...password, error: passwordError});
+    //   return;
+    // }
+    debugger;
     navigation.navigate('Home');
   };
 
