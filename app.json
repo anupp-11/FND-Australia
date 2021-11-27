@@ -21,14 +21,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "aha.orders.com"
+      "bundleIdentifier": "fndaustralia.com"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "aha.orders.com"
+      "package": "fndaustralia.com"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
