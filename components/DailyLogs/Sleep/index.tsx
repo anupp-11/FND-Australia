@@ -4,6 +4,7 @@ import Slider from '@react-native-community/slider';
 import Background from '../../LoginComponents/Background';
 import { View } from '../../Themed';
 import styles from './styles';
+import Header from '../../LoginComponents/Header';
 
 
 interface SleepDurationProps {
@@ -27,17 +28,18 @@ const SleepDuration = () => {
   const [sliding, setSliding] = useState('Inactive');
   return (
     <Background>
-        <Text style = {styles.root} >{range}</Text>
-        <Text style = {styles.root} >{sliding}</Text>
+        <Header> Sleep Monitor </Header>
+        {/* <Text style = {styles.root} >{range}</Text>
+        <Text style = {styles.root} >{sliding}</Text> */}
         
-        <Slider
-  style={{width: 200, height: 40}}
-  minimumValue={0}
-  maximumValue={1}
-  minimumTrackTintColor="#FFFFFF"
-  maximumTrackTintColor="#000000"
-  thumbTintColor = 'tomato'
-/>
+        {/* <Slider
+            style={{width: 200, height: 40}}
+            minimumValue={0}
+            maximumValue={1}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor = 'tomato'
+          /> */}
           {/* <Slider
           style={{width: 250, height: 40}}
           minimumValue={0}

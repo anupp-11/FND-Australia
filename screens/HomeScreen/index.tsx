@@ -16,13 +16,14 @@ import Background from '../../components/LoginComponents/Background';
 import Header from '../../components/LoginComponents/Header';
 import { theme } from '../../components/LoginComponents/theme';
 import SleepDuration from '../../components/DailyLogs/Sleep';
+import Mood from '../../components/DailyLogs/Mood';
 
 
 const HomeScreen = ({searchValue}: {searchValue: string}) => {
   console.log(searchValue);
   return (
-    <View style = {styles.container} >
-      <View>
+    <View  >
+      <View style = {styles.container}>
 
         <Text style = {styles.header}>
           My FND Australia
@@ -38,13 +39,18 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
           </Text>
         </Text>
 
-        <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', marginBottom:50}}>
+        <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', }}>
           How are you feeling today?
         </Text>
-        
+
+        </View>
+        <View style= {styles.mood}>
+          <Text></Text>
+        </View>
+        <Mood/>
         <SleepDuration/>
 
-      </View>
+      
       
       {/* <ScrollView>
         <CarouselCards />
