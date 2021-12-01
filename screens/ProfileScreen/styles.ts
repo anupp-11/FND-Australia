@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       },
       userInfoSection: {
         paddingHorizontal: 30,
-        marginBottom: 25,
+        marginBottom: 15,
       },
       title: {
         fontSize: 24,
@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },
       menuWrapper: {
-        marginTop: 10,
+        //marginTop: 10,
       },
       menuItem: {
         flexDirection: 'row',
-        paddingVertical: 15,
+        paddingVertical: 5,
         paddingHorizontal: 30,
       },
       menuItemText: {

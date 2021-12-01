@@ -2,7 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     page: {
-        padding: 10,
+      paddingHorizontal :10
+        //padding: 20,
       },
       root: {
         marginTop:10,
@@ -12,11 +13,21 @@ const styles = StyleSheet.create({
         color:'#223263'
       },
       container: {
-        flex: 1,
-        marginLeft: 10,
-        marginRight: 10,
-        alignItems: "stretch",
-        justifyContent: "center"
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop : 20,
+        paddingHorizontal : 20,
+        marginBottom: 20
+      },
+      Txtcontainer: {
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingHorizontal : 15,
+        marginBottom: 10
       }
 });
 

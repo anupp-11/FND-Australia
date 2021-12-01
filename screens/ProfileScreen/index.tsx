@@ -10,13 +10,14 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
-
+import FAIcon from 'react-native-vector-icons/FontAwesome5';
 
 
 
 import Button from '../../components/LoginComponents/Button';
 
 import styles from './styles';
+import { theme } from '../../components/LoginComponents/theme';
 
 // create a component
 const ProfileScreen = () => {
@@ -42,7 +43,7 @@ const ProfileScreen = () => {
       </View>
     </View>
 
-    <View style={styles.userInfoSection}>
+    {/* <View style={styles.userInfoSection}>
       <View style={styles.row}>
         <Icon name="map-marker-radius" color="#777777" size={20}/>
         <Text style={{color:"#777777", marginLeft: 20}}>Dhapakhel, Lalitpur</Text>
@@ -55,53 +56,96 @@ const ProfileScreen = () => {
         <Icon name="email" color="#777777" size={20}/>
         <Text style={{color:"#777777", marginLeft: 20}}>rame@email.com</Text>
       </View>
-    </View>
+    </View> */}
+    <View
+      style={{
+      borderBottomColor: theme.colors.surface,
+      borderBottomWidth: 3,
+      marginHorizontal: 10,
+      marginBottom: 10
+      }}
+    />
 
-    <View style={styles.infoBoxWrapper}>
-        <View style={[styles.infoBox, {
-          borderRightColor: '#dddddd',
-          borderRightWidth: 1
-        }]}>
-          <Title>$140.50</Title>
-          <Caption>Wallet</Caption>
-        </View>
-        <View style={styles.infoBox}>
-          <Title>12</Title>
-          <Caption>Orders</Caption>
-        </View>
-    </View>
 
     <View style={styles.menuWrapper}>
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <Icon name="cart-arrow-down" color="#28cd00" size={25}/>
-          <Text style={styles.menuItemText}>Your Orders</Text>
+          <FAIcon name="user-edit" color="#28cd00" size={20}/>
+          <Text style={styles.menuItemText}>Manage Profile</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <Icon name="credit-card" color="#28cd00" size={25}/>
-          <Text style={styles.menuItemText}>Payment</Text>
+          <FAIcon name="user-md" color="#28cd00" size={20}/>
+          <Text style={styles.menuItemText}>Diagnosis</Text>
         </View>
       </TouchableRipple>
-      {/*<TouchableRipple onPress={myCustomShare}>
+      <TouchableRipple onPress={() =>{}}>
         <View style={styles.menuItem}>
-          <Icon name="share-outline" color="#FF6347" size={25}/>
-          <Text style={styles.menuItemText}>Tell Your Friends</Text>
+          <FAIcon name="briefcase-medical" color="#28cd00" size={20}/>
+          <Text style={styles.menuItemText}>Medication</Text>
         </View>
       </TouchableRipple>
       
-      */}
+     
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
           <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Support</Text>
+          <Text style={styles.menuItemText}>Symptom Management Plan</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Potential Strategies</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Daily Log</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Exercise</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Self-Referral Form</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <FAIcon name="donate" color="#28cd00" size={25}/>
+          <Text style={styles.menuItemText}>Donation</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Stories</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => {}}>
+        <View style={styles.menuItem}>
+          <FAIcon name="question-circle" color="#28cd00" size={23}/>
+          <Text style={styles.menuItemText}>FAQ</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
           <Icons name="settings" color="#28cd00" size={23}/>
-          <Text style={styles.menuItemText}>Settings</Text>
+          <Text style={styles.menuItemText}>App Settings</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Dashboard')}>

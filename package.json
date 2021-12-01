@@ -40,6 +40,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.66.3",
+    "react-native-custom-slider": "^1.0.2",
     "react-native-device-info": "^8.0.0",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-event-listeners": "^1.0.7",
