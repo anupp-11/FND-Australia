@@ -18,10 +18,16 @@ import Button from '../../components/LoginComponents/Button';
 
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
+import navigation from '../../navigation';
+
+
 
 // create a component
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const _onSMRPressed = () => {
+    navigation.navigate('SMRScreen');
+  }
   return (
     <SafeAreaView style={styles.container}>
 
@@ -94,7 +100,7 @@ const ProfileScreen = () => {
           <Text style={styles.menuItemText}>Symptom Management Plan</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={_onSMRPressed}>
         <View style={styles.menuItem}>
           <Icon name="account-check-outline" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
