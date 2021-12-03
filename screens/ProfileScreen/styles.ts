@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-      marginTop:50,
+      //marginTop:50,
         flex: 1,
       },
       userInfoSection: {

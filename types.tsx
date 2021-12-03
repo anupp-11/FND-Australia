@@ -20,8 +20,8 @@ export type CartTabParamList = {
   CartScreen: undefined;
 };
 
-export type OrdersTabParamList = {
-  OrdersScreen: undefined;
+export type ProfileTabParamList = {
+  ProfileScreen: undefined;
 };
 
 export type BarCodeTabParamList = {

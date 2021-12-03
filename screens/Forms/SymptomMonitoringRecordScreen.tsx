@@ -15,6 +15,7 @@ import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
 
 
+
 const _onSMRPressed = () => {
 
 }
@@ -25,7 +26,7 @@ const SymptomMonitoringRecordScreen = () => {
     <SafeAreaView style={styles.container}>
 
     <View style={{flex: 1}}>
-        
+        <Text>smr</Text>
       </View>
   </SafeAreaView>
   );
