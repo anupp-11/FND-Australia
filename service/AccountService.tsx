@@ -39,7 +39,7 @@ export async function authUser(email:string, pass:string) {
     body: JSON.stringify({ username: email, password:pass })
   };
   debugger;
-  const response = await fetch('https://172.18.0.2:5001/User/authenticate', requestOptions);
+  const response = await fetch('https://172.18.0.3:5001/User/authenticate', requestOptions);
   const data = await response.json();
   
     debugger;

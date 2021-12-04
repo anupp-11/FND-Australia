@@ -43,8 +43,8 @@ const ProfileScreen = () => {
           <Title style={[styles.title, {
             marginTop:15,
             marginBottom: 5,
-          }]}>Ram Bahadur</Title>
-          <Caption style={styles.caption}>@rame</Caption>
+          }]}>Saurab</Title>
+          <Caption style={styles.caption}>@saurab</Caption>
         </View>
       </View>
     </View>

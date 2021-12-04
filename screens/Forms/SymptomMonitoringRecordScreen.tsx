@@ -309,6 +309,10 @@ const SymptomMonitoringRecordScreen = () => {
           </Card.Content>
         </Card>
 
+        <Button mode="contained"  >
+                Submit
+              </Button>
+
       </ScrollView>
     </SafeAreaView>
   );
