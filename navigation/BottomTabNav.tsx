@@ -11,6 +11,7 @@ import ExploreScreen from '../screens/ExploreScreen';
 import MediaScreen from '../screens/MediaScreen';
 
 import { theme } from '../components/LoginComponents/theme';
+import ProfileNavigator from './navigators/ProfileNavigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -63,7 +64,7 @@ const BottomTabNav = () => {
       /> */}
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({color}) => (
             <Feather name="user" color={color} size={20} />

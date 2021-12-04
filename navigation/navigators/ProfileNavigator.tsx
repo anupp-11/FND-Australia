@@ -6,62 +6,65 @@ import { Platform } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Appbar } from "react-native-paper";
 import { PRIMARY_COLOR, PRIMARY_WHITE_COLOR } from "../../constants/Colors";
-import OrderInfoScreen from "../../screens/orders/OrderInfoScreen";
-import OrderListScreen from "../../screens/orders/OrderListScreen";
-import { OrdersTabParamList } from "../../types";
+import SymptomMonitoringRecordScreen from "../../screens/Forms/SymptomMonitoringRecordScreen";
+import ProfileScreen from "../../screens/ProfileScreen";
 
-import ProductScreen from "../../screens/products/ProductInfoScreen";
-const OrdersStack = createStackNavigator<OrdersTabParamList>();
+import { ProfileTabParamList } from "../../types";
 
-export default function OrderNavigator() {
+const ProfileStack = createStackNavigator<ProfileTabParamList>();
+
+export default function ProfileNavigator() {
   const navigation = useNavigation();
   return (
-    <OrdersStack.Navigator>
-      <OrdersStack.Screen
-        name="OrderListScreen"
-        component={OrderListScreen}
-        options={{
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        
+      />
+      <ProfileStack.Screen
+        name="SMRScreen"
+        component={SymptomMonitoringRecordScreen}
+        // options={{
           
-          header: ({ navigation }) => {
-            if(Platform.OS === "android"){
-              return (
-                <Appbar.Header style={{backgroundColor: PRIMARY_COLOR}}>
-                  <Appbar.BackAction onPress={() =>{
+        //   header: ({ navigation }) => {
+        //     if(Platform.OS === "android"){
+        //       return (
+        //         <Appbar.Header style={{backgroundColor: PRIMARY_COLOR}}>
+        //           <Appbar.BackAction onPress={() =>{
                      
-                      navigation.dispatch(
-                        CommonActions.reset({
-                          index: 0,
-                          routes: [{ name: "Products" }]
-                        }));
+        //               navigation.goBack();
                      
-                  }}/>
-                  <Appbar.Content title="Orders" />
+        //           }}/>
+        //           <Appbar.Content title="Symptopm Monitoring Record" />
                   
-                </Appbar.Header>
-              );
+        //         </Appbar.Header>
+        //       );
 
-            }else{
-              return(
-                <Appbar.Header style={{backgroundColor: PRIMARY_WHITE_COLOR}}>
+        //     }else{
+        //       return(
+        //         <Appbar.Header style={{backgroundColor: PRIMARY_WHITE_COLOR}}>
+        //           <Appbar.BackAction onPress={() =>{
+        //              navigation.goBack()
+        //           }}/>
+        //           <Appbar.Content title="Symptopm Monitoring Record" />
                  
-                  <Appbar.Content title="Orders" />
-                  
-                </Appbar.Header>
-              );
-            }
+        //         </Appbar.Header>
+        //       );
+        //     }
 
            
-          },
+        //   },
         
-          transitionSpec:{
-            open: TransitionSpecs.FadeOutToBottomAndroidSpec,
-            close: TransitionSpecs.FadeOutToBottomAndroidSpec
-          }
-        }}
+        //   transitionSpec:{
+        //     open: TransitionSpecs.FadeOutToBottomAndroidSpec,
+        //     close: TransitionSpecs.FadeOutToBottomAndroidSpec
+        //   }
+        //}}
       />
-       <OrdersStack.Screen
-        name="OrderScreen"
-        component={OrderInfoScreen}
+       {/* <ProfileStack.Screen
+        name=""
+        component={}
         options={{
           
           header: ({ navigation }) => {
@@ -99,7 +102,7 @@ export default function OrderNavigator() {
           }
         }}
       />
-       <OrdersStack.Screen
+       <ProfileStack.Screen
         name="OrderProductScreen"
         component={ProductScreen}
         options={{
@@ -144,7 +147,7 @@ export default function OrderNavigator() {
             close: TransitionSpecs.FadeOutToBottomAndroidSpec
           }
         }}
-      />
-    </OrdersStack.Navigator>
+      /> */}
+    </ProfileStack.Navigator>
   );
 }
