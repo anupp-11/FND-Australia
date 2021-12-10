@@ -5,13 +5,20 @@ import Background from '../../LoginComponents/Background';
 import { View } from '../../Themed';
 import styles from './styles';
 import Header from '../../LoginComponents/Header';
+import Paragraph from '../../LoginComponents/Paragraph';
 
 
 const Mood = () => {
 
   return (
     <View style = {{backgroundColor:'white', borderRadius: 10, padding:10, marginBottom:20}}>
-        <Header> Mood Monitor </Header>
+        <Paragraph> Mood Monitor </Paragraph>
+        
+          <Image
+            style={{height: 150, width : '100%', borderRadius:10, marginBottom: 20 }}
+            source={require('../../../assets/images/Mood.png')}
+          />
+        
         <View style = {{display:'flex', flexDirection : 'row', justifyContent:'space-around', marginTop: 10, marginBottom:20}}>
           <View style={{height:50, width:50}}>
             <Image source={require('../../../assets/emojis/vhappy.png')} style={{height:50, width: 50}} />

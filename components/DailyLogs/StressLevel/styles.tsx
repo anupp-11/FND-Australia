@@ -29,24 +29,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal : 15,
         marginBottom: 10
-      },
-      imgContainer : {
-          //position : 'relative',
-          textAlign: 'center',
-          height:150
-      },
-      image : {
-        height: 150, 
-        width : '100%', 
-        borderRadius:10, 
-        marginBottom: 20 
-      },
-      centerText : {
-        fontSize: 80,
-        fontWeight:'700',
-        color: 'white',
-        
-        
       }
 });
 

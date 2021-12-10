@@ -1,9 +1,8 @@
 
 
 import React, { useState } from 'react';
-import { Image, Text,ImageBackground} from 'react-native';
-//import Slider from '@react-native-community/slider';
-import Background from '../../LoginComponents/Background';
+import { Text,FlatList, Image} from 'react-native';
+
 import { View } from '../../Themed';
 import styles from './styles';
 import Header from '../../LoginComponents/Header';
@@ -12,23 +11,16 @@ import { theme } from '../../LoginComponents/theme';
 import Paragraph from '../../LoginComponents/Paragraph';
 
 
-const SleepQuality = () => {
+
+const StressLevel = () => {
   const [value, setValue] = useState(0);
   return (
     <View style = {styles.page}>
-        <Paragraph> Sleep Quality </Paragraph>
-        <View style= {styles.imgContainer}>
-          <Image
-              style={styles.image}
-              source={require('../../../assets/images/SleepQuality.png')}
-            />
-         
-          <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center',backgroundColor: 'transparent'}}>
-             <Text style = {styles.centerText}>{value}</Text>
-          </View>
-        </View>
-        
-        
+        <Paragraph> Stress Level </Paragraph>
+        <Image
+            style={{height: 150, width : '100%', borderRadius:10, marginBottom: 20 }}
+            source={require('../../../assets/images/StressLevel.png')}
+          />
         <View style = {{paddingHorizontal:20}}>
         <Slider
             value={value}
@@ -37,12 +29,14 @@ const SleepQuality = () => {
             step = {1}
             onValueChange={(value) => setValue(value)}
             thumbStyle={{ justifyContent: 'center', alignItems: 'center', width: 25 }}
-            trackStyle={{height: 10}}
+            // minimumTrackTintColor = "yellow"
+            // maximumTrackTintColor = "red"
+            trackStyle={{height: 20}}
             customThumb={
                 <View
                     style={{
                         width: 35,
-                        height: 20,
+                        height: 30,
                         overflow: 'hidden',
                         borderTopLeftRadius: 10,
                         borderTopRightRadius: 10,
@@ -56,15 +50,15 @@ const SleepQuality = () => {
         />
         </View>
         
-            
-            
-   
         <View style = {styles.container}>
           <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
             <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>0</Text>
             <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
           </View>
-          
+          <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
+            <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>{value}</Text>
+            <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.primary, position: 'absolute'}}></View>
+          </View>
           <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
             <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>10</Text>
             <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
@@ -82,6 +76,6 @@ const SleepQuality = () => {
 
 
 
-export default SleepQuality;
+export default StressLevel;
 
 
