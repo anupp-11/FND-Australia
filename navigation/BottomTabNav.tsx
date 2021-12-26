@@ -12,6 +12,7 @@ import MediaScreen from '../screens/MediaScreen';
 
 import { theme } from '../components/LoginComponents/theme';
 import ProfileNavigator from './navigators/ProfileNavigator';
+import HomeNavigator from './navigators/HomeNavigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +27,7 @@ const BottomTabNav = () => {
         inactiveTintColor: theme.colors.secondary,
       }}>
       <Tab.Screen
-        component={ HomeScreen }
+        component={ HomeNavigator }
         name="Home"
         options={{
           tabBarIcon: ({color}) => (
@@ -52,16 +53,8 @@ const BottomTabNav = () => {
             <MaterialIcons name="personal-video" color={color} size={20} />
           ),
         }}
-      />{/*
-      <Tab.Screen
-        name="Offer"
-        component={OfferScreen}
-        options={{
-          tabBarIcon: ({color}) => (
-            <Feather name="tag" color={color} size={20} />
-          ),
-        }}
-      /> */}
+      />
+    
       <Tab.Screen
         name="Profile"
         component={ProfileNavigator}

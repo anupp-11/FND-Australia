@@ -2,19 +2,9 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  SectionList,
-  FlatList,
   ScrollView,
-  Image,
-  ImageBackground,
 } from 'react-native';
-
 import styles from './styles';
-import HomeImageCarousel from '../../components/HomeImageCarousel';
-import ImageCarousal from '../../data/ImageCarousal';
-import Background from '../../components/LoginComponents/Background';
-import Header from '../../components/LoginComponents/Header';
 import { theme } from '../../components/LoginComponents/theme';
 import SleepDuration from '../../components/DailyLogs/SleepDuration';
 import Mood from '../../components/DailyLogs/Mood';
@@ -23,12 +13,20 @@ import PhysicalHealthRating from '../../components/DailyLogs/PhysicalHealthRatin
 import PhysicalActivityLevel from '../../components/DailyLogs/PhysicalActivityLevel';
 import StressLevel from '../../components/DailyLogs/StressLevel';
 import GoalAchievement from '../../components/DailyLogs/GoalAchievement';
+import Stepper from "react-native-stepper-ui";
+import Button from '../../components/LoginComponents/Button';
 
+import { useNavigation } from '@react-navigation/native';
+import Background from '../../components/LoginComponents/Background';
 
 
 
 const HomeScreen = ({searchValue}: {searchValue: string}) => {
-  console.log(searchValue);
+  const navigation = useNavigation();
+  const onButtonPress = () => {
+    navigation.navigate('DailyLogsScreen');
+  };
+  
   return (
     <View  >
       <ScrollView>
@@ -53,18 +51,12 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
             </Text>
 
             </View>
-            <View style= {styles.mood}>
-              <Text></Text>
-            </View>
-            <Mood/>
-            <SleepDuration/>
-            <SleepQuality/>
-            <StressLevel/>
-            <PhysicalHealthRating/>
-            <SleepDuration/>
-            <PhysicalActivityLevel/>
+            <Background>
+              <Button  mode="contained" onPress={onButtonPress}>
+                Daily Logs
+              </Button>
+            </Background>
             
-            <GoalAchievement/>
       </ScrollView>
     </View>
   );

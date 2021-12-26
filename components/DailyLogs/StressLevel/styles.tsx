@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     page: {
-      paddingHorizontal :10,
+      padding :10,
       marginBottom: 20
         //padding: 20,
       },
@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal : 15,
         marginBottom: 10
+      },
+      input :{
+        width: '100%',
+        height: 44,
+        backgroundColor: '#f1f3f6',
+        borderRadius: 6,
+        paddingHorizontal : 10,
       }
 });
 

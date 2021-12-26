@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import Header from '../../LoginComponents/Header';
 import { theme } from '../../LoginComponents/theme';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import styles from './styles';
 class PhysicalHealthRating extends Component {
   constructor(props:any) {
     super(props);
@@ -23,6 +24,18 @@ class PhysicalHealthRating extends Component {
            style={{ paddingVertical: 10 }}
         />
          </View>
+
+         <TextInput
+          style={[
+            styles.input,{
+              height:100,
+              paddingVertical:10,
+              textAlignVertical:'top'
+            },
+          ]}
+          multiline={true}
+          placeholder={'Type Here'}
+          />
         
     </View>
     );

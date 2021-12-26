@@ -23,6 +23,9 @@ export type CartTabParamList = {
 export type ProfileTabParamList = {
   ProfileScreen: undefined;
 };
+export type HomeTabParamList = {
+  HomeScreen: undefined;
+};
 
 export type BarCodeTabParamList = {
   ScannerScreen: undefined;

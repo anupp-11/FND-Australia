@@ -6,32 +6,40 @@ import {
   Caption,
   Text,
   TouchableRipple,
+  Portal,
+  Dialog,
+  Paragraph,
+  Button,
+  Provider,
 } from 'react-native-paper';
+
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-
-
-
-import Button from '../../components/LoginComponents/Button';
-
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
-import navigation from '../../navigation';
 
-
-
-// create a component
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
   const _onSMRPressed = () => {
     navigation.navigate('SMRScreen');
   }
+  const logout = () =>{
+    hideDialog();
+    navigation.navigate('Dashboard');
+  
+  }
   return (
     <SafeAreaView style={styles.container}>
-
-    <View style={styles.userInfoSection}>
+    <Provider>
+    <View style={styles.head}>
+      
       <View style={{flexDirection: 'row', marginTop: 15}}>
         <Avatar.Image 
           source={{
@@ -48,21 +56,6 @@ const ProfileScreen = () => {
         </View>
       </View>
     </View>
-
-    {/* <View style={styles.userInfoSection}>
-      <View style={styles.row}>
-        <Icon name="map-marker-radius" color="#777777" size={20}/>
-        <Text style={{color:"#777777", marginLeft: 20}}>Dhapakhel, Lalitpur</Text>
-      </View>
-      <View style={styles.row}>
-        <Icon name="phone" color="#777777" size={20}/>
-        <Text style={{color:"#777777", marginLeft: 20}}>+977-9867564548</Text>
-      </View>
-      <View style={styles.row}>
-        <Icon name="email" color="#777777" size={20}/>
-        <Text style={{color:"#777777", marginLeft: 20}}>rame@email.com</Text>
-      </View>
-    </View> */}
     <View
       style={{
       borderBottomColor: theme.colors.surface,
@@ -74,7 +67,7 @@ const ProfileScreen = () => {
 
 
     <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('Manage Profile')}>
         <View style={styles.menuItem}>
           <FAIcon name="user-edit" color="#28cd00" size={20}/>
           <Text style={styles.menuItemText}>Manage Profile</Text>
@@ -86,83 +79,93 @@ const ProfileScreen = () => {
           <Text style={styles.menuItemText}>Diagnosis</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() =>{}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="briefcase-medical" color="#28cd00" size={20}/>
-          <Text style={styles.menuItemText}>Medication</Text>
-        </View>
-      </TouchableRipple>
+  
       
      
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Icon name="file-powerpoint" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Symptom Management Plan</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={_onSMRPressed}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Icon name="file-cabinet" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('SMPScreen')}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Potential Strategies</Text>
+          <Icon name="file-document-outline" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>My Seizure Monitoring Record</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('My Wellbeing Strategies')}>
+        <View style={styles.menuItem}>
+          <FAIcon name="briefcase-medical" color="#28cd00" size={20}/>
+          <Text style={styles.menuItemText}>My Wellbeing Strategies</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => navigation.navigate('Daily Logs')}>
         <View style={styles.menuItem}>
           <Icon name="account-check-outline" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Daily Log</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('Useful Links')}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Exercise</Text>
+          <Icon name="link-variant" color="#28cd00" size={27}/>
+          <Text style={styles.menuItemText}>Useful Links</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Self-Referral Form</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('Donation')}>
         <View style={styles.menuItem}>
           <FAIcon name="donate" color="#28cd00" size={25}/>
           <Text style={styles.menuItemText}>Donation</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('Stories')}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Icon name="camera-party-mode" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Stories</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('FAQs')}>
         <View style={styles.menuItem}>
           <FAIcon name="question-circle" color="#28cd00" size={23}/>
           <Text style={styles.menuItemText}>FAQ</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() => navigation.navigate('App Setting')}>
         <View style={styles.menuItem}>
           <Icons name="settings" color="#28cd00" size={23}/>
           <Text style={styles.menuItemText}>App Settings</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => navigation.navigate('Dashboard')}>
+      <TouchableRipple onPress={showDialog}>
         <View style={styles.menuItem}>
           <Icon name="logout" color="#28cd00" size={23}/>
           <Text style={styles.menuItemText}>Logout</Text>
         </View>
       </TouchableRipple>
-
+     
+      <Portal>
+        <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Title>Logout</Dialog.Title>
+            <Dialog.Content>
+              <Paragraph>Are you sure you want to logout?</Paragraph>
+            </Dialog.Content>
+          <Dialog.Actions>
+          
+            <Button onPress={logout}>Yes</Button>
+            <Button onPress={hideDialog}>No</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
   
     </View>
+    </Provider>
+
   </SafeAreaView>
   );
 };

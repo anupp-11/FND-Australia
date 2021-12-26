@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
-
+import { View, Text, Pressable, TextInput } from 'react-native';
+import DurationPicker from 'react-duration-picker';
 
 import Header from '../../LoginComponents/Header';
-import NumericInput from 'react-native-numeric-input';
-import { theme } from '../../LoginComponents/theme';
-import { Button, Chip } from 'react-native-paper';
 import RadioButton from './RadioButton';
+import styles from '../Mood/styles';
+
+
 
 const PhysicalActivityLevel = () => {
 
-  
+ 
+
   const [option, setOption] = useState(null);
   const data = [
     { value: 'Low' },
@@ -30,7 +31,17 @@ const PhysicalActivityLevel = () => {
         <Button mode="contained" style = {{borderRadius:12, margin:5}} color= "green" onPress={() => setLevel("High")} > High </Button> */}
         <RadioButton data={data} onSelect={(value) => setOption(value)} />
         {/* <Text> Your option: {option}</Text> */}
-        
+        <TextInput
+          style={[
+            styles.input,{
+              height:100,
+              paddingVertical:10,
+              textAlignVertical:'top'
+            },
+          ]}
+          multiline={true}
+          placeholder={'Type Here'}
+          />
         
         
     </View>

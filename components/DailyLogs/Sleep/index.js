@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Image, Text,ImageBackground} from 'react-native';
+import { Image, Text,TextInput} from 'react-native';
 //import Slider from '@react-native-community/slider';
 import Background from '../../LoginComponents/Background';
 import { View } from '../../Themed';
@@ -74,6 +74,17 @@ const SleepQuality = () => {
           <Text>Bad</Text>
           <Text>Good</Text>
         </View>
+        <TextInput
+          style={[
+            styles.input,{
+              height:100,
+              paddingVertical:10,
+              textAlignVertical:'top'
+            },
+          ]}
+          multiline={true}
+          placeholder={'Type Here'}
+          />
      
     </View>
   );

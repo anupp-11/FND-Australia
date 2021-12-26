@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Text,FlatList, Image} from 'react-native';
+import { Text,TextInput, Image} from 'react-native';
 
 import { View } from '../../Themed';
 import styles from './styles';
@@ -68,6 +68,17 @@ const StressLevel = () => {
           <Text>Bad</Text>
           <Text>Good</Text>
         </View>
+        <TextInput
+          style={[
+            styles.input,{
+              height:100,
+              paddingVertical:10,
+              textAlignVertical:'top'
+            },
+          ]}
+          multiline={true}
+          placeholder={'Type Here'}
+          />
      
     </View>
   );

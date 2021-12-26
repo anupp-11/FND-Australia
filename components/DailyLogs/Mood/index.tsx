@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Image, Text,FlatList} from 'react-native';
+import {Image, Text,FlatList, TextInput} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Background from '../../LoginComponents/Background';
 import { View } from '../../Themed';
@@ -35,12 +35,22 @@ const Mood = () => {
           <View style={{height:50, width:50, }}>
           <Image source={require('../../../assets/emojis/sad.png')} style={{height:50, width: 50}} />
           </View>
-          
         </View>
+        <TextInput
+          style={[
+            styles.input,{
+              height:100,
+              paddingVertical:10,
+              textAlignVertical:'top'
+            },
+          ]}
+          multiline={true}
+          placeholder={'Type Here'}
+          />
     </View>
   );
 };
 
 
-
 export default Mood;
+

@@ -8,6 +8,15 @@ const styles = StyleSheet.create({
       userInfoSection: {
         paddingHorizontal: 30,
         marginBottom: 15,
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center'
+      },
+      head: {
+        paddingHorizontal: 30,
+        marginBottom: 15,
+       
       },
       title: {
         fontSize: 24,
