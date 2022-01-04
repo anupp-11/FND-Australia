@@ -19,37 +19,36 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         justifyContent: "center"
       },
-      option: {
+      selectedOption: {
         fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+        fontWeight:'700'
+      },
+      unselectedOption: {
+        fontSize: 18,
         color: theme.colors.primary,
         textAlign: 'center',
-        display: 'flex',
-        flexDirection :'row',
-        alignItems:'center',
-        justifyContent:'center'
       },
       unselected: {
         backgroundColor: 'white',
         borderWidth : 2,
         borderColor : theme.colors.primary,
-        borderRadius: 10,
         margin: 5,
-        display: 'flex',
-        flexDirection :'row',
-        alignItems:'center',
-        justifyContent:'center'
-        //padding: 5
+        paddingVertical: 5,
+        borderRadius: 20,
+        width:100
+        //paddingHorizontal:10,
       },
       selected: {
         color: 'white',
         backgroundColor: theme.colors.primary,
-        margin: 6,
-        padding: 5,
-        borderRadius: 10,
-        display: 'flex',
-        flexDirection :'row',
-        alignItems:'center',
-        justifyContent:'center'
+        margin: 5,
+        paddingVertical: 5,
+        borderWidth : 2,
+        borderColor : "gray",
+        borderRadius: 20,
+        width:100
       },
 });
 

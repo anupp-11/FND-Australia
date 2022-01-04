@@ -73,11 +73,12 @@ export default class ManageProfileScreen extends React.Component {
                   mode="flat"
                   label="Email"
                   style={{ backgroundColor: 'white', margin:10 }}
-                  right={<TextInput.Icon name="border-color" />}
+                  //right={<TextInput.Icon name="border-color" />}
                   value={this.state.email}
-                  onChangeText={(value) =>
-                     this.setState({ email: value })
-                   }
+                  disabled={true}
+                  // onChangeText={(value) =>
+                  //    this.setState({ email: value })
+                  //  }
                 />
                 <TextInput
                   mode="flat"

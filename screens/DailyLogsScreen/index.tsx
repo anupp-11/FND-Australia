@@ -15,6 +15,7 @@ import PhysicalActivityLevel from '../../components/DailyLogs/PhysicalActivityLe
 import StressLevel from '../../components/DailyLogs/StressLevel';
 import GoalAchievement from '../../components/DailyLogs/GoalAchievement';
 import Stepper from "react-native-stepper-ui";
+import { useNavigation } from '@react-navigation/native';
 
 const content = [
   <Mood/>,
@@ -26,9 +27,15 @@ const content = [
   <GoalAchievement/>,
 ];
 
-const DailyLogsScreen = ({searchValue}: {searchValue: string}) => {
+
+const DailyLogsScreen = () => {
+  const navigation = useNavigation();
   const [active, setActive] = useState(0);
-  console.log(searchValue);
+  
+  const onSubmit = () =>{
+    Alert.alert("Daily Log Submitted Successfully.");
+    navigation.navigate("Profile Screen");
+  }
   return (
     <View style={{ marginVertical: 80, marginHorizontal: 20 }}>
       <Stepper
@@ -36,7 +43,9 @@ const DailyLogsScreen = ({searchValue}: {searchValue: string}) => {
         content={content}
         onNext={() => setActive((p) => p + 1)}
         onBack={() => setActive((p) => p - 1)}
-        onFinish={() => Alert.alert("Finish")}
+        onFinish={onSubmit}
+        buttonStyle={{backgroundColor: theme.colors.primary,}}
+        stepStyle={{backgroundColor: theme.colors.primary, }}
       />
     </View>
   );

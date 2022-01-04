@@ -1,8 +1,9 @@
 
 
 import React, { useState } from 'react';
-import { Text,TextInput, Image} from 'react-native';
-
+import { Image, Text,TextInput} from 'react-native';
+//import Slider from '@react-native-community/slider';
+import Background from '../../LoginComponents/Background';
 import { View } from '../../Themed';
 import styles from './styles';
 import Header from '../../LoginComponents/Header';
@@ -11,22 +12,23 @@ import { theme } from '../../LoginComponents/theme';
 import Paragraph from '../../LoginComponents/Paragraph';
 
 
-
-const StressLevel = () => {
+const PhysicalHealthRating = () => {
   const [value, setValue] = useState(0);
   return (
     <View style = {styles.page}>
-        <Paragraph> Stress Level </Paragraph>
+        <Paragraph> Physical Wellbeing Rating</Paragraph>
         <View style= {styles.imgContainer}>
           <Image
               style={styles.image}
-              source={require('../../../assets/images/StressLevel.png')}
+              source={require('../../../assets/images/PWR.png')}
             />
          
           <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center',backgroundColor: 'transparent'}}>
              <Text style = {styles.centerText}>{value}</Text>
           </View>
         </View>
+        
+        
         <View style = {{paddingVertical:20}}>
         <Slider
             value={value}
@@ -47,7 +49,7 @@ const StressLevel = () => {
                         borderRadius: 15,
                         borderColor:'white',
                         borderWidth:2,
-                        backgroundColor: "#599FB9" 
+                        backgroundColor: "#9316E4" 
                     }}
                 />
             }
@@ -55,15 +57,15 @@ const StressLevel = () => {
         />
         </View>
         
+            
+            
+   
         {/* <View style = {styles.container}>
           <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
             <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>0</Text>
             <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
           </View>
-          <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
-            <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>{value}</Text>
-            <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.primary, position: 'absolute'}}></View>
-          </View>
+          
           <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
             <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>10</Text>
             <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
@@ -92,6 +94,6 @@ const StressLevel = () => {
 
 
 
-export default StressLevel;
+export default PhysicalHealthRating;
 
 

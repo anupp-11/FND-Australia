@@ -1,46 +1,82 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  SectionList,
   FlatList,
-  ScrollView,
-  Image,
 } from 'react-native';
-import Background from '../../components/LoginComponents/Background';
-
-import styles from './styles';
-
+import { Appbar } from 'react-native-paper';
+import SymptomComponent from './SymptomComponent';
 
 
-const HomeScreen = ({searchValue}: {searchValue: string}) => {
-  console.log(searchValue);
-  return (
-    <Background >
 
-      <Text>
-        Welcome to ExploreScreen
-      </Text>
-      {/* <ScrollView>
-        <CarouselCards />
-        <ScrollView>
-          <FlatList
-            data={categories.category}
-            renderItem={({item}) => <HomeCategory category={item} />}
-          />
-        </ScrollView>
-        <ScrollView>
-          <Text style={styles.root}>All Products</Text>
-          <FlatList
-            data={products}
-            renderItem={({item}) => <ProductItem item={item} />}
-            showsVerticalScrollIndicator={false}
-          />
-        </ScrollView>
-      </ScrollView> */}
-    </Background>
-  );
+export default class SymptomScreen extends React.Component {
+  
+  constructor(props: any,) {
+    super(props);
+   
+    this.state = {
+      isProcessing: true,
+      symptoms: [
+        {
+          title:"Functional Limb Weakness",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Tremor",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Movement Disorder",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Dystonia",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Gait Disorder",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Facial Symptoms",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Tics",
+          detail:"Detail for Symptom."
+        },
+        {
+          title:"Functional Drop Attacks",
+          detail:"Detail for Symptom."
+        },
+
+      ],
+      
+
+    };
+   
+  }
+
+  renderItem = ({ item }) => <SymptomComponent symptom={item} navigation={this.props.navigation} />;
+  headerComponent = () =>{
+    return(
+      <Appbar.Header style={{backgroundColor: 'white'}}>
+        <Appbar.Content title="Symptoms"/>
+    </Appbar.Header>
+    );
+  }
+  render() {
+    return (
+        <FlatList
+              ListHeaderComponent = {this.headerComponent()}
+              initialNumToRender={7}
+              showsVerticalScrollIndicator={false}
+              data={this.state.symptoms}
+              renderItem={this.renderItem}
+              horizontal={false}
+              style={{
+                width: "100%",
+                marginTop: 35,
+              }}
+             />
+     );
+  }
 };
-
-export default HomeScreen;

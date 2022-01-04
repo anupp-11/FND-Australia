@@ -18,6 +18,8 @@ import Button from '../../components/LoginComponents/Button';
 
 import { useNavigation } from '@react-navigation/native';
 import Background from '../../components/LoginComponents/Background';
+import { Card, Paragraph, Title } from 'react-native-paper';
+import WebView from 'react-native-webview';
 
 
 
@@ -33,7 +35,7 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
           <View style = {styles.container}>
           
             <Text style = {styles.header}>
-              My FND Australia
+              FND Australia
             </Text>
 
             <Text style = {styles.name}>
@@ -42,21 +44,36 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
               </Text>
               {" "}
               <Text style = {{color : theme.colors.primary}}>
-                  Anup ! 
+                  Sohit ! 
               </Text>
             </Text>
 
-            <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', }}>
+            {/* <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', }}>
               How are you feeling today?
-            </Text>
-
+            </Text> */}
+           
             </View>
-            <Background>
-              <Button  mode="contained" onPress={onButtonPress}>
-                Daily Logs
-              </Button>
-            </Background>
+            <View style={{padding:10}}>
+              <Card>
+                <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
+                <Card.Content>
+                  <Title style={{marginTop:10}}>Know more about recovery</Title>
+                </Card.Content>
+              </Card>
+            </View>
             
+            {/* <View style={{padding:10}}>
+              <Card>
+                <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, height: undefined, width: undefined, resizeMode: 'contain' }} />
+                <Card.Content>
+                  <Title style={{marginTop:10}}>Know more about recovery</Title>
+                </Card.Content>
+              </Card>
+            </View> */}
+            <WebView
+              source={{uri: 'https://fndaus.org.au/news-and-events/'}}
+              style={{width:'100%', height:500}}
+            />
       </ScrollView>
     </View>
   );

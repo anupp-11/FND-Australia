@@ -6,6 +6,7 @@ import { View } from '../../Themed';
 import styles from './styles';
 import Header from '../../LoginComponents/Header';
 import Paragraph from '../../LoginComponents/Paragraph';
+import { TouchableRipple } from 'react-native-paper';
 
 
 const Mood = () => {
@@ -21,7 +22,10 @@ const Mood = () => {
         
         <View style = {{display:'flex', flexDirection : 'row', justifyContent:'space-around', marginTop: 10, marginBottom:20}}>
           <View style={{height:50, width:50}}>
+           <TouchableRipple onPress={() => {}}>
             <Image source={require('../../../assets/emojis/vhappy.png')} style={{height:50, width: 50}} />
+
+           </TouchableRipple>
           </View>
           <View style={{height:50, width:50,}}>
           <Image source={require('../../../assets/emojis/happy.png')} style={{height:50, width: 50}} />

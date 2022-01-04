@@ -1,46 +1,61 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  SectionList,
   FlatList,
-  ScrollView,
-  Image,
 } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import Background from '../../components/LoginComponents/Background';
 
-import styles from './styles';
+import VideoComponent from './VideoComponent';
 
 
 
-const HomeScreen = ({searchValue}: {searchValue: string}) => {
-  console.log(searchValue);
-  return (
-    <Background >
+export default class MediaScreen extends React.Component {
+  
+  constructor(props: any,) {
+    super(props);
+   
+    this.state = {
+      isProcessing: true,
+      videos: [
+        "lcLYqYjO69c",
+        "tFx7tokRbu8",
+        "yE8sbxP7694",
+        "u52rcsud5LE",
+      ],
+      
 
-      <Text>
-        Welcome to MediaScreen
-      </Text>
-      {/* <ScrollView>
-        <CarouselCards />
-        <ScrollView>
-          <FlatList
-            data={categories.category}
-            renderItem={({item}) => <HomeCategory category={item} />}
-          />
-        </ScrollView>
-        <ScrollView>
-          <Text style={styles.root}>All Products</Text>
-          <FlatList
-            data={products}
-            renderItem={({item}) => <ProductItem item={item} />}
-            showsVerticalScrollIndicator={false}
-          />
-        </ScrollView>
-      </ScrollView> */}
-    </Background>
-  );
+    };
+   
+  }
+  componentDidMount(){
+    
+  }
+ 
+
+  renderItem = ({ item }) => <VideoComponent video={item} navigation={this.props.navigation} />;
+  headerComponent = () =>{
+    return(
+      <Appbar.Header style={{backgroundColor: 'white'}}>
+        <Appbar.Content title="Media"/>
+    </Appbar.Header>
+    );
+  }
+  render() {
+    return (
+        <FlatList
+                ListHeaderComponent = {this.headerComponent()}
+               initialNumToRender={7}
+               showsVerticalScrollIndicator={false}
+               data={this.state.videos}
+               renderItem={this.renderItem}
+               columnWrapperStyle={{ justifyContent: "space-around" }}
+               horizontal={false}
+               numColumns={2}
+               style={{
+                width: "100%",
+                marginTop: 35,
+               }}
+             />
+     );
+  }
 };
-
-export default HomeScreen;

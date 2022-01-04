@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, BackHandler} from 'react-native';
 import {
   Avatar,
   Title,
@@ -13,15 +13,18 @@ import {
   Provider,
 } from 'react-native-paper';
 
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import MAIcon from 'react-native-vector-icons/MaterialIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+
   const [visible, setVisible] = React.useState(false);
 
   const showDialog = () => setVisible(true);
@@ -69,14 +72,22 @@ const ProfileScreen = () => {
     <View style={styles.menuWrapper}>
       <TouchableRipple onPress={() => navigation.navigate('Manage Profile')}>
         <View style={styles.menuItem}>
-          <FAIcon name="user-edit" color="#28cd00" size={20}/>
+          <FAIcon name="user-edit" color="black" size={20}/>
           <Text style={styles.menuItemText}>Manage Profile</Text>
+          <MAIcon name="arrow-forward-ios" color="black" size={20} style={{marginLeft:180, marginTop:5}}/>
         </View>
       </TouchableRipple>
+      <View
+        style={{
+          borderBottomColor: 'grey',
+          borderBottomWidth: 1,
+        }}
+      />
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <FAIcon name="user-md" color="#28cd00" size={20}/>
+          <FAIcon name="user-md" color="black" size={20}/>
           <Text style={styles.menuItemText}>Diagnosis</Text>
+          <MAIcon name="arrow-forward-ios" color="black" size={20} style={{marginLeft:225, marginTop:5}}/>
         </View>
       </TouchableRipple>
   
@@ -84,17 +95,17 @@ const ProfileScreen = () => {
      
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <Icon name="file-powerpoint" color="#28cd00" size={27}/>
+          <Fontisto name="prescription" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Symptom Management Plan</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={_onSMRPressed}>
+      <TouchableRipple onPress={() => navigation.navigate('Symptom Monitoring Record')}>
         <View style={styles.menuItem}>
           <Icon name="file-cabinet" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => navigation.navigate('SMPScreen')}>
+      <TouchableRipple onPress={() => navigation.navigate('Seizure Management Plan')}>
         <View style={styles.menuItem}>
           <Icon name="file-document-outline" color="#28cd00" size={27}/>
           <Text style={styles.menuItemText}>My Seizure Monitoring Record</Text>

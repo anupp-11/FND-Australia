@@ -29,26 +29,27 @@ const SleepQuality = () => {
         </View>
         
         
-        <View style = {{paddingHorizontal:20}}>
+        <View style = {{paddingVertical:20}}>
         <Slider
             value={value}
             minimumValue={0}
             maximumValue={10}
             step = {1}
             onValueChange={(value) => setValue(value)}
-            thumbStyle={{ justifyContent: 'center', alignItems: 'center', width: 25 }}
-            trackStyle={{height: 10}}
+            thumbStyle={{ justifyContent: 'center', alignItems: 'center', width: 30 }}
+            trackStyle={{height: 20, borderRadius:10}}
+            maximumTrackTintColor = {'#6C6C6C'}
+            minimumTrackTintColor = {theme.colors.primary}
             customThumb={
                 <View
                     style={{
-                        width: 35,
-                        height: 20,
+                        width: 30,
+                        height: 30,
                         overflow: 'hidden',
-                        borderTopLeftRadius: 10,
-                        borderTopRightRadius: 10,
-                        borderBottomLeftRadius: 10,
-                        borderBottomRightRadius: 10,
-                        backgroundColor: theme.colors.primary 
+                        borderRadius: 15,
+                        borderColor:'white',
+                        borderWidth:2,
+                        backgroundColor: "#39407E" 
                     }}
                 />
             }
@@ -59,7 +60,7 @@ const SleepQuality = () => {
             
             
    
-        <View style = {styles.container}>
+        {/* <View style = {styles.container}>
           <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
             <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>0</Text>
             <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
@@ -73,7 +74,7 @@ const SleepQuality = () => {
         <View style = {styles.Txtcontainer}>
           <Text>Bad</Text>
           <Text>Good</Text>
-        </View>
+        </View> */}
         <TextInput
           style={[
             styles.input,{

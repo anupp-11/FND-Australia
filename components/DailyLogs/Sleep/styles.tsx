@@ -3,8 +3,8 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     page: {
       padding :10,
-      marginBottom: 20
-        //padding: 20,
+      marginBottom: 20,
+      borderRadius: 10,
       },
       root: {
         marginTop:10,

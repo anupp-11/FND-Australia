@@ -72,7 +72,7 @@ const SeizureMgmtPlanScreen = () => {
           <Paragraph style = {{fontSize:14}}>For people with functional seizures, a Seizure management plan may be helpful so others know how to best support the person. NOTE: A seizure management plan is very individual, what helps one person, may not help another person with the same condition.</Paragraph>
         </View>
         <Background>
-          <Button mode="contained" onPress={() => <SeizureMonitoringRecord/>}>
+          <Button mode="contained" onPress={() => navigation.navigate('Seizure Monitoring Record')}>
             Record Your Seizure
           </Button>
         </Background>
@@ -80,14 +80,7 @@ const SeizureMgmtPlanScreen = () => {
     </SafeAreaView>
   );
 };
-const SeizureMonitoringRecord = () => {
-  return(
-    <SafeAreaView>
-      <Text>Form Yeta</Text>
-      
-    </SafeAreaView>
-  );
-};
+
 const styles = StyleSheet.create({
   questions:{
     fontSize: 16,

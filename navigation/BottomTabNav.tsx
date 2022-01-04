@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import FAIcons from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ExploreScreen from '../screens/ExploreScreen';
@@ -23,8 +23,13 @@ const BottomTabNav = () => {
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
-        activeTintColor: theme.colors.primary,
+        
+        activeTintColor: "white",
         inactiveTintColor: theme.colors.secondary,
+        style: {
+          backgroundColor: theme.colors.primary,
+          //paddingBottom: 3
+        }
       }}>
       <Tab.Screen
         component={ HomeNavigator }
@@ -41,7 +46,7 @@ const BottomTabNav = () => {
         component={ExploreScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Feather name="search" color={color} size={20} />
+            <FAIcons name="user-md" color={color} size={20} />
           ),
         }}
       />

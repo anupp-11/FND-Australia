@@ -22,7 +22,7 @@ export default class DonationScreen extends React.Component {
   render(){
     return (
       <WebView
-        source={{uri: 'https://www.gofundme.com/f/pm97y-the-king-family?qid=4c3343189cac014ce0f512333369d188'}}
+        source={{uri: 'https://tinyurl.com/donatefnd'}}
         style={{}}
       />
     );

@@ -8,9 +8,12 @@ import { Appbar } from "react-native-paper";
 import { PRIMARY_COLOR, PRIMARY_WHITE_COLOR } from "../../constants/Colors";
 import DailyLogsScreen from "../../screens/DailyLogsScreen";
 import SeizureMgmtPlanScreen from "../../screens/Forms/SeizureMgmtPlanScreen";
+import SMPForm from "../../screens/Forms/SMPForm";
 import SymptomMonitoringRecordScreen from "../../screens/Forms/SymptomMonitoringRecordScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
+import AppSettingScreen from "../../screens/ProfileScreen/AppSettingScreen";
 import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
+import FAQs from "../../screens/ProfileScreen/FAQs";
 import ManageProfileScreen from "../../screens/ProfileScreen/ManageProfileScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
@@ -24,16 +27,16 @@ export default function ProfileNavigator() {
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
-        name="ProfileScreen"
+        name="Profile Screen"
         component={ProfileScreen}
         
       />
       <ProfileStack.Screen
-        name="SMRScreen"
+        name="Symptom Monitoring Record"
         component={SymptomMonitoringRecordScreen}
       />
       <ProfileStack.Screen
-        name="SMPScreen"
+        name="Seizure Management Plan"
         component={SeizureMgmtPlanScreen}
       />
       <ProfileStack.Screen
@@ -55,6 +58,18 @@ export default function ProfileNavigator() {
       <ProfileStack.Screen
         name="Donation"
         component={DonationScreen}
+      />
+      <ProfileStack.Screen
+        name="FAQs"
+        component={FAQs}
+      />
+       <ProfileStack.Screen
+        name="Seizure Monitoring Record"
+        component={SMPForm}
+      />
+      <ProfileStack.Screen
+        name="App Setting"
+        component={AppSettingScreen}
       />
     </ProfileStack.Navigator>
   );

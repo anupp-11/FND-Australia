@@ -9,16 +9,16 @@ export default function RadioButton({ data, onSelect }) {
     setUserOption(value);
   };
   return (
-    <View>
+    <View style={{display : 'flex',flexDirection :'row',width:'100%',justifyContent:'space-around',alignItems:'center',  }}>
       {data.map((item) => {
         return (
-            <View style = {{display : 'flex', alignItems:'center', marginBottom: 10, flexDirection :'row',justifyContent:'center'}}>
+            <View style = {{marginBottom: 10, }}>
                 <Pressable
                     style={
                     item.value === userOption ? styles.selected : styles.unselected 
                     }
                     onPress={() => selectHandler(item.value)}>
-                    <Text style={styles.option}> {item.value}</Text>
+                    <Text style={item.value === userOption ? styles.selectedOption : styles.unselectedOption }> {item.value}</Text>
                 </Pressable>
             </View>
           
