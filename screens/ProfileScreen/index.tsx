@@ -72,22 +72,15 @@ const ProfileScreen = () => {
     <View style={styles.menuWrapper}>
       <TouchableRipple onPress={() => navigation.navigate('Manage Profile')}>
         <View style={styles.menuItem}>
-          <FAIcon name="user-edit" color="black" size={20}/>
+          <FAIcon name="user-edit" color="#28cd00" size={20}/>
           <Text style={styles.menuItemText}>Manage Profile</Text>
-          <MAIcon name="arrow-forward-ios" color="black" size={20} style={{marginLeft:180, marginTop:5}}/>
         </View>
       </TouchableRipple>
-      <View
-        style={{
-          borderBottomColor: 'grey',
-          borderBottomWidth: 1,
-        }}
-      />
+     
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <FAIcon name="user-md" color="black" size={20}/>
+          <FAIcon name="user-md" color="#28cd00" size={20}/>
           <Text style={styles.menuItemText}>Diagnosis</Text>
-          <MAIcon name="arrow-forward-ios" color="black" size={20} style={{marginLeft:225, marginTop:5}}/>
         </View>
       </TouchableRipple>
   

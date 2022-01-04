@@ -47,10 +47,6 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
                   Sohit ! 
               </Text>
             </Text>
-
-            {/* <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', }}>
-              How are you feeling today?
-            </Text> */}
            
             </View>
             <View style={{padding:10}}>
@@ -62,18 +58,18 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
               </Card>
             </View>
             
-            {/* <View style={{padding:10}}>
+            <View style={{padding:10}}>
               <Card>
-                <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, height: undefined, width: undefined, resizeMode: 'contain' }} />
+                <Card.Cover source={require('../../assets/images/Upcoming-Events.jpg')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
                 <Card.Content>
-                  <Title style={{marginTop:10}}>Know more about recovery</Title>
+                  <Title style={{marginTop:10}}>Upcoming Events</Title>
                 </Card.Content>
               </Card>
-            </View> */}
-            <WebView
+            </View>
+            {/* <WebView
               source={{uri: 'https://fndaus.org.au/news-and-events/'}}
-              style={{width:'100%', height:500}}
-            />
+              style={{width:'100%', height:600}}
+            /> */}
       </ScrollView>
     </View>
   );

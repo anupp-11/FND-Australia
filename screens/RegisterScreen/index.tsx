@@ -1,11 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {memo, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
-import Background from '../../components/LoginComponents/Background';
-import Button from '../../components/LoginComponents/Button';
-import Header from '../../components/LoginComponents/Header';
-import Logo from '../../components/LoginComponents/Logo';
+import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
 import {
@@ -13,6 +10,7 @@ import {
   nameValidator,
   passwordValidator,
 } from '../../components/LoginComponents/utils';
+import Button from '../../components/LoginComponents/Button';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -40,56 +38,83 @@ const RegisterScreen = () => {
   };
 
   return (
-    <Background>
-      <BackButton goBack={() => navigation.navigate('Login')} />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      
+      <View style={styles.container}>
+      <BackButton goBack={() => navigation.navigate('Dashboard')} />
+        <View style={styles.centerizedView}>
+          <View style={styles.authBox}>
+            <View style={styles.logoBox}>
+              <FAIcon name="user" color="#fff" size={50} style = {{}}/>
+            </View>
+            <Text style={styles.loginTitleText}>Sign In</Text>
+            
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Name</Text>
+              <TextInput
+                returnKeyType="next"
+                value={name.value}
+                onChangeText={text => setName({value: text, error: ''})}
+                error={!!name.error}
+                errorText={name.error}
+              />
+            </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Email</Text>
+              <TextInput
+                returnKeyType="next"
+                value={email.value}
+                onChangeText={text => setEmail({value: text, error: ''})}
+                error={!!email.error}
+                errorText={email.error}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+              />
+            </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Password</Text>
+              <TextInput
+                returnKeyType="done"
+                value={password.value}
+                onChangeText={text => setPassword({value: text, error: ''})}
+                error={!!password.error}
+                errorText={password.error}
+                secureTextEntry
+              />
+            </View>
 
-      <Logo />
+            <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+              Sign Up
+            </Button>
 
-      <Header>Create Account</Header>
-
-      <TextInput
-        label="Name"
-        returnKeyType="next"
-        value={name.value}
-        onChangeText={text => setName({value: text, error: ''})}
-        error={!!name.error}
-        errorText={name.error}
-      />
-
-      <TextInput
-        label="Email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={text => setEmail({value: text, error: ''})}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={text => setPassword({value: text, error: ''})}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
-        Sign Up
-      </Button>
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Already have an account? </Text>
-        <TouchableOpacity onPress={Login}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
+            <View style={styles.row}>
+              <Text style={styles.label}>Already have an account? </Text>
+              <TouchableOpacity onPress={Login}>
+                <Text style={styles.link}>Login</Text>
+              </TouchableOpacity>
+            </View>                                                 
+            
+          </View>
+        </View>
       </View>
-    </Background>
+    </TouchableWithoutFeedback>
+    // <Background>
+    //   <BackButton goBack={() => navigation.navigate('Login')} />
+
+    //   <Logo />
+
+    //   <Header>Create Account</Header>
+
+     
+
+      
+
+      
+
+      
+    // </Background>
   );
 };
 
@@ -101,12 +126,107 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   row: {
-    flexDirection: 'row',
+    alignSelf: 'center',
+    display: 'flex',
+    flexDirection:'row',
     marginTop: 4,
   },
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  container: {
+    flex: 1,
+    position: 'relative',
+    backgroundColor:"#fff"
+  },
+  centerizedView: {
+    width: '100%',
+    top: '20%',
+    color:"#DBDBDB"
+  },
+  authBox: {
+    width: '80%',
+    backgroundColor: '#fafafa',
+    borderRadius: 20,
+    alignSelf: 'center',
+    paddingHorizontal: 14,
+    paddingBottom: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  logoBox: {
+    width: 80,
+    height: 80,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 1000,
+    alignSelf: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: -50,
+    marginBottom: -50,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  loginTitleText: {
+    alignSelf: 'center',
+    display: 'flex',
+    fontSize: 26,
+    //fontWeight: 'bold',
+    marginTop: 10,
+    color: theme.colors.primary
+  },
+  hr: {
+    width: '100%',
+    height: 0.5,
+    backgroundColor: '#444',
+    marginTop: 6,
+  },
+  inputBox: {
+    marginTop: 10,
+  },
+  inputLabel: {
+    fontSize: 18,
+    marginBottom: 6,
+  },
+  input: {
+    borderRadius: 10,
+    
+  },
+  loginButton: {
+    backgroundColor: '#ff4757',
+    marginTop: 10,
+    paddingVertical: 10,
+    borderRadius: 4,
+  },
+  loginButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  registerText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+  },
+  forgotPasswordText: {
+    textAlign: 'center',
+    marginTop: 12,
+    fontSize: 16,
   },
 });
 
