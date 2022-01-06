@@ -25,44 +25,31 @@ export abstract class BaseModel{
 
 }
 
-export class CustomerInfo{
+export class UserInfo{
     constructor(
-      public customerFullName:string,
-      public storeName:string,
-      public street1:string,
-      public street2: string,
-      public city: string,
-      public stateCode: string,
-      public zipCode: string,
-      public comments: string,
-      public email: string,
-      public phoneNumber : string
-  
+      public email:string,
+      public mobileNumber:string,
+      public emergencyContact:EmergencyContact,
+      public doctorDetail: DoctorDetail,
     ){}
   
   }
 
-  export class Address{
+  export class EmergencyContact{
     constructor(
-     
-      public street1:string,
-      public street2: string,
-      public city: string,
-      public state: string,
-      public zipCode: string,
-      public zipCodeExtension: string,
-    
-  
+      public name:string,
+      public relationship: string,
+      public phoneNumber: string,
+      public address: string,
     ){}
   }
 
-  export class OrderStatusModel{
+  export class DoctorDetail{
      constructor(
-      public submitted: OrderStatus,
-      public inProgress: OrderStatus,
-      public cancelled: OrderStatus,
-      public outForDelivery: OrderStatus,
-      public delivered: OrderStatus
+      public name:string,
+      public profession: string,
+      public phoneNumber: string,
+      public address: string,
      ){}
   }
 

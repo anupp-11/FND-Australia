@@ -91,44 +91,7 @@ export default class MediaScreen extends React.Component {
               </Card.Content>
             </Card>
 
-            {/* Question 5 */}
-            <Card style = {styles.card}>
-            <Card.Content>
-              <Text style={styles.questions}>My emergency contact is.</Text>
-              <TextInput
-                      mode="outlined"
-                      theme={{ colors: { primary: theme.colors.primary}}}
-                      multiline={true}
-                      label="Name"
-                      value={this.state.emergencyContact.name}
-                      onChangeText={(value) => this.setState({ name : value })}
-                    />
-              <TextInput
-                      mode="outlined"
-                      theme={{ colors: { primary: theme.colors.primary}}}
-                      multiline={true}
-                      label="Relationship"
-                      value={this.state.emergencyContact.relationship}
-                      onChangeText={(value) => this.setState({ relationship : value })}
-                    />
-              <TextInput
-                      mode="outlined"
-                      theme={{ colors: { primary: theme.colors.primary}}}
-                      multiline={true}
-                      label='Phone Number'
-                      value={this.state.emergencyContact.phoneNo}
-                      onChangeText={(value) => this.setState({ phoneNo : value })}
-                    />
-              <TextInput
-                      mode="outlined"
-                      theme={{ colors: { primary: theme.colors.primary}}}
-                      multiline={true}
-                      label="Phone Number Home"
-                      value={this.state.emergencyContact.phoneNoHome}
-                      onChangeText={(value) => this.setState({ phoneNoHome : value })}
-                    />
-            </Card.Content>
-          </Card>
+           
             {/* Question 6 */}
             <Card style = {styles.card}>
               <Card.Content>

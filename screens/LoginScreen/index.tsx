@@ -1,26 +1,58 @@
-import React, {memo, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
+import React, {memo, useEffect, useState} from 'react';
+import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions, Alert, } from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
 import Button from '../../components/LoginComponents/Button';
 import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
 import {useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import IoIcon from 'react-native-vector-icons/Ionicons';
 import {
   emailValidator,
   passwordValidator,
 } from '../../components/LoginComponents/utils';
 import { authUser } from '../../service/AccountService';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
+
+  // Check if hardware supports biometrics
+  useEffect(() => {
+    (async () => {
+      const compatible = await LocalAuthentication.hasHardwareAsync();
+      debugger;
+      setIsBiometricSupported(compatible);
+    })();
+  });
+
   const ForgotPassword = () => {
     navigation.navigate('ForgotPassword');
   };
   const Register = () => {
     navigation.navigate('Register');
   };
-
+  const handleBiometricAuth = async () => {
+    try {
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+     
+      if (!isEnrolled) {
+        throw new Error('No Faces / Fingers found.')
+      }
+      
+      // Authenticate user
+      const resp = await LocalAuthentication.authenticateAsync();
+      if(resp.success){
+        navigation.navigate('Home');
+      }else{
+        Alert.alert('Fingerprint didnot match.');
+      }
+    } catch (error) {
+      Alert.alert('An error as occured', error?.message);
+    }
+    
+}
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
 
@@ -88,8 +120,23 @@ const LoginScreen = () => {
                 <Text style={styles.link}>Sign up</Text>
               </TouchableOpacity>
             </View>
+            <View style={styles.row}>
+              <Text style={{marginVertical:10, color:theme.colors.secondary}}>OR</Text>
+            </View>
+            {isBiometricSupported ? (
+              <View >
+                <TouchableOpacity style={styles.row} onPress={handleBiometricAuth}>
+                  <IoIcon name="finger-print-outline" color={theme.colors.primary} size={20} style={{marginRight:10}} />
+                  <Text style={styles.label}>Tap to login with biometric</Text>
+                </TouchableOpacity>
+              </View>)
+              : (
+                <View></View>
+              )}
           </View>
         </View>
+        
+        
       </View>
     </TouchableWithoutFeedback>
     
