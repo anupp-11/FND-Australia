@@ -23,7 +23,7 @@ export default class DonationScreen extends React.Component {
     return (
       <WebView
         source={{uri: 'https://tinyurl.com/donatefnd'}}
-        style={{}}
+        style={{height:'100%'}}
       />
     );
   }
