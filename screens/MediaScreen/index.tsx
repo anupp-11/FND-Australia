@@ -3,8 +3,6 @@ import {
   FlatList,
 } from 'react-native';
 import { Appbar } from 'react-native-paper';
-import Background from '../../components/LoginComponents/Background';
-
 import VideoComponent from './VideoComponent';
 
 

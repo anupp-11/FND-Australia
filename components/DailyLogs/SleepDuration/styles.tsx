@@ -24,17 +24,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f1f3f6',
         borderRadius: 6,
         paddingHorizontal : 10,
-      },
-      selectSize:{
-        //borderColor:PRIMARY_TEXT_GRAY_COLOR, 
-        borderRadius:10,
-        padding:10,
-        borderBottomWidth:1, 
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'flex-end',
-        height:40,
-        flex:1
       }
 
 });

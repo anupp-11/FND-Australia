@@ -3,6 +3,7 @@ import {
   View,
   Text,
   ScrollView,
+  Linking,
 } from 'react-native';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
@@ -20,6 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 import Background from '../../components/LoginComponents/Background';
 import { Card, Paragraph, Title } from 'react-native-paper';
 import WebView from 'react-native-webview';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -50,12 +52,14 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
            
             </View>
             <View style={{padding:10}}>
-              <Card>
-                <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
-                <Card.Content>
-                  <Title style={{marginTop:10}}>Know more about recovery</Title>
-                </Card.Content>
-              </Card>
+              <TouchableOpacity onPress={()=>{ Linking.openURL('https://fndaus.org.au/functional-neurological-disorder-recovery/')}}>
+                <Card>
+                  <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
+                  <Card.Content>
+                    <Title style={{marginTop:10}}>A path to FND recovery</Title>
+                  </Card.Content>
+                </Card>
+              </TouchableOpacity>
             </View>
             
             <View style={{padding:10}}>

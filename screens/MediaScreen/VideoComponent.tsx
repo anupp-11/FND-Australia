@@ -39,13 +39,13 @@ export default class VideoComponent extends React.Component{
             padding: 10,
           }}
         >
-            <YoutubePlayer
+          <YoutubePlayer
             ref={this.playerRef}
             height={width/2}
             width={width-10}
             videoId={this.state.video}
             
-        />
+          />
         <Text numberOfLines={2} style={{width: width-10, fontWeight:'600',  }}>{this.state.title}</Text>
         </View>
    

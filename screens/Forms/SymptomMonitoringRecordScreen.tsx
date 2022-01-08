@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Platform, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {
   Card, Paragraph,
   Avatar,
@@ -15,13 +15,14 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Feather';
-import Icons from 'react-native-vector-icons/Ionicons';
+
+
+
 
 
 const SymptomMonitoringRecordScreen = () => {
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [feel, setFeel] = React.useState('Stressed');
@@ -32,7 +33,6 @@ const SymptomMonitoringRecordScreen = () => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    debugger;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
@@ -63,26 +63,15 @@ const SymptomMonitoringRecordScreen = () => {
       <ScrollView>
           {/* Date and Time Picker */}
           <Card style = {styles.card}>
-            <View style = {{marginTop:10}}>
-              <TouchableOpacity style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:"space-around",width:"100%"}} onPress={showDatepicker} >
-                <View style={{borderColor:theme.colors.primary,borderWidth:1,borderRadius:4,padding:10,width:'80%'}}>
-                  <Text style={{color:'black',fontWeight:'bold',fontSize:16, textAlign:'center'}}>{date.toLocaleDateString()}</Text>
-                </View>
-                <View style={{}}>
-                <Icon name="calendar" color="black" size={30}/>
-                </View>
-                
-              </TouchableOpacity>
+            <View style = {{marginHorizontal:10}}>
+              <Button mode="contained" onPress={showDatepicker} >
+                Date of Seizure
+              </Button>
             </View>
-            <View style = {{marginBottom:10, marginTop:10}}>
-            <TouchableOpacity style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:"space-around",width:"100%"}} onPress={showTimepicker} >
-              <View style={{borderColor:theme.colors.primary,borderWidth:1,borderRadius:4,padding:10,width:'80%'}}>
-                  <Text style={{color:'black',fontWeight:'bold',fontSize:16, textAlign:'center'}}>{date.toLocaleTimeString()}</Text>
-                  </View>
-                  <View style={{}}>
-                  <Icons name="time-outline" color="black" size={30}/>
-                </View>  
-            </TouchableOpacity>
+            <View style = {{marginHorizontal:10}}>
+              <Button mode="contained" onPress={showTimepicker} >
+                Time Seizure Started
+              </Button>
             </View>
             {show && (
               <DateTimePicker

@@ -6,6 +6,7 @@ import Logo from '../../components/LoginComponents/Logo';
 import {useNavigation} from '@react-navigation/native';
 import Paragraph from '../../components/LoginComponents/Paragraph';
 import { theme } from '../../components/LoginComponents/theme';
+import { View } from 'react-native';
 
 const DashboardScreen = () => {
   const navigation = useNavigation();
@@ -19,7 +20,10 @@ const DashboardScreen = () => {
   return (
     <Background>
       <Logo />
-      <Header>Welcome To FND</Header>
+      <View style={{paddingVertical: 14,}}></View>
+      <Header>Welcome To</Header>
+      <Header>FND Australia</Header>
+      <View style={{paddingVertical: 14,}}></View>
 
       {/* <Paragraph> Login or SignUp </Paragraph> */}
       <Button mode="contained" onPress={Login}>

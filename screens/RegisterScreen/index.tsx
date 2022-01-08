@@ -11,6 +11,10 @@ import {
   passwordValidator,
 } from '../../components/LoginComponents/utils';
 import Button from '../../components/LoginComponents/Button';
+import { RadioButton } from 'react-native-paper';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-datepicker';
+
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -21,6 +25,9 @@ const RegisterScreen = () => {
   const [name, setName] = useState({value: '', error: ''});
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
+  const [gender, setGender] = useState('Male');
+  const [DOB, setDOB] = useState(new Date);
+
 
   const _onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
@@ -33,8 +40,14 @@ const RegisterScreen = () => {
       setPassword({...password, error: passwordError});
       return;
     }
+    const n = name.value;
+    const e = email.value;
+    const p = password.value;
+    const g = gender;
+    const d = DOB;
+    debugger;
 
-    navigation.navigate('Dashboard');
+    navigation.navigate('Login');
   };
 
   return (
@@ -47,7 +60,7 @@ const RegisterScreen = () => {
             <View style={styles.logoBox}>
               <FAIcon name="user" color="#fff" size={50} style = {{}}/>
             </View>
-            <Text style={styles.loginTitleText}>Sign In</Text>
+            <Text style={styles.loginTitleText}>Sign Up</Text>
             
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Name</Text>
@@ -84,6 +97,39 @@ const RegisterScreen = () => {
                 secureTextEntry
               />
             </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Gender</Text>
+                <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
+                  <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
+                    <View style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                      <Text>Male</Text>
+                      <RadioButton value="Male" />
+                    </View> 
+                    <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                      <Text>Female</Text>
+                      <RadioButton value="Female" />
+                    </View>
+                    <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                      <Text>Other</Text>
+                      <RadioButton value="Other" />
+                    </View>
+                  </View>
+                </RadioButton.Group>
+            </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Date of Birth</Text>
+              <DatePicker
+                style={{width: '100%'}}
+                date={DOB}
+                placeholder="Select Date"
+                format="YYYY-MM-DD"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+               
+                onDateChange={(date) => setDOB(date)}
+              />
+               
+            </View>
 
             <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
               Sign Up
@@ -100,21 +146,6 @@ const RegisterScreen = () => {
         </View>
       </View>
     </TouchableWithoutFeedback>
-    // <Background>
-    //   <BackButton goBack={() => navigation.navigate('Login')} />
-
-    //   <Logo />
-
-    //   <Header>Create Account</Header>
-
-     
-
-      
-
-      
-
-      
-    // </Background>
   );
 };
 
@@ -142,7 +173,7 @@ const styles = StyleSheet.create({
   },
   centerizedView: {
     width: '100%',
-    top: '20%',
+    top: '12%',
     color:"#DBDBDB"
   },
   authBox: {
