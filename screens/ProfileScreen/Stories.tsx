@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { Feather as Icon, MaterialIcons as MIcon } from '@expo/vector-icons';
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper'
 
 
 
@@ -70,38 +70,7 @@ export default function StoryScreen(){
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Header */}
-      <View
-        style={{
-          height: 80,
-          backgroundColor: '#3c40c6',
-        }}
-      >
-        <View
-          style={{
-            // marginTop: Number(StatusBar.currentHeight),
-            marginTop: 30,
-            // backgroundColor: 'red',
-            // paddingVertical: 20,
-            paddingHorizontal: 10,
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <Text
-            style={{
-              marginLeft: 14,
-              fontSize: 22,
-              color: '#fff',
-              fontWeight:'bold'
-              
-            }}
-          >
-            Chats
-          </Text>
-        </View>
-      </View>
+      
       
         {/* Stories */}
         <View style={[styles.storiesView]}>
