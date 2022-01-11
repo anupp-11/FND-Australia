@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {
   Card, Paragraph,
   Avatar,
@@ -15,8 +15,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
+//import MultipleChoice from 'react-native-multiple-choice-picker';
+import MultipleChoice from 'react-native-multiple-choice';
 
-
+// yarn add npm i react-native-multiple-choice-picker
 
 
 
@@ -97,6 +99,27 @@ const SymptomMonitoringRecordScreen = () => {
                     //value={this.state.storeName}
                     //onChangeText={(value) => this.setState({ storeName: value })}
                   />
+                  <MultipleChoice
+                    renderCustomItem={() => {
+                      return <Text style={{ color: 'red', fontWeight: 'bold' }}>Basketball</Text>
+                    }}
+                    chosenColor={'red'}
+                    chosenTextColor={'black'}
+                    customIndex={0}
+                    direction={'column'}
+                    choices={['Football', 'Badminton', 'Basketball', 'Tennis']}/>
+            {/* <MultipleChoice
+                options={[
+                'Lorem ipsum dolor sit',
+                'Lorem ipsum',
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+                'Lorem ipsum dolor sit amet, consetetur',
+                'Lorem ipsum dolor'
+                ]}
+                selectedOptions={['Lorem ipsum']}
+                maxSelectedOptions={2}
+                onSelection={(option)=>alert(option + ' was selected!')}
+            /> */}
           </Card.Content>
         </Card>
         
