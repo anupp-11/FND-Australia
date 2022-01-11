@@ -63,7 +63,7 @@ const SeizureMgmtPlanScreen = () => {
   return (
     <SafeAreaView >
       <ScrollView>
-        <Header> My Seizure Management Plan </Header>
+        <Header> Functional Seizure Information </Header>
         <View style = {{paddingHorizontal:10}}>
           <Paragraph style = {{fontSize:14,marginBottom:10}}>Functional Neurological Disorder (FND) is a condition that results in neurological symptoms such as functional seizures, paralysis, gait disorder, sensory issues, involuntary movements, problems with speech and swallowing, and bowel and bladder issues. Pain and chronic fatigue often co-exist with these symptoms.</Paragraph>
           <Paragraph style = {{fontSize:14,marginBottom:10}}>FND is as disabling and distressing as similar neurological diseases such as Epilepsy, Multiple Sclerosis, Parkinson and Stroke. For many people FND is a life-long condition that they will have to manage long term.</Paragraph>

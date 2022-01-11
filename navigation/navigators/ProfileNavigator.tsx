@@ -16,6 +16,7 @@ import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
 import FAQs from "../../screens/ProfileScreen/FAQs";
 import ManageProfileScreen from "../../screens/ProfileScreen/ManageProfileScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
+import StoryScreen from "../../screens/ProfileScreen/Stories";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
 
 import { ProfileTabParamList } from "../../types";
@@ -36,7 +37,7 @@ export default function ProfileNavigator() {
         component={SymptomMonitoringRecordScreen}
       />
       <ProfileStack.Screen
-        name="Seizure Management Plan"
+        name="Functional Seizure Information"
         component={SeizureMgmtPlanScreen}
       />
       <ProfileStack.Screen
@@ -70,6 +71,11 @@ export default function ProfileNavigator() {
       <ProfileStack.Screen
         name="App Setting"
         component={AppSettingScreen}
+      />
+      
+      <ProfileStack.Screen
+        name="Stories"
+        component={StoryScreen}
       />
     </ProfileStack.Navigator>
   );

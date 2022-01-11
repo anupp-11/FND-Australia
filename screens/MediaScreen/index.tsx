@@ -1,9 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react';
 import {
+  Dimensions,
   FlatList,
+  Text, View,
 } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import VideoComponent from './VideoComponent';
+import YoutubePlayer, { getYoutubeMeta } from "react-native-youtube-iframe";
+let width = Dimensions.get("screen").width;
 
 
 
@@ -11,7 +15,7 @@ export default class MediaScreen extends React.Component {
   
   constructor(props: any,) {
     super(props);
-   
+    this.playerRef = React.createRef();
     this.state = {
       isProcessing: true,
       videos: [
