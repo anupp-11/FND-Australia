@@ -73,7 +73,7 @@ const SeizureMgmtPlanScreen = () => {
         </View>
         <Background>
           <Button mode="contained" onPress={() => navigation.navigate('Seizure Monitoring Record')}>
-            Record Your Seizure
+          My Seizure Mgmt Plan
           </Button>
         </Background>
       </ScrollView>

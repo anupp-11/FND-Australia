@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
 import {View, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {
-  Card, Paragraph,
-  Avatar,
-  Title,
-  Caption,
+  Card,
   Text,
-  TouchableRipple,
   TextInput,
+  Checkbox,
   RadioButton 
 } from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
-import { ScrollView } from 'react-native-gesture-handler';
-//import MultipleChoice from 'react-native-multiple-choice-picker';
-// import MultipleChoice from 'react-native-multiple-choice';
-
-// yarn add npm i react-native-multiple-choice-picker
-
-
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+const FruitsData=require('./../../service/options.json');
 
 const SymptomMonitoringRecordScreen = () => {
 
@@ -32,6 +24,7 @@ const SymptomMonitoringRecordScreen = () => {
   const [how, setHow] = React.useState('Black');
   const [feelAfter, setFeelAfter] = React.useState('Tired');
   const [service, setService] = React.useState('Yes');
+  const [data, setData] = useState(FruitsData);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -57,6 +50,39 @@ const SymptomMonitoringRecordScreen = () => {
 
   const _onSMRPressed = () => {
 
+  }
+  const onChecked = (id) => {
+    const Data = data;
+    debugger;
+    const index = Data.findIndex(x=>x.id===id);
+    debugger;
+    if(data[index].checked=="checked")
+    {
+      Data[index].checked = "unchecked";
+    }else if(data[index].checked=="unchecked"){
+      Data[index].checked = "unchecked";
+    }
+    //Data[index].checked=!data[index].checked;
+    setData(Data);
+    debugger;
+    const b = data;
+  }
+
+  const renderFruits = () => {
+    return data.map((item, key)=>{
+      debugger;
+      return(
+        <View>
+          <Checkbox.Item label={item.key} status={item.checked} onPress={()=>{onChecked(item.id)}}/>
+        </View>
+
+        // <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} key = {key} onPress={()=>{onChecked(item.id)}}>
+        //   <Checkbox.Item status={item.checked} onPress={()=>{onChecked(item.id)}}/>
+        //   <Text>{item.key}</Text>
+
+        // </TouchableOpacity>
+      )
+    })
   }
 
   const navigation = useNavigation();
@@ -99,27 +125,8 @@ const SymptomMonitoringRecordScreen = () => {
                     //value={this.state.storeName}
                     //onChangeText={(value) => this.setState({ storeName: value })}
                   />
-                  {/* <MultipleChoice
-                    renderCustomItem={() => {
-                      return <Text style={{ color: 'red', fontWeight: 'bold' }}>Basketball</Text>
-                    }}
-                    chosenColor={'red'}
-                    chosenTextColor={'black'}
-                    customIndex={0}
-                    direction={'column'}
-                    choices={['Football', 'Badminton', 'Basketball', 'Tennis']}/> */}
-            {/* <MultipleChoice
-                options={[
-                'Lorem ipsum dolor sit',
-                'Lorem ipsum',
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
-                'Lorem ipsum dolor sit amet, consetetur',
-                'Lorem ipsum dolor'
-                ]}
-                selectedOptions={['Lorem ipsum']}
-                maxSelectedOptions={2}
-                onSelection={(option)=>alert(option + ' was selected!')}
-            /> */}
+            {renderFruits()}
+
           </Card.Content>
         </Card>
         

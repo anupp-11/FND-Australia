@@ -24,7 +24,7 @@ export default class UsefulLinksScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <View style={{padding:20}}>
           <Text style={{fontSize:16, fontWeight:'700', marginBottom:10}}>Contact Us</Text>
-          <Button onPress={() => Linking.openURL('mailto:info@fndaus.org.au') }
+          <Button color={"#f46036"} onPress={() => Linking.openURL('mailto:info@fndaus.org.au') }
             title="info@fndaus.org.au" />
         </View>
         <View
@@ -35,7 +35,7 @@ export default class UsefulLinksScreen extends React.Component {
         />
         <View style={{padding:20}}>
           <Text style={{fontSize:16, fontWeight:'700',marginBottom:10}}>Upcoming Events</Text>
-          <Button title="View Events" onPress={ ()=>{ Linking.openURL('https://fndaus.org.au/news-and-events/')}} />
+          <Button color={"#f46036"} title="View Events" onPress={ ()=>{ Linking.openURL('https://fndaus.org.au/news-and-events/')}} />
         
         </View>
         <View

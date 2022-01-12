@@ -149,20 +149,20 @@ const ProfileScreen = () => {
       <TouchableRipple onPress={showDialog}>
         <View style={styles.menuItem}>
           <Icon name="logout" color="#28cd00" size={23}/>
-          <Text style={styles.menuItemText}>Logout</Text>
+          <Text style={styles.menuItemText}>Signout</Text>
         </View>
       </TouchableRipple>
      
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>Logout</Dialog.Title>
+        <Dialog.Title>Signout</Dialog.Title>
             <Dialog.Content>
               <Paragraph>Are you sure you want to logout?</Paragraph>
             </Dialog.Content>
-          <Dialog.Actions>
+          <Dialog.Actions style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}>
           
-            <Button onPress={logout}>Yes</Button>
-            <Button onPress={hideDialog}>No</Button>
+            <Button color={theme.colors.primary} onPress={logout}>Yes</Button>
+            <Button color='red' onPress={hideDialog}>No</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>

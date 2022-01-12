@@ -44,8 +44,8 @@ const DailyLogsScreen = () => {
         onNext={() => setActive((p) => p + 1)}
         onBack={() => setActive((p) => p - 1)}
         onFinish={onSubmit}
-        buttonStyle={{backgroundColor: theme.colors.primary,}}
-        stepStyle={{backgroundColor: theme.colors.primary, }}
+        buttonStyle={{backgroundColor: theme.colors.primary,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}
+        stepStyle={{backgroundColor: theme.colors.primary,}}
       />
     </View>
   );
