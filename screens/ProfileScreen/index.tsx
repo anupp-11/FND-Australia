@@ -92,10 +92,10 @@ const ProfileScreen = () => {
           <Text style={styles.menuItemText}>Symptom Management Plan</Text>
         </View>
       </TouchableRipple> */}
-      <TouchableRipple onPress={() => navigation.navigate('Symptom Monitoring Record')}>
+      <TouchableRipple onPress={() => navigation.navigate('Seizure Monitoring Record')}>
         <View style={styles.menuItem}>
           <Icon name="file-cabinet" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
+          <Text style={styles.menuItemText}>Seizure Monitoring Record</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Functional Seizure Information')}>

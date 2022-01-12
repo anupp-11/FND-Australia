@@ -39,6 +39,9 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
             <Text style = {styles.header}>
               FND Australia
             </Text>
+            <Text style = {styles.cheader}>
+              Support Services
+            </Text>
 
             <Text style = {styles.name}>
               <Text style = {{color : theme.colors.secondary}}>

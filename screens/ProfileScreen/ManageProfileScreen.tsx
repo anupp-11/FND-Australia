@@ -22,6 +22,8 @@ export default class ManageProfileScreen extends React.Component {
     this.state = {
       isProcessing: true,
       email: "abc@gmail.com",
+      gender:"Male",
+      DOB:"1998-05-18",
       mobileNumber: "98273648172",
       emergencyContact: {
         name:null,
@@ -118,6 +120,26 @@ export default class ManageProfileScreen extends React.Component {
                   value={this.state.mobileNumber}
                   onChangeText={(value) => this.setState({ mobileNumber: value })}
                 />
+                <View style={{display:'flex', flexDirection:'row', flex:1,width:'100%'}}>
+                <TextInput
+                  mode="flat"
+                  label="Gender"
+                  //right={<TextInput.Icon name="border-color" />}
+                  style={{ backgroundColor: 'white',margin:10, flex:1}}
+                  value={this.state.gender}
+                  disabled={true}
+                  //onChangeText={(value) => this.setState({ mobileNumber: value })}
+                />
+                <TextInput
+                  mode="flat"
+                  label="Date of Birth"
+                  //right={<TextInput.Icon name="border-color" />}
+                  style={{ backgroundColor: 'white',margin:10,flex:1 }}
+                  value={this.state.DOB}
+                  disabled={true}
+                  //onChangeText={(value) => this.setState({ mobileNumber: value })}
+                />
+                </View>
                  {/* Emergency Contact */}
                   <Card style = {{margin:10}}>
                   <Card.Content>

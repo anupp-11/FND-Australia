@@ -12,9 +12,8 @@ import {
 } from '../../components/LoginComponents/utils';
 import Button from '../../components/LoginComponents/Button';
 import { RadioButton } from 'react-native-paper';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from 'react-native-datepicker';
-
+import {TextInput as TextInputP} from 'react-native-paper';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -27,7 +26,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState({value: '', error: ''});
   const [gender, setGender] = useState('Male');
   const [DOB, setDOB] = useState(new Date);
-
+  const [hidePass, setHidePass] = useState(true);
 
   const _onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
@@ -88,14 +87,25 @@ const RegisterScreen = () => {
             </View>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
+              <TextInputP
+                  mode="outlined"
+                  //label="Mobile Number"
+                  right={<TextInputP.Icon name="eye" onPress={() => setHidePass(!hidePass)}/>}
+                  style={{ backgroundColor: 'white'}}
+                  selectionColor={"#42AF6A"}
+                  theme={{ colors: { primary: theme.colors.primary,},}}
+                  value={password.value}
+                  secureTextEntry={hidePass ? true : false}
+                  onChangeText={text => setPassword({value: text, error: ''})}
+                />
+              {/* <TextInput
                 returnKeyType="done"
                 value={password.value}
                 onChangeText={text => setPassword({value: text, error: ''})}
                 error={!!password.error}
                 errorText={password.error}
                 secureTextEntry
-              />
+              /> */}
             </View>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Gender</Text>
@@ -103,15 +113,15 @@ const RegisterScreen = () => {
                   <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
                     <View style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
                       <Text>Male</Text>
-                      <RadioButton value="Male" />
+                      <RadioButton color={theme.colors.primary} value="Male" />
                     </View> 
                     <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                       <Text>Female</Text>
-                      <RadioButton value="Female" />
+                      <RadioButton color={theme.colors.primary} value="Female" />
                     </View>
                     <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                       <Text>Other</Text>
-                      <RadioButton value="Other" />
+                      <RadioButton color={theme.colors.primary} value="Other" />
                     </View>
                   </View>
                 </RadioButton.Group>

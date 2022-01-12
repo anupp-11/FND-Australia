@@ -16,7 +16,7 @@ import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
 //import MultipleChoice from 'react-native-multiple-choice-picker';
-import MultipleChoice from 'react-native-multiple-choice';
+// import MultipleChoice from 'react-native-multiple-choice';
 
 // yarn add npm i react-native-multiple-choice-picker
 
@@ -99,7 +99,7 @@ const SymptomMonitoringRecordScreen = () => {
                     //value={this.state.storeName}
                     //onChangeText={(value) => this.setState({ storeName: value })}
                   />
-                  <MultipleChoice
+                  {/* <MultipleChoice
                     renderCustomItem={() => {
                       return <Text style={{ color: 'red', fontWeight: 'bold' }}>Basketball</Text>
                     }}
@@ -107,7 +107,7 @@ const SymptomMonitoringRecordScreen = () => {
                     chosenTextColor={'black'}
                     customIndex={0}
                     direction={'column'}
-                    choices={['Football', 'Badminton', 'Basketball', 'Tennis']}/>
+                    choices={['Football', 'Badminton', 'Basketball', 'Tennis']}/> */}
             {/* <MultipleChoice
                 options={[
                 'Lorem ipsum dolor sit',
@@ -313,10 +313,10 @@ const SymptomMonitoringRecordScreen = () => {
                           <RadioButton value="Yes" />
                           <Text>Yes</Text>
                         </View>
-                        <View style = {styles.radio}>
+                        {/* <View style = {styles.radio}>
                           <RadioButton value="Placed Cushions" />
                           <Text>Placed Cushions</Text>
-                        </View>
+                        </View> */}
                     </View>
 
                     <View style = {styles.child}>
@@ -332,9 +332,11 @@ const SymptomMonitoringRecordScreen = () => {
           </Card.Content>
         </Card>
 
-        <Button mode="contained"  >
-                Submit
-              </Button>
+        <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
+          <Button style={{width:'80%'}} mode="contained"  >
+             Submit
+          </Button>
+        </View>
 
       </ScrollView>
     </SafeAreaView>

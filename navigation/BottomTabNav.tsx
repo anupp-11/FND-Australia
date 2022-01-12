@@ -65,7 +65,7 @@ const BottomTabNav = () => {
         component={ProfileNavigator}
         options={{
           tabBarIcon: ({color}) => (
-            <Feather name="user" color={color} size={20} />
+            <Feather name="menu" color={color} size={20} />
           ),
         }}
       /> 
@@ -73,5 +73,4 @@ const BottomTabNav = () => {
   );
 };
 
-//make this component available to the app
 export default BottomTabNav;

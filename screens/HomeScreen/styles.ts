@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
         fontSize: 26,
         color: theme.colors.primary
       },
+      cheader : {
+        fontWeight: '700',
+        fontSize: 24,
+        color: theme.colors.primary
+      },
       titletxt :{
         fontWeight: '700',
         fontSize: 16,

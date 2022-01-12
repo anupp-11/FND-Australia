@@ -6,6 +6,7 @@ import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
 import {useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import {TextInput as TextInputP} from 'react-native-paper';
 import IoIcon from 'react-native-vector-icons/Ionicons';
 import {
   emailValidator,
@@ -16,6 +17,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [hidePass, setHidePass] = useState(true);
   const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
 
   // Check if hardware supports biometrics
@@ -97,14 +99,33 @@ const LoginScreen = () => {
             </View>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
+              <TextInputP
+                  mode="outlined"
+                  //label="Mobile Number"
+                  right={<TextInputP.Icon name="eye" onPress={() => setHidePass(!hidePass)}/>}
+                  style={{ backgroundColor: 'white'}}
+                  selectionColor={"#42AF6A"}
+                  theme={{ colors: { primary: theme.colors.primary,},}}
+                  value={password.value}
+                  secureTextEntry={hidePass ? true : false}
+                  onChangeText={text => setPassword({value: text, error: ''})}
+                />
+              {/* <TextInput
                 returnKeyType="done"
                 value={password.value}
                 onChangeText={text => setPassword({value: text, error: ''})}
                 error={!!password.error}
                 errorText={password.error}
-                secureTextEntry
+                secureTextEntry={hidePass ? true : false}
+                //right={<TextInput.Input.Icon name="border-color" />}
+                //right={<TextInput.Icon name="border-color" onPress={() => setHidePass(!hidePass)} />}
               />
+              <FAIcon
+                name={hidePass ? 'eye-slash' : 'eye'}
+                size={15}
+                color="grey"
+                onPress={() => setHidePass(!hidePass)}
+              /> */}
             </View>
             <View style={styles.forgotPassword}>
               <TouchableOpacity onPress={ForgotPassword}>
