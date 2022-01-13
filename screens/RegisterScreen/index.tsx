@@ -107,7 +107,7 @@ const RegisterScreen = () => {
                 secureTextEntry
               /> */}
             </View>
-            <View style={styles.inputBox}>
+            {/* <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Gender</Text>
                 <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
                   <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
@@ -139,7 +139,7 @@ const RegisterScreen = () => {
                 onDateChange={(date) => setDOB(date)}
               />
                
-            </View>
+            </View> */}
 
             <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
               Sign Up
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   centerizedView: {
     width: '100%',
-    top: '12%',
+    top: '20%',
     color:"#DBDBDB"
   },
   authBox: {

@@ -1,25 +1,34 @@
 import React from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Alert} from 'react-native';
 import {
   Avatar,
   Title,
   TextInput,
   Text,
   Card,
+  Dialog,
+  Portal,
+  Provider,
+  Paragraph,
+  RadioButton,
+  Button as RButton
 } from 'react-native-paper';
 import styles from './styles';
-import Icons from 'react-native-vector-icons/MaterialIcons';
+import EIcon from 'react-native-vector-icons/Entypo';
 import Button from '../../components/LoginComponents/Button';
 import Background from '../../components/LoginComponents/Background';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import { DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
+import DatePicker from 'react-native-datepicker';
 
 export default class ManageProfileScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      tempGender:'',
+      visible: false,
       isProcessing: true,
       email: "abc@gmail.com",
       gender:"Male",
@@ -39,9 +48,13 @@ export default class ManageProfileScreen extends React.Component {
       }
       
     };
+    this.showDialog = this.showDialog.bind(this);
+    this.hideDialog = this.hideDialog.bind(this);
+    this.updateGender = this.updateGender.bind(this);
   }
 
   componentDidMount = async () => {
+    this.setState({tempGender:this.state.gender})
    // var userInfo = await getUserInfo();
       
     // if (userInfo) {
@@ -54,6 +67,7 @@ export default class ManageProfileScreen extends React.Component {
     //   });
     // }
   };
+  
   updateUserData(){
     const userEmergencyContact = new EmergencyContact(
       this.state.emergencyContact.name,
@@ -75,9 +89,20 @@ export default class ManageProfileScreen extends React.Component {
     );
     //send userData to service
   }
+  showDialog(){
+    this.setState({visible:true});
+  }
+  hideDialog(){
+    this.setState({visible:false});
+  }
+  updateGender(){
+    this.setState({gender:this.state.tempGender});
+    this.hideDialog();
+  }
   render(){
     return (
       <SafeAreaView style={styles.container}>
+        <Provider>
         <ScrollView>
         <View style={styles.userInfoSection}>
         <View style={{display:'flex', flexDirection:'row',justifyContent:'center', marginTop: 15}}>
@@ -121,24 +146,65 @@ export default class ManageProfileScreen extends React.Component {
                   onChangeText={(value) => this.setState({ mobileNumber: value })}
                 />
                 <View style={{display:'flex', flexDirection:'row', flex:1,width:'100%'}}>
-                <TextInput
-                  mode="flat"
-                  label="Gender"
-                  //right={<TextInput.Icon name="border-color" />}
-                  style={{ backgroundColor: 'white',margin:10, flex:1}}
-                  value={this.state.gender}
-                  disabled={true}
-                  //onChangeText={(value) => this.setState({ mobileNumber: value })}
-                />
-                <TextInput
+                <Portal>
+                  <Dialog visible={this.state.visible}  onDismiss={this.hideDialog}>
+                    <Dialog.Title>Update Gender</Dialog.Title>
+                    <Dialog.Content>
+                      <RadioButton.Group onValueChange={newValue => this.setState({tempGender:newValue})} value={this.state.tempGender}>
+                        <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
+                          <View style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                            <Text>Male</Text>
+                            <RadioButton color={theme.colors.primary} value="Male" />
+                          </View> 
+                          <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                            <Text>Female</Text>
+                            <RadioButton color={theme.colors.primary} value="Female" />
+                          </View>
+                          <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                            <Text>Other</Text>
+                            <RadioButton color={theme.colors.primary} value="Other" />
+                          </View>
+                        </View>
+                      </RadioButton.Group>
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                      <RButton color='gray' onPress={this.hideDialog}>Cancel</RButton>
+                      <RButton color={theme.colors.primary} onPress={this.updateGender}>Ok</RButton>
+                    </Dialog.Actions>
+                  </Dialog>
+                </Portal>
+                <View style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',flex:1}}>
+                  <TextInput
+                    mode="flat"
+                    label="Gender"
+                    right={<TextInput.Icon name="border-color" onPress={this.showDialog} />}
+                    style={{ backgroundColor: 'white',margin:10, flex:1}}
+                    value={this.state.gender}
+                    disabled={true}
+                    //onChangeText={(value) => this.setState({ mobileNumber: value })}
+                  />
+                  <View style={{backgroundColor:'white',display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',flex:1,padding:12,marginRight:10}}>
+                    <DatePicker
+                      style={{width:'100%'}}
+                      date={this.state.DOB}
+                      placeholder="Select Date"
+                      format="YYYY-MM-DD"
+                      confirmBtnText="Confirm"
+                      cancelBtnText="Cancel"
+                    
+                      onDateChange={(date) => this.setState({DOB: date})}
+                    />
+                  </View>
+              </View>
+                {/* <TextInput
                   mode="flat"
                   label="Date of Birth"
-                  //right={<TextInput.Icon name="border-color" />}
+                  right={<TextInput.Icon name="border-color" onPress={this.showDialog} />}
                   style={{ backgroundColor: 'white',margin:10,flex:1 }}
                   value={this.state.DOB}
                   disabled={true}
                   //onChangeText={(value) => this.setState({ mobileNumber: value })}
-                />
+                /> */}
                 </View>
                  {/* Emergency Contact */}
                   <Card style = {{margin:10}}>
@@ -228,7 +294,7 @@ export default class ManageProfileScreen extends React.Component {
                
       </View>
         </ScrollView>
-      
+        </Provider>
       </SafeAreaView>
     );
   }

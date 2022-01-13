@@ -2,7 +2,7 @@ import {
   Text, View, StyleSheet, Platform
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Card, RadioButton, TextInput } from 'react-native-paper';
+import { Card, Dialog, Portal, RadioButton, TextInput, Button as RButton, Provider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import { theme } from '../../components/LoginComponents/theme';
@@ -10,6 +10,7 @@ import DatePicker from 'react-native-datepicker';
 import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
 import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
 import Button from '../../components/LoginComponents/Button';
+
 //import RNPickerSelect from 'react-native-picker-select';
 
 
@@ -19,6 +20,8 @@ export default class SMPForm extends React.Component {
     super(props);
    
     this.state = {
+      tempMedication:"",
+      visible:false,
       isProcessing: true,
       minutes:'',
       hours:'',
@@ -41,8 +44,11 @@ export default class SMPForm extends React.Component {
       typesOfSeizure : 'Epileptic',
       seizureAtPresent:'',
       assistanceRequired: '',
+
     };
-   
+    this.showDialog = this.showDialog.bind(this);
+    this.hideDialog = this.hideDialog.bind(this);
+    this.updateMedication = this.updateMedication.bind(this);
   }
   componentDidMount(){
     
@@ -326,11 +332,39 @@ export default class SMPForm extends React.Component {
     //   )
     // }
   }
+  showDialog(){
+    this.setState({visible:true});
+  }
+  hideDialog(){
+    this.setState({visible:false});
+  }
+  updateMedication(){
+    //this.state.myArray.push('new value')
+    debugger;
+    this.setState({ medicalConditions: [...this.state.medicalConditions, this.state.tempMedication] });
+    const c = this.state.medicalConditions;
+    debugger;
+    this.setState({tempMedication:null});
+    this.hideDialog();
+  }
+  deleteMedicalCondition(key){
+    debugger;
+    var array = this.state.medicalConditions;
+    if (key !== -1) {
+      array.splice(key, 1);
+      this.setState({medicalConditions: array});
+    }
+    // delete array[key];
+    // this.setState({medicalConditions: array})
+    // const  b = array;
+  }
   
  
   render() {
     return (
+      <Provider>
         <SafeAreaView style={{marginTop:-50}}>
+         
           <ScrollView>
             {/* Question 1 */}
             <Card style = {styles.card}>
@@ -351,7 +385,7 @@ export default class SMPForm extends React.Component {
               </Card.Content>
             </Card>
 
-            {/* Question 1 */}
+            {/* Question 2 */}
             <Card style = {styles.card}>
               <Card.Content>
                 
@@ -371,7 +405,7 @@ export default class SMPForm extends React.Component {
             </Card>
                
             
-            {/* Question 2 */}
+            {/* Question 3 */}
             <Card style = {styles.card}>
               <Card.Content>
                 <Text style={styles.questions}>Medication you are on</Text>
@@ -404,42 +438,63 @@ export default class SMPForm extends React.Component {
                       ):(<View></View>)}
               </Card.Content>
             </Card>
-
-            {/* Question 3 */}
+          
+            {/* Question 4 */}
             <Card style = {styles.card}>
               <Card.Content>
                 <Text style={styles.questions}>Medical Conditions</Text>
-                <RadioButton.Group onValueChange={newValue => this.setState({onMedication : newValue})} value={this.state.onMedication}>
-                    <View style = {styles.parent}>
-                        <View style = {styles.child}>
-                            <View style = {styles.radio}>
-                              <RadioButton value="Yes" />
-                              <Text>Yes</Text>
-                            </View>
+                {this.state.medicalConditions ? (<View>
+                  {
+                    this.state.medicalConditions.map((item, key)=>{
+                      debugger;
+                      return(
+                        <View>
+                          <TextInput
+                            mode="outlined"
+                            theme={{ colors: { primary: theme.colors.primary}}}
+                            multiline={true}
+                            right={<TextInput.Icon name="delete" color='red' onPress={this.deleteMedicalCondition.bind(this,key)}/>}
+                            //placeholder="Type Here"
+                            value={item}
+                           // onChangeText={(value) => this.setState({ tempMedication: value })}
+                            disabled={true}
+                          />
+                          {/* <Text>
+                            {item}
+                          </Text> */}
                         </View>
-
-                        <View style = {styles.child}>
-                          <View style = {styles.radio}>
-                            <RadioButton value="No" />
-                            <Text>No</Text>
-                          </View>
-                        </View>
-                      </View>
-                    </RadioButton.Group>
-                    { this.state.onMedication == "Yes" ? (
-                        <TextInput
-                          mode="outlined"
-                          theme={{ colors: { primary: theme.colors.primary}}}
-                          multiline={true}
-                          placeholder="Type Here"
-                          value={this.state.medication}
-                          onChangeText={(value) => this.setState({ medication: value })}
-                      />
-                      ):(<View></View>)}
+                
+                       
+                      )
+                    })
+                  }
+                </View>):(<View></View>)}
+                <Button onPress={this.showDialog}>Add</Button>
               </Card.Content>
             </Card>
 
-             {/* Question 4 */}
+            <Portal>
+                  <Dialog visible={this.state.visible}  onDismiss={this.hideDialog}>
+                    <Dialog.Title>Add Condition</Dialog.Title>
+                    <Dialog.Content>
+                      <TextInput
+                        mode="outlined"
+                        theme={{ colors: { primary: theme.colors.primary}}}
+                        multiline={true}
+                        placeholder="Type Here"
+                        value={this.state.tempMedication}
+                        onChangeText={(value) => this.setState({ tempMedication: value })}
+                      />
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                      <RButton color='gray' onPress={this.hideDialog}>Cancel</RButton>
+                      <RButton color={theme.colors.primary} onPress={this.updateMedication}>Ok</RButton>
+                    </Dialog.Actions>
+                  </Dialog>
+                </Portal>
+            
+
+             {/* Question 5 */}
             <Card style = {styles.card}>
               <Card.Content>
                 <Text style={styles.questions}>Other relevant medical history.</Text>
@@ -634,9 +689,12 @@ export default class SMPForm extends React.Component {
                       Submit
                     </Button>
                   </View>
+                  
 
           </ScrollView>
+         
         </SafeAreaView>
+        </Provider>
      );
   }
 };
