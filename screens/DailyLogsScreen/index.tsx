@@ -33,7 +33,19 @@ const DailyLogsScreen = () => {
   const [active, setActive] = useState(0);
   
   const onSubmit = () =>{
-    Alert.alert("Daily Log Submitted Successfully.");
+    Alert.alert(
+      "Successful",
+      "Your Daily Log Has been Submitted.",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressedd"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+    //Alert.alert("Daily Log Submitted Successfully.");
     navigation.navigate("Profile Screen");
   }
   return (

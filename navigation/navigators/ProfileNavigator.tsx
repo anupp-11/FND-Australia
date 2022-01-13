@@ -64,10 +64,10 @@ export default function ProfileNavigator() {
         name="FAQs"
         component={FAQs}
       />
-       {/* <ProfileStack.Screen
-        name="Seizure Monitoring Record"
+       <ProfileStack.Screen
+        name="My Seizure Management Plan"
         component={SMPForm}
-      /> */}
+      />
       <ProfileStack.Screen
         name="App Setting"
         component={AppSettingScreen}

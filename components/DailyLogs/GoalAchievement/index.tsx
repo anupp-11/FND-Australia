@@ -10,7 +10,7 @@ const GoalAchievement = () => {
   const onChangee =  () => {}
   return (
     <View style = {{backgroundColor:'white', borderRadius: 10, padding:10, marginBottom:20}}>
-         <Paragraph> Goal Achievement </Paragraph>
+         <Paragraph> Daily Achievement </Paragraph>
         
         <Image
           style={{height: 150, width : '100%', borderRadius:10, marginBottom: 20 }}

@@ -1,21 +1,31 @@
 import {
-  Text, View, StyleSheet
+  Text, View, StyleSheet, Platform
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, RadioButton, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import { theme } from '../../components/LoginComponents/theme';
+import DatePicker from 'react-native-datepicker';
+import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
+import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
+import Button from '../../components/LoginComponents/Button';
+//import RNPickerSelect from 'react-native-picker-select';
 
 
-
-export default class MediaScreen extends React.Component {
+export default class SMPForm extends React.Component {
   
   constructor(props: any,) {
     super(props);
    
     this.state = {
       isProcessing: true,
+      minutes:'',
+      hours:'',
+      duration:'',
+      frequency:'',
+      DOB: new Date,
+      DOP: new Date,
       onMedication: 'Yes',
       medicalConditions: [],
       medicalHistory: '',
@@ -37,15 +47,368 @@ export default class MediaScreen extends React.Component {
   componentDidMount(){
     
   }
+  getHourPicker(){
+
+    if(Platform.OS === "android"){
+      return(
+        <View
+          style={{
+          display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:120,
+          borderRadius: 10,
+          backgroundColor:'#E9E9E9',
+          
+          margin: 10,
+          height:50,
+      }}>
+        <SelectPicker
+                selectedValue={this.state.hours}
+                style={{ width: 60, flex: 1,textAlign:'center'}}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({ hours: itemValue })
+                }
+              >
+                {HOURS.map((x) => (
+                  <SelectPicker.Item key={x} label={x} value={x} />
+                ))}
+        </SelectPicker>
+        <Text style={{marginRight:10,fontWeight:'700'}}>Hr</Text>
+      </View>
+      );
+    }
+    // else{
+    //   return (
+    //     <View style={styles.selectSize}>
+    //       <RNPickerSelect
+    //         style={{
+    //           inputIOS:{
+    //             //width: 150, flex: 1
+    //             backgroundColor: '#fff',
+    //             borderWidth: 1,
+    //             borderRadius: 10,
+    //             //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+    //             marginTop: 10,
+    //             height: 40
+    //           }
+    //         }}
+    //         // placeholder={{
+    //         //   label:"Select State",
+    //         //   value:null,
+    //         //   color:PRIMARY_COLOR
+    //         // }}
+    //         value={this.state.hours}
+    //         onValueChange={(itemValue, itemIndex) =>{
+              
+    //           this.setState({hours:itemValue})
+    //         }
+              
+    //         }
+    //         items={HOURS.map(x => {
+    //           const sta ={
+    //             label: x,
+    //             value: x
+    //           };
+    //           return sta;
+    //         })}
+            
+            
+    //       />
+    //     </View>
+
+    //   )
+    // }
+  }
+  getMinutePicker(){
+
+    if(Platform.OS === "android"){
+      return(
+        <View
+          style={{
+          display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:120,
+          borderRadius: 10,
+          backgroundColor:'#E9E9E9',
+          
+          margin: 10,
+          height:50,
+      }}>
+        <SelectPicker
+                selectedValue={this.state.minutes}
+                style={{ width: 60, flex: 1,textAlign:'center'}}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({ minutes: itemValue })
+                }
+              >
+                {MINUTES.map((x) => (
+                  <SelectPicker.Item key={x} label={x} value={x} />
+                ))}
+        </SelectPicker>
+        <Text style={{marginRight:10,fontWeight:'700'}}>Min</Text>
+      </View>
+      );
+    }
+    // else{
+    //   return (
+    //     <View style={styles.selectSize}>
+    //       <RNPickerSelect
+    //         style={{
+    //           inputIOS:{
+    //             //width: 150, flex: 1
+    //             backgroundColor: '#fff',
+    //             borderWidth: 1,
+    //             borderRadius: 10,
+    //             //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+    //             marginTop: 10,
+    //             height: 40
+    //           }
+    //         }}
+    //         // placeholder={{
+    //         //   label:"Select State",
+    //         //   value:null,
+    //         //   color:PRIMARY_COLOR
+    //         // }}
+    //         value={this.state.minutes}
+    //         onValueChange={(itemValue, itemIndex) =>{
+              
+    //           this.setState({minutes:itemValue})
+    //         }
+              
+    //         }
+    //         items={MINUTE.map(x => {
+    //           const sta ={
+    //             label: x,
+    //             value: x
+    //           };
+    //           return sta;
+    //         })}
+            
+            
+    //       />
+    //     </View>
+
+    //   )
+    // }
+  }
+  getFrequencyPicker(){
+
+    if(Platform.OS === "android"){
+      return(
+        <View
+          style={{
+          display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:120,
+          borderRadius: 10,
+          backgroundColor:'#E9E9E9',
+          
+          margin: 10,
+          height:50,
+      }}>
+        <SelectPicker
+                selectedValue={this.state.frequency}
+                style={{ width: 60, flex: 1,textAlign:'center'}}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({ frequency: itemValue })
+                }
+              >
+                {FREQUENCY.map((x) => (
+                  <SelectPicker.Item key={x} label={x} value={x} />
+                ))}
+        </SelectPicker>
+        
+      </View>
+      );
+    }
+    // else{
+    //   return (
+    //     <View style={styles.selectSize}>
+    //       <RNPickerSelect
+    //         style={{
+    //           inputIOS:{
+    //             //width: 150, flex: 1
+    //             backgroundColor: '#fff',
+    //             borderWidth: 1,
+    //             borderRadius: 10,
+    //             //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+    //             marginTop: 10,
+    //             height: 40
+    //           }
+    //         }}
+    //         // placeholder={{
+    //         //   label:"Select State",
+    //         //   value:null,
+    //         //   color:PRIMARY_COLOR
+    //         // }}
+    //         value={this.state.frequency}
+    //         onValueChange={(itemValue, itemIndex) =>{
+              
+    //           this.setState({frequency:itemValue})
+    //         }
+              
+    //         }
+    //         items={FREQUENCY.map(x => {
+    //           const sta ={
+    //             label: x,
+    //             value: x
+    //           };
+    //           return sta;
+    //         })}
+            
+            
+    //       />
+    //     </View>
+
+    //   )
+    // }
+  }
+  getDurationPicker(){
+
+    if(Platform.OS === "android"){
+      return(
+        <View
+          style={{
+          display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:120,
+          borderRadius: 10,
+          backgroundColor:'#E9E9E9',
+          
+          margin: 10,
+          height:50,
+      }}>
+        <SelectPicker
+                selectedValue={this.state.duration}
+                style={{ width: 100, flex: 1,textAlign:'center'}}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({ duration: itemValue })
+                }
+              >
+                {DURATION.map((x) => (
+                  <SelectPicker.Item key={x} label={x} value={x} />
+                ))}
+        </SelectPicker>
+      </View>
+      );
+    }
+    // else{
+    //   return (
+    //     <View style={styles.selectSize}>
+    //       <RNPickerSelect
+    //         style={{
+    //           inputIOS:{
+    //             //width: 150, flex: 1
+    //             backgroundColor: '#fff',
+    //             borderWidth: 1,
+    //             borderRadius: 10,
+    //             //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+    //             marginTop: 10,
+    //             height: 40
+    //           }
+    //         }}
+    //         // placeholder={{
+    //         //   label:"Select State",
+    //         //   value:null,
+    //         //   color:PRIMARY_COLOR
+    //         // }}
+    //         value={this.state.duration}
+    //         onValueChange={(itemValue, itemIndex) =>{
+              
+    //           this.setState({duration:itemValue})
+    //         }
+              
+    //         }
+    //         items={DURATION.map(x => {
+    //           const sta ={
+    //             label: x,
+    //             value: x
+    //           };
+    //           return sta;
+    //         })}
+            
+            
+    //       />
+    //     </View>
+
+    //   )
+    // }
+  }
+  
  
   render() {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{marginTop:-50}}>
           <ScrollView>
+            {/* Question 1 */}
+            <Card style = {styles.card}>
+              <Card.Content>
+               
+                  <Text style={styles.questions}>Date of Birth</Text>
+                  <DatePicker
+                    style={{width: '100%'}}
+                    date={this.state.DOB}
+                    placeholder="Select Date"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                  
+                    onDateChange={(date) => this.setState({DOB:date})}
+                  />
+               
+              </Card.Content>
+            </Card>
+
+            {/* Question 1 */}
+            <Card style = {styles.card}>
+              <Card.Content>
+                
+                  <Text style={styles.questions}>Date of Plan</Text>
+                  <DatePicker
+                    style={{width: '100%'}}
+                    date={this.state.DOP}
+                    placeholder="Select Date"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                  
+                    onDateChange={(date) => this.setState({DOP:date})}
+                  />
+                
+              </Card.Content>
+            </Card>
+               
+            
             {/* Question 2 */}
             <Card style = {styles.card}>
               <Card.Content>
                 <Text style={styles.questions}>Medication you are on</Text>
+                <RadioButton.Group onValueChange={newValue => this.setState({onMedication : newValue})} value={this.state.onMedication}>
+                    <View style = {styles.parent}>
+                        <View style = {styles.child}>
+                            <View style = {styles.radio}>
+                              <RadioButton value="Yes" />
+                              <Text>Yes</Text>
+                            </View>
+                        </View>
+
+                        <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="No" />
+                            <Text>No</Text>
+                          </View>
+                        </View>
+                      </View>
+                    </RadioButton.Group>
+                    { this.state.onMedication == "Yes" ? (
+                        <TextInput
+                          mode="outlined"
+                          theme={{ colors: { primary: theme.colors.primary}}}
+                          multiline={true}
+                          placeholder="Type Here"
+                          value={this.state.medication}
+                          onChangeText={(value) => this.setState({ medication: value })}
+                      />
+                      ):(<View></View>)}
+              </Card.Content>
+            </Card>
+
+            {/* Question 3 */}
+            <Card style = {styles.card}>
+              <Card.Content>
+                <Text style={styles.questions}>Medical Conditions</Text>
                 <RadioButton.Group onValueChange={newValue => this.setState({onMedication : newValue})} value={this.state.onMedication}>
                     <View style = {styles.parent}>
                         <View style = {styles.child}>
@@ -91,45 +454,6 @@ export default class MediaScreen extends React.Component {
               </Card.Content>
             </Card>
 
-           
-            {/* Question 6 */}
-            <Card style = {styles.card}>
-              <Card.Content>
-                <Text style={styles.questions}>My Doctor's contact detail are.</Text>
-                <TextInput
-                        mode="outlined"
-                        theme={{ colors: { primary: theme.colors.primary}}}
-                        multiline={true}
-                        label="Name"
-                        value={this.state.emergencyContact.name}
-                        onChangeText={(value) => this.setState({ name : value })}
-                      />
-                <TextInput
-                        mode="outlined"
-                        theme={{ colors: { primary: theme.colors.primary}}}
-                        multiline={true}
-                        label="Profession"
-                        value={this.state.emergencyContact.relationship}
-                        onChangeText={(value) => this.setState({ relationship : value })}
-                      />
-                <TextInput
-                        mode="outlined"
-                        theme={{ colors: { primary: theme.colors.primary}}}
-                        multiline={true}
-                        label='Address'
-                        value={this.state.emergencyContact.phoneNo}
-                        onChangeText={(value) => this.setState({ phoneNo : value })}
-                      />
-                <TextInput
-                        mode="outlined"
-                        theme={{ colors: { primary: theme.colors.primary}}}
-                        multiline={true}
-                        label="Phone Number"
-                        value={this.state.emergencyContact.phoneNoHome}
-                        onChangeText={(value) => this.setState({ phoneNoHome : value })}
-                      />
-              </Card.Content>
-            </Card>
 
             {/* Question 7 */}
               <Card style = {styles.card}>
@@ -238,6 +562,44 @@ export default class MediaScreen extends React.Component {
                 {/* Question 8 */}
                 <Card style = {styles.card}>
                     <Card.Content>
+                      <Text style={styles.questions}>Duration of Seizure</Text>
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent:'center'
+                          }}
+                        >
+                          {this.getHourPicker()}
+                          {this.getMinutePicker()}
+                          
+                        </View>
+                    </Card.Content>
+                  </Card> 
+
+                {/* Question 8 */}
+                <Card style = {styles.card}>
+                    <Card.Content>
+                      <Text style={styles.questions}>Frequency of Seizure</Text>
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent:'center'
+                          }}
+                        >
+                          {this.getFrequencyPicker()}
+                          {this.getDurationPicker()}
+                          
+                        </View>
+                    </Card.Content>
+                  </Card> 
+
+                {/* Question 8 */}
+                <Card style = {styles.card}>
+                    <Card.Content>
                       <Text style={styles.questions}>Assistance required from people.</Text>
                           <RadioButton.Group onValueChange={newValue => this.setState({assistanceRequired:newValue})} value={this.state.assistanceRequired}>
                           <View style = {styles.parent}>
@@ -267,6 +629,11 @@ export default class MediaScreen extends React.Component {
                           </RadioButton.Group>
                     </Card.Content>
                   </Card> 
+                  <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
+                    <Button style={{width:'80%'}} mode="contained"  >
+                      Submit
+                    </Button>
+                  </View>
 
           </ScrollView>
         </SafeAreaView>
@@ -289,6 +656,17 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingHorizontal:10
    //backgroundColor: 'red'
+  },
+  inputBox: {
+    marginTop: 10,
+  },
+  inputLabel: {
+    fontSize: 18,
+    marginBottom: 6,
+  },
+  input: {
+    borderRadius: 10,
+    
   }
   ,child:{
     //marginRight: 40

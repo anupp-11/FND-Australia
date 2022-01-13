@@ -72,7 +72,7 @@ const SeizureMgmtPlanScreen = () => {
           <Paragraph style = {{fontSize:14}}>For people with functional seizures, a Seizure management plan may be helpful so others know how to best support the person. NOTE: A seizure management plan is very individual, what helps one person, may not help another person with the same condition.</Paragraph>
         </View>
         <Background>
-          <Button mode="contained" onPress={() => navigation.navigate('Seizure Monitoring Record')}>
+          <Button mode="contained" onPress={() => navigation.navigate('My Seizure Management Plan')}>
           My Seizure Mgmt Plan
           </Button>
         </Background>

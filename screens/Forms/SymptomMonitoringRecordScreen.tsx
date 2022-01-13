@@ -12,7 +12,11 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+// import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
+// import RNPickerSelect from 'react-native-picker-select';
+import { HOURS } from '../../service/utils';
 const FruitsData=require('./../../service/options.json');
+
 
 const SymptomMonitoringRecordScreen = () => {
 
@@ -25,6 +29,7 @@ const SymptomMonitoringRecordScreen = () => {
   const [feelAfter, setFeelAfter] = React.useState('Tired');
   const [service, setService] = React.useState('Yes');
   const [data, setData] = useState(FruitsData);
+  const [hour,setHour] = useState('');
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -40,6 +45,77 @@ const SymptomMonitoringRecordScreen = () => {
   const showDatepicker = () => {
     showMode('date');
   };
+
+  //  const getStatePicker = () => {
+
+  //   if(Platform.OS === "android"){
+  //     return(
+  //       <View
+  //         style={{
+  //         //paddingVertical: 2,
+  //         //backgroundColor: '#fff',
+  //         borderWidth: 1,
+  //         borderRadius: 10,
+  //         borderColor: 'gray',
+  //         marginTop: 10
+  //     }}>
+  //       <SelectPicker
+  //               selectedValue={hour}
+  //               style={{ width: 150, flex: 1}}
+  //               onValueChange={(itemValue, itemIndex) =>
+  //                 setHour(itemValue)
+  //               }
+  //             >
+  //               {HOURS.map((x) => (
+  //                 <SelectPicker.Item key={x} label={x} value={x} />
+  //               ))}
+  //       </SelectPicker>
+  //     </View>
+  //     );
+  //   }else{
+  //     return (
+  //       <View style={{}}>
+  //         <RNPickerSelect
+  //           style={{
+  //             inputIOS:{
+  //               //width: 150, flex: 1
+  //               backgroundColor: '#fff',
+  //               borderWidth: 1,
+  //               borderRadius: 10,
+  //               //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+  //               marginTop: 10,
+  //               height: 40
+  //             }
+  //           }}
+  //           // placeholder={{
+  //           //   label:"Select State",
+  //           //   value:null,
+  //           //   color:PRIMARY_COLOR
+  //           // }}
+  //           value={hour}
+  //           onValueChange={(itemValue, itemIndex) =>{
+              
+  //             setHour(itemValue)
+  //           }
+              
+  //           }
+  //           items={HOURS.map(x => {
+  //             const sta ={
+  //               label: x,
+  //               value: x
+  //             };
+  //             return sta;
+  //           })}
+            
+            
+  //         />
+  //       </View>
+
+  //     )
+  //   }
+  // }
+  
+
 
   const showTimepicker = () => {
     showMode('time');

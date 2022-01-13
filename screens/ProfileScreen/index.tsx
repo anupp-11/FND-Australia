@@ -160,7 +160,6 @@ const ProfileScreen = () => {
               <Paragraph>Are you sure you want to logout?</Paragraph>
             </Dialog.Content>
           <Dialog.Actions style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}>
-          
             <Button color={theme.colors.primary} onPress={logout}>Yes</Button>
             <Button color='red' onPress={hideDialog}>No</Button>
           </Dialog.Actions>
