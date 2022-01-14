@@ -65,14 +65,14 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
               </TouchableOpacity>
             </View>
             
-            <View style={{padding:10}}>
+            {/* <View style={{padding:10}}>
               <Card>
                 <Card.Cover source={require('../../assets/images/Upcoming-Events.jpg')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
                 <Card.Content>
                   <Title style={{marginTop:10}}>Upcoming Events</Title>
                 </Card.Content>
               </Card>
-            </View>
+            </View> */}
             {/* <WebView
               source={{uri: 'https://fndaus.org.au/news-and-events/'}}
               style={{width:'100%', height:600}}

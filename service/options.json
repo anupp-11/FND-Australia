@@ -2,26 +2,26 @@
     {
         "id":0,
         "key":"Mango",
-        "checked":"checked"
+        "checked":true
     },{
         "id":1,
         "key":"Banana",
-        "checked":"checked"
+        "checked":true
     },{
         "id":2,
         "key":"Papaya",
-        "checked":"unchecked"
+        "checked":false
     },{
         "id":3,
         "key":"Grapes",
-        "checked":"checked"
+        "checked":true
     },{
         "id":4,
         "key":"Guava",
-        "checked":"checked"
+        "checked":false
     },{
         "id":5,
         "key":"Lychee",
-        "checked":"unchecked"
+        "checked":false
     }
 ]

@@ -34,8 +34,8 @@ export default class UsefulLinksScreen extends React.Component {
           }}
         />
         <View style={{padding:20}}>
-          <Text style={{fontSize:16, fontWeight:'700',marginBottom:10}}>Upcoming Events</Text>
-          <Button color={"#f46036"} title="View Events" onPress={ ()=>{ Linking.openURL('https://fndaus.org.au/news-and-events/')}} />
+          <Text style={{fontSize:16, fontWeight:'700',marginBottom:10}}>Other Links</Text>
+          <Button color={"#f46036"} title="View Other Links" onPress={ ()=>{ Linking.openURL("")}} />
         
         </View>
         <View

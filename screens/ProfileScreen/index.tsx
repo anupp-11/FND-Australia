@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import MAIcon from 'react-native-vector-icons/MaterialIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
 
@@ -79,46 +79,48 @@ const ProfileScreen = () => {
      
       <TouchableRipple onPress={() => {}}>
         <View style={styles.menuItem}>
-          <FAIcon name="user-md" color="#28cd00" size={20}/>
-          <Text style={styles.menuItemText}>Diagnosis</Text>
+          <FAIcon name="user-md" color="#28cd00" size={22}/>
+          <Text style={{color: '#777777',marginLeft: 26,fontWeight: '600',fontSize: 16,lineHeight: 26}}>Diagnosis</Text>
         </View>
       </TouchableRipple>
   
       
      
-      {/* <TouchableRipple onPress={() => {}}>
+     
+       <TouchableRipple onPress={() => navigation.navigate('Functional Seizure Information')}>
         <View style={styles.menuItem}>
-          <Fontisto name="prescription" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Symptom Management Plan</Text>
-        </View>
-      </TouchableRipple> */}
-      <TouchableRipple onPress={() => navigation.navigate('Seizure Monitoring Record')}>
-        <View style={styles.menuItem}>
-          <Icon name="file-cabinet" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Seizure Monitoring Record</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => navigation.navigate('Functional Seizure Information')}>
-        <View style={styles.menuItem}>
-          <Icon name="file-document-outline" color="#28cd00" size={27}/>
+          <IIcon name="information-circle" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
           <Text style={styles.menuItemText}>Functional Seizure Information</Text>
         </View>
       </TouchableRipple>
+      <TouchableRipple onPress={() => navigation.navigate('My Seizure Management Plan')}>
+        <View style={styles.menuItem}>
+          <Icon name="form-select" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
+          <Text style={styles.menuItemText}>My Seizure Management Plan</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => navigation.navigate('Seizure Monitoring Record')}>
+        <View style={styles.menuItem}>
+          <Icon name="file-cabinet" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
+          <Text style={styles.menuItemText}>Seizure Monitoring Record</Text>
+        </View>
+      </TouchableRipple>
+     
       <TouchableRipple onPress={() => navigation.navigate('My Wellbeing Strategies')}>
         <View style={styles.menuItem}>
-          <FAIcon name="briefcase-medical" color="#28cd00" size={20}/>
+          <FAIcon name="briefcase-medical" color="#28cd00" size={20} style={{marginRight:5}}/>
           <Text style={styles.menuItemText}>My Wellbeing Strategies</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Daily Logs')}>
         <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
+          <Icon name="account-check-outline" color="#28cd00" size={27} style={{marginLeft:-3,marginRight:0}}/>
           <Text style={styles.menuItemText}>Daily Log</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Useful Links')}>
         <View style={styles.menuItem}>
-          <Icon name="link-variant" color="#28cd00" size={27}/>
+          <Icon name="link-variant" color="#28cd00" size={25} style={{marginLeft:-2,marginRight:3}}/>
           <Text style={styles.menuItemText}>Useful Links</Text>
         </View>
       </TouchableRipple>
@@ -130,25 +132,25 @@ const ProfileScreen = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Stories')}>
         <View style={styles.menuItem}>
-          <Icon name="camera-party-mode" color="#28cd00" size={27}/>
+          <Icon name="camera-party-mode" color="#28cd00" size={27} style={{marginLeft:-2,marginRight:1}}/>
           <Text style={styles.menuItemText}>Stories</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('FAQs')}>
         <View style={styles.menuItem}>
-          <FAIcon name="question-circle" color="#28cd00" size={23}/>
+          <FAIcon name="question-circle" color="#28cd00" size={23} style={{marginRight:3}}/>
           <Text style={styles.menuItemText}>FAQ</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('App Setting')}>
         <View style={styles.menuItem}>
-          <Icons name="settings" color="#28cd00" size={23}/>
+          <Icons name="settings" color="#28cd00" size={23} style={{marginRight:3}}/>
           <Text style={styles.menuItemText}>App Settings</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={showDialog}>
         <View style={styles.menuItem}>
-          <Icon name="logout" color="#28cd00" size={23}/>
+          <Icon name="logout" color="#28cd00" size={23} style={{marginRight:3}}/>
           <Text style={styles.menuItemText}>Signout</Text>
         </View>
       </TouchableRipple>

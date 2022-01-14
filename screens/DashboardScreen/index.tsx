@@ -23,6 +23,7 @@ const DashboardScreen = () => {
       <View style={{paddingVertical: 14,}}></View>
       <Header>Welcome To</Header>
       <Header>FND Australia</Header>
+      <Header>Support Services</Header>
       <View style={{paddingVertical: 14,}}></View>
 
       {/* <Paragraph> Login or SignUp </Paragraph> */}

@@ -18,32 +18,48 @@ import { HOURS } from '../../service/utils';
 const FruitsData=require('./../../service/options.json');
 
 
-const SymptomMonitoringRecordScreen = () => {
+export default class SymptomMonitoringRecordScreen extends React.Component {
+  
+  constructor(props: any,) {
+    super(props);
+   
+    this.state = {
+      date: new Date,
+      mode : 'date',
+      show : false,
+      feel:'Stressed',
+      action:'Keep Calm',
+      how:'Black',
+      feelAfter:'Tired',
+      service : 'Yes',
+      data :FruitsData,
+      hour:'',
+      
+    };
+    this.renderFruits = this.renderFruits.bind(this);
+    // this.hideDialog = this.hideDialog.bind(this);
+    // this.updateMedication = this.updateMedication.bind(this);
+  }
+  componentDidMount(){
+    
+  }
 
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [feel, setFeel] = React.useState('Stressed');
-  const [action, setAction] = React.useState('Keep Calm');
-  const [how, setHow] = React.useState('Black');
-  const [feelAfter, setFeelAfter] = React.useState('Tired');
-  const [service, setService] = React.useState('Yes');
-  const [data, setData] = useState(FruitsData);
-  const [hour,setHour] = useState('');
+  
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
+  onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || this.state.date;
+    this.setState({show:(Platform.OS ==='ios')});
+    this.setState({date:currentDate});
   };
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
+  showMode = (currentMode) => {
+    this.setState({show:true});
+    this.setState({mode:currentMode});
+   
   };
 
-  const showDatepicker = () => {
-    showMode('date');
+  showDatepicker = () => {
+    this.showMode('date');
   };
 
   //  const getStatePicker = () => {
@@ -117,39 +133,35 @@ const SymptomMonitoringRecordScreen = () => {
   
 
 
-  const showTimepicker = () => {
-    showMode('time');
+  showTimepicker = () => {
+    this.showMode('time');
   };
 
  
 
 
-  const _onSMRPressed = () => {
+   _onSMRPressed = () => {
 
   }
-  const onChecked = (id) => {
-    const Data = data;
+  onChecked = (id) => {
+    const Data = this.state.data;
     debugger;
     const index = Data.findIndex(x=>x.id===id);
     debugger;
-    if(data[index].checked=="checked")
-    {
-      Data[index].checked = "unchecked";
-    }else if(data[index].checked=="unchecked"){
-      Data[index].checked = "unchecked";
-    }
-    //Data[index].checked=!data[index].checked;
-    setData(Data);
-    debugger;
-    const b = data;
+    Data[index].checked=!this.state.data[index].checked;
+    this.setState({data:Data});
+    //setData(Data);
+    // debugger;
+    // const b = data;
+    // debugger;
   }
 
-  const renderFruits = () => {
-    return data.map((item, key)=>{
+  renderFruits ()  {
+    return this.state.data.map((item, key)=>{
       debugger;
       return(
         <View>
-          <Checkbox.Item label={item.key} status={item.checked} onPress={()=>{onChecked(item.id)}}/>
+          <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id)}}/>
         </View>
 
         // <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} key = {key} onPress={()=>{onChecked(item.id)}}>
@@ -161,269 +173,276 @@ const SymptomMonitoringRecordScreen = () => {
     })
   }
 
-  const navigation = useNavigation();
-  return (
-    <SafeAreaView >
-      <ScrollView>
-          {/* Date and Time Picker */}
+  //const navigation = useNavigation();
+  render(){
+    return (
+      <SafeAreaView >
+        <ScrollView>
+            {/* Date and Time Picker */}
+            <Card style = {styles.card}>
+              <View style = {{marginHorizontal:10}}>
+                <Button mode="contained" onPress={this.showDatepicker} >
+                  Date of Seizure
+                </Button>
+              </View>
+              <View style = {{marginHorizontal:10}}>
+                <Button mode="contained" onPress={this.showTimepicker} >
+                  Time Seizure Started
+                </Button>
+              </View>
+              {this.state.show && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={this.state.date}
+                  mode={this.state.mode}
+                  is24Hour={true}
+                  display="default"
+                  onChange={this.onChange}
+                />
+              )}
+            </Card>
+          
+          {/* Question 1 */}
           <Card style = {styles.card}>
-            <View style = {{marginHorizontal:10}}>
-              <Button mode="contained" onPress={showDatepicker} >
-                Date of Seizure
-              </Button>
-            </View>
-            <View style = {{marginHorizontal:10}}>
-              <Button mode="contained" onPress={showTimepicker} >
-                Time Seizure Started
-              </Button>
-            </View>
-            {show && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-              />
-            )}
+            <Card.Content>
+              <Text style={styles.questions}>What were you doing when Seizure started?</Text>
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
+                    {/* <Checkbox
+                      status={checked ? 'checked' : 'unchecked'}
+                      onPress={() => {
+                        setChecked(!checked);
+                      }}/> */}
+              {this.renderFruits()}
+  
+            </Card.Content>
           </Card>
-        
-        {/* Question 1 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>What were you doing when Seizure started?</Text>
-            <TextInput
-                    mode="outlined"
-                    theme={{ colors: { primary: theme.colors.primary}}}
-                    multiline={true}
-                    placeholder="Type Here"
-                    //value={this.state.storeName}
-                    //onChangeText={(value) => this.setState({ storeName: value })}
-                  />
-            {renderFruits()}
-
-          </Card.Content>
-        </Card>
-        
-        {/* Question 2 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>How were you feeling before Seizure started?</Text>
-                <RadioButton.Group onValueChange={newValue => setFeel(newValue)} value={feel}>
-                <View style = {styles.parent}>
-                    <View style = {styles.child}>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Stressed" />
-                          <Text>Stressed</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Fatigued" />
-                          <Text>Fatigued</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Angry" />
-                          <Text>Angry</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Exhausted" />
-                          <Text>Exhausted</Text>
-                        </View>
-                    </View>
-
-                    <View style = {styles.child}>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Emotional" />
-                        <Text>Emotional</Text>
+          
+          {/* Question 2 */}
+          <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>How were you feeling before Seizure started?</Text>
+                  <RadioButton.Group onValueChange={newValue => this.setState({feel:newValue})} value={this.state.feel}>
+                  <View style = {styles.parent}>
+                      <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Stressed" />
+                            <Text>Stressed</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Fatigued" />
+                            <Text>Fatigued</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Angry" />
+                            <Text>Angry</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Exhausted" />
+                            <Text>Exhausted</Text>
+                          </View>
                       </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Hungry" />
-                        <Text>Hungry</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Thirsty" />
-                        <Text>Thirsty</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Dizzy" />
-                        <Text>Dizzy</Text>
+  
+                      <View style = {styles.child}>
+                        <View style = {styles.radio}>
+                          <RadioButton value="Emotional" />
+                          <Text>Emotional</Text>
+                        </View>
+                        <View style = {styles.radio}>
+                          <RadioButton value="Hungry" />
+                          <Text>Hungry</Text>
+                        </View>
+                        <View style = {styles.radio}>
+                          <RadioButton value="Thirsty" />
+                          <Text>Thirsty</Text>
+                        </View>
+                        <View style = {styles.radio}>
+                          <RadioButton value="Dizzy" />
+                          <Text>Dizzy</Text>
+                        </View>
                       </View>
                     </View>
-                  </View>
-                </RadioButton.Group>
+                  </RadioButton.Group>
+                
               
-            
-          </Card.Content>
-        </Card>
-
-        {/* Question 3 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>What actions were taken?</Text>
-                <RadioButton.Group onValueChange={newValue => setAction(newValue)} value={action}>
-                <View style = {styles.parent}>
-                    <View style = {styles.child}>
+            </Card.Content>
+          </Card>
+  
+          {/* Question 3 */}
+          <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>What actions were taken?</Text>
+                  <RadioButton.Group onValueChange={newValue => this.setState({action:newValue})} value={this.state.action}>
+                  <View style = {styles.parent}>
+                      <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Keep Calm" />
+                            <Text>Keep Calm</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Placed Cushions" />
+                            <Text>Placed Cushions</Text>
+                          </View>
+                      </View>
+  
+                      <View style = {styles.child}>
                         <View style = {styles.radio}>
-                          <RadioButton value="Keep Calm" />
-                          <Text>Keep Calm</Text>
+                          <RadioButton value="Stroking" />
+                          <Text>Stroking</Text>
                         </View>
                         <View style = {styles.radio}>
-                          <RadioButton value="Placed Cushions" />
-                          <Text>Placed Cushions</Text>
+                          <RadioButton value="Pillows Around" />
+                          <Text>Pillows Around</Text>
                         </View>
-                    </View>
-
-                    <View style = {styles.child}>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Stroking" />
-                        <Text>Stroking</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Pillows Around" />
-                        <Text>Pillows Around</Text>
                       </View>
                     </View>
-                  </View>
-                </RadioButton.Group>
+                  </RadioButton.Group>
+                
               
-            
-          </Card.Content>
-        </Card>
-
-        {/* Question 4 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>How did the seizure present?</Text>
-                <RadioButton.Group onValueChange={newValue => setHow(newValue)} value={how}>
-                <View style = {styles.parent}>
-                    <View style = {styles.child}>
+            </Card.Content>
+          </Card>
+  
+          {/* Question 4 */}
+          <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>How did the seizure present?</Text>
+                  <RadioButton.Group onValueChange={newValue => this.setState({how:newValue})} value={this.state.how}>
+                  <View style = {styles.parent}>
+                      <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Black" />
+                            <Text>Black</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Spaced Out" />
+                            <Text>Spaced Out</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Convulsing" />
+                            <Text>Convulsing</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Tremor" />
+                            <Text>Tremor</Text>
+                          </View>
+                      </View>
+  
+                      <View style = {styles.child}>
                         <View style = {styles.radio}>
-                          <RadioButton value="Black" />
-                          <Text>Black</Text>
+                          <RadioButton value="Dissociative" />
+                          <Text>Dissociative</Text>
                         </View>
                         <View style = {styles.radio}>
-                          <RadioButton value="Spaced Out" />
-                          <Text>Spaced Out</Text>
+                          <RadioButton value="Drop Attacks" />
+                          <Text>Drop Attacks</Text>
                         </View>
                         <View style = {styles.radio}>
-                          <RadioButton value="Convulsing" />
-                          <Text>Convulsing</Text>
+                          <RadioButton value="Shaking" />
+                          <Text>Shaking</Text>
                         </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Tremor" />
-                          <Text>Tremor</Text>
-                        </View>
+                      </View>
                     </View>
-
-                    <View style = {styles.child}>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Dissociative" />
-                        <Text>Dissociative</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Drop Attacks" />
-                        <Text>Drop Attacks</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Shaking" />
-                        <Text>Shaking</Text>
-                      </View>
-                    </View>
-                  </View>
-                </RadioButton.Group>
+                  </RadioButton.Group>
+                
               
-            
-          </Card.Content>
-        </Card>
-
-         {/* Question 5 */}
-         <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>How did the seizure resolve?</Text>
-            <TextInput
-                    mode="outlined"
-                    theme={{ colors: { primary: theme.colors.primary}}}
-                    multiline={true}
-                    placeholder="Type Here"
-                    //value={this.state.storeName}
-                    //onChangeText={(value) => this.setState({ storeName: value })}
-                  />
-          </Card.Content>
-        </Card>
-
-        {/* Question 6 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>How did you feel after the Seizure?</Text>
-                <RadioButton.Group onValueChange={newValue => setFeelAfter(newValue)} value={feelAfter}>
-                <View style = {styles.parent}>
-                    <View style = {styles.child}>
+            </Card.Content>
+          </Card>
+  
+           {/* Question 5 */}
+           <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>How did the seizure resolve?</Text>
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
+            </Card.Content>
+          </Card>
+  
+          {/* Question 6 */}
+          <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>How did you feel after the Seizure?</Text>
+                  <RadioButton.Group onValueChange={newValue => this.setState({feelAfter:newValue})} value={this.state.feelAfter}>
+                  <View style = {styles.parent}>
+                      <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Tired" />
+                            <Text>Tired</Text>
+                          </View>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Paralyzed" />
+                            <Text>Paralyzed</Text>
+                          </View>
+                      </View>
+  
+                      <View style = {styles.child}>
                         <View style = {styles.radio}>
-                          <RadioButton value="Tired" />
-                          <Text>Tired</Text>
+                          <RadioButton value="Confused" />
+                          <Text>Confused</Text>
                         </View>
                         <View style = {styles.radio}>
-                          <RadioButton value="Paralyzed" />
-                          <Text>Paralyzed</Text>
+                          <RadioButton value="Disoriented" />
+                          <Text>Disoriented</Text>
                         </View>
-                    </View>
-
-                    <View style = {styles.child}>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Confused" />
-                        <Text>Confused</Text>
-                      </View>
-                      <View style = {styles.radio}>
-                        <RadioButton value="Disoriented" />
-                        <Text>Disoriented</Text>
                       </View>
                     </View>
-                  </View>
-                </RadioButton.Group>
+                  </RadioButton.Group>
+                
               
-            
-          </Card.Content>
-        </Card>
-        
-        {/* Question 7 */}
-        <Card style = {styles.card}>
-          <Card.Content>
-            <Text style={styles.questions}>Were emergency services involved?</Text>
-                <RadioButton.Group onValueChange={newValue => setService(newValue)} value={service}>
-                <View style = {styles.parent}>
-                    <View style = {styles.child}>
+            </Card.Content>
+          </Card>
+          
+          {/* Question 7 */}
+          <Card style = {styles.card}>
+            <Card.Content>
+              <Text style={styles.questions}>Were emergency services involved?</Text>
+                  <RadioButton.Group onValueChange={newValue => this.setState({service:newValue})} value={this.state.service}>
+                  <View style = {styles.parent}>
+                      <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Yes" />
+                            <Text>Yes</Text>
+                          </View>
+                          {/* <View style = {styles.radio}>
+                            <RadioButton value="Placed Cushions" />
+                            <Text>Placed Cushions</Text>
+                          </View> */}
+                      </View>
+  
+                      <View style = {styles.child}>
                         <View style = {styles.radio}>
-                          <RadioButton value="Yes" />
-                          <Text>Yes</Text>
+                          <RadioButton value="No" />
+                          <Text>No</Text>
                         </View>
-                        {/* <View style = {styles.radio}>
-                          <RadioButton value="Placed Cushions" />
-                          <Text>Placed Cushions</Text>
-                        </View> */}
-                    </View>
-
-                    <View style = {styles.child}>
-                      <View style = {styles.radio}>
-                        <RadioButton value="No" />
-                        <Text>No</Text>
                       </View>
                     </View>
-                  </View>
-                </RadioButton.Group>
+                  </RadioButton.Group>
+                
               
-            
-          </Card.Content>
-        </Card>
-
-        <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-          <Button style={{width:'80%'}} mode="contained"  >
-             Submit
-          </Button>
-        </View>
-
-      </ScrollView>
-    </SafeAreaView>
-  );
+            </Card.Content>
+          </Card>
+  
+          <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
+            <Button style={{width:'80%'}} mode="contained"  >
+               Submit
+            </Button>
+          </View>
+  
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -450,5 +469,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default SymptomMonitoringRecordScreen;
 
