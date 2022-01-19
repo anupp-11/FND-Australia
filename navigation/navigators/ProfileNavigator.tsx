@@ -13,8 +13,10 @@ import SymptomMonitoringRecordScreen from "../../screens/Forms/SymptomMonitoring
 import ProfileScreen from "../../screens/ProfileScreen";
 import AppSettingScreen from "../../screens/ProfileScreen/AppSettingScreen";
 import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
+import ExerciseScreen from "../../screens/ProfileScreen/ExerciseScreen";
 import FAQs from "../../screens/ProfileScreen/FAQs";
 import ManageProfileScreen from "../../screens/ProfileScreen/ManageProfileScreen";
+import MusicScreen from "../../screens/ProfileScreen/MusicScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
 import StoryScreen from "../../screens/ProfileScreen/Stories";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
@@ -77,6 +79,15 @@ export default function ProfileNavigator() {
         name="Stories"
         component={StoryScreen}
       />
+      <ProfileStack.Screen
+        name="Exercise"
+        component={ExerciseScreen}
+      />
+      <ProfileStack.Screen
+        name="Soothing Music"
+        component={MusicScreen}
+      />
+      
     </ProfileStack.Navigator>
   );
 }

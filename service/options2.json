@@ -3,7 +3,7 @@
         "question1":[
             {
                 "id":0,
-                "key":"Stressed",
+                "key":"Distracted",
                 "checked":false
             },{
                 "id":1,
@@ -11,93 +11,87 @@
                 "checked":false
             },{
                 "id":2,
-                "key":"Angry",
+                "key":"Feeling of an Aura",
                 "checked":false
             },{
                 "id":3,
-                "key":"Exhausted",
+                "key":"Dissociated",
                 "checked":false
             },{
                 "id":4,
-                "key":"Emotional",
+                "key":"Sad",
                 "checked":false
             },{
                 "id":5,
-                "key":"Hungry",
-                "checked":false
-            },{
-                "id":6,
-                "key":"Thirsty",
-                "checked":false
-            },{
-                "id":7,
-                "key":"Dizzy",
+                "key":"Agitated",
                 "checked":false
             }
         ],
         "question2":[
             {
                 "id":0,
-                "key":"Keep Calm",
+                "key":"Epileptic",
                 "checked":false
             },{
                 "id":1,
-                "key":"Placed Cushions",
+                "key":"Non-Epileptic",
                 "checked":false
             },{
                 "id":2,
-                "key":"Stroking",
+                "key":"Functional",
                 "checked":false
             },{
                 "id":3,
-                "key":"Pillow Around",
+                "key":"Dissociative",
+                "checked":false
+            },{
+                "id":4,
+                "key":"Blank Spells",
+                "checked":false
+            },{
+                "id":5,
+                "key":"Hypokinetic",
+                "checked":false
+            },{
+                "id":6,
+                "key":"Hyperkinetic",
                 "checked":false
             }
         ],
         "question3":[
             {
                 "id":0,
-                "key":"Blackout",
+                "key":"Place Cushion Around",
                 "checked":false
             },{
                 "id":1,
-                "key":"Dissociative",
+                "key":"Keep Safe from injury",
                 "checked":false
             },{
                 "id":2,
-                "key":"Drop Attacks",
+                "key":"Help to keep calm",
                 "checked":false
             },{
                 "id":3,
-                "key":"Convulsing",
-                "checked":false
-            },{
-                "id":4,
-                "key":"Shaking",
-                "checked":false
-            },{
-                "id":5,
-                "key":"Tremor",
+                "key":"Remain calm around you",
                 "checked":false
             }
-
-
         ],"question4":[
             {
                 "id":0,
-                "key":"Tired",
+                "key":"Sternum rub",
                 "checked":false
             },{
                 "id":1,
-                "key":"Paralyzed",
+                "key":"Pinch",
                 "checked":false
             },{
                 "id":2,
-                "key":"Confused",
+                "key":"Panic",
                 "checked":false
             },{
                 "id":3,
-                "key":"Disoriented",
+                "key":"Hold you down",
                 "checked":false
             }
 

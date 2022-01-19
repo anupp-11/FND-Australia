@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Platform} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Platform, FlatList} from 'react-native';
 import {
   Card,
   Text,
@@ -15,7 +15,8 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 // import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
 // import RNPickerSelect from 'react-native-picker-select';
 import { HOURS } from '../../service/utils';
-const FruitsData=require('./../../service/options.json');
+import CheckboxComponent from './CheckboxComponent';
+const OPTIONS=require('./../../service/options.json');
 
 
 export default class SymptomMonitoringRecordScreen extends React.Component {
@@ -32,13 +33,14 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
       how:'Black',
       feelAfter:'Tired',
       service : 'Yes',
-      data :FruitsData,
+      data1 :OPTIONS.question1,
+      data2 :OPTIONS.question2,
+      data3 :OPTIONS.question3,
+      data4 :OPTIONS.question4,
       hour:'',
-      
+      selectedFruits:[]
     };
-    this.renderFruits = this.renderFruits.bind(this);
-    // this.hideDialog = this.hideDialog.bind(this);
-    // this.updateMedication = this.updateMedication.bind(this);
+   
   }
   componentDidMount(){
     
@@ -143,35 +145,41 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
    _onSMRPressed = () => {
 
   }
-  onChecked = (id) => {
-    const Data = this.state.data;
-    debugger;
-    const index = Data.findIndex(x=>x.id===id);
-    debugger;
-    Data[index].checked=!this.state.data[index].checked;
-    this.setState({data:Data});
-    //setData(Data);
-    // debugger;
-    // const b = data;
-    // debugger;
-  }
+  // onChecked = (id) => {
+  //   const Data = this.state.data;
+  //   debugger;
+  //   const index = Data.findIndex(x=>x.id===id);
+  //   Data[index].checked=!this.state.data[index].checked;
+  //   this.setState({data:Data});
+   
+  // }
 
-  renderFruits ()  {
-    return this.state.data.map((item, key)=>{
-      debugger;
-      return(
-        <View>
-          <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id)}}/>
-        </View>
 
-        // <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} key = {key} onPress={()=>{onChecked(item.id)}}>
-        //   <Checkbox.Item status={item.checked} onPress={()=>{onChecked(item.id)}}/>
-        //   <Text>{item.key}</Text>
 
-        // </TouchableOpacity>
-      )
-    })
-  }
+ 
+  // renderFruits ()  {
+  //   return this.state.data.map((item)=>{
+  //     debugger;
+  //     return(
+  //       <View>
+  //         <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id)}}/>
+  //       </View>
+  //     )
+  //   })
+  // }
+  // getSelectedOptions(){
+  //   var keys = this.state.data.map((t)=>t.key)
+  //   var checks = this.state.data.map((t)=>t.checked)
+  //   let Selected = []
+  //   for(let i=0;i<checks.length;i++){
+  //     if(checks[i]==true){
+  //       Selected.push(keys[i])
+  //     }
+  //   }
+  //   debugger;
+  //   alert(Selected);
+  // }
+  renderItem = ({ item }) => <CheckboxComponent data={item} navigation={this.props.navigation} />;
 
   //const navigation = useNavigation();
   render(){
@@ -214,12 +222,11 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                       //value={this.state.storeName}
                       //onChangeText={(value) => this.setState({ storeName: value })}
                     />
-                    {/* <Checkbox
-                      status={checked ? 'checked' : 'unchecked'}
-                      onPress={() => {
-                        setChecked(!checked);
-                      }}/> */}
-              {this.renderFruits()}
+                  
+
+              
+
+             
   
             </Card.Content>
           </Card>
@@ -228,47 +235,31 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How were you feeling before Seizure started?</Text>
-                  <RadioButton.Group onValueChange={newValue => this.setState({feel:newValue})} value={this.state.feel}>
-                  <View style = {styles.parent}>
-                      <View style = {styles.child}>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Stressed" />
-                            <Text>Stressed</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Fatigued" />
-                            <Text>Fatigued</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Angry" />
-                            <Text>Angry</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Exhausted" />
-                            <Text>Exhausted</Text>
-                          </View>
-                      </View>
-  
-                      <View style = {styles.child}>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Emotional" />
-                          <Text>Emotional</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Hungry" />
-                          <Text>Hungry</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Thirsty" />
-                          <Text>Thirsty</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Dizzy" />
-                          <Text>Dizzy</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </RadioButton.Group>
+                <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data1}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
                 
               
             </Card.Content>
@@ -278,31 +269,31 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>What actions were taken?</Text>
-                  <RadioButton.Group onValueChange={newValue => this.setState({action:newValue})} value={this.state.action}>
-                  <View style = {styles.parent}>
-                      <View style = {styles.child}>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Keep Calm" />
-                            <Text>Keep Calm</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Placed Cushions" />
-                            <Text>Placed Cushions</Text>
-                          </View>
-                      </View>
-  
-                      <View style = {styles.child}>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Stroking" />
-                          <Text>Stroking</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Pillows Around" />
-                          <Text>Pillows Around</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </RadioButton.Group>
+              <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data2}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />   
                 
               
             </Card.Content>
@@ -312,43 +303,31 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How did the seizure present?</Text>
-                  <RadioButton.Group onValueChange={newValue => this.setState({how:newValue})} value={this.state.how}>
-                  <View style = {styles.parent}>
-                      <View style = {styles.child}>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Black" />
-                            <Text>Black</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Spaced Out" />
-                            <Text>Spaced Out</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Convulsing" />
-                            <Text>Convulsing</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Tremor" />
-                            <Text>Tremor</Text>
-                          </View>
-                      </View>
-  
-                      <View style = {styles.child}>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Dissociative" />
-                          <Text>Dissociative</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Drop Attacks" />
-                          <Text>Drop Attacks</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Shaking" />
-                          <Text>Shaking</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </RadioButton.Group>
+              <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data3}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
                 
               
             </Card.Content>
@@ -373,31 +352,31 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How did you feel after the Seizure?</Text>
-                  <RadioButton.Group onValueChange={newValue => this.setState({feelAfter:newValue})} value={this.state.feelAfter}>
-                  <View style = {styles.parent}>
-                      <View style = {styles.child}>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Tired" />
-                            <Text>Tired</Text>
-                          </View>
-                          <View style = {styles.radio}>
-                            <RadioButton value="Paralyzed" />
-                            <Text>Paralyzed</Text>
-                          </View>
-                      </View>
-  
-                      <View style = {styles.child}>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Confused" />
-                          <Text>Confused</Text>
-                        </View>
-                        <View style = {styles.radio}>
-                          <RadioButton value="Disoriented" />
-                          <Text>Disoriented</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </RadioButton.Group>
+              <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data4}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
                 
               
             </Card.Content>
@@ -434,7 +413,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           </Card>
   
           <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-            <Button style={{width:'80%'}} mode="contained"  >
+            <Button style={{width:'80%'}} mode="contained" onPress={this.getSelectedOptions}>
                Submit
             </Button>
           </View>

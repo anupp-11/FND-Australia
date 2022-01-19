@@ -26,6 +26,9 @@ export type ProfileTabParamList = {
 export type HomeTabParamList = {
   HomeScreen: undefined;
 };
+export type SymptomTabParamList = {
+  ExploreScreen: undefined;
+};
 
 export type BarCodeTabParamList = {
   ScannerScreen: undefined;

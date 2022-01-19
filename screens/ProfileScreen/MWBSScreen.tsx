@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Image, SafeAreaView} from 'react-native';
+import {View,Image, SafeAreaView, TouchableOpacity} from 'react-native';
 import {
   Text,
 } from 'react-native-paper';
@@ -25,7 +25,7 @@ export default class MWBSScreen extends React.Component {
   
       
         <View style={{display:'flex', flexDirection:'row',justifyContent:"space-around", marginTop: 15}}>
-          <View style= {styles.userInfoSection}>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate("Exercise")} style= {styles.userInfoSection}>
             <View >
               <Image
               style={{height: 150, width :150, borderRadius:10, marginBottom: 20 }}
@@ -37,9 +37,9 @@ export default class MWBSScreen extends React.Component {
                 Exercises
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
 
-          <View style= {styles.userInfoSection}>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate("Soothing Music")} style= {styles.userInfoSection}>
             <View >
                 <Image
                 style={{height: 150, width :150, borderRadius:10, marginBottom: 20 }}
@@ -52,7 +52,7 @@ export default class MWBSScreen extends React.Component {
                   </Text>
                 </View>
             
-          </View>
+          </TouchableOpacity>
        
       
      

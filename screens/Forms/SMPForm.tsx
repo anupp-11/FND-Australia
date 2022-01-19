@@ -1,8 +1,8 @@
 import {
-  Text, View, StyleSheet, Platform
+  Text, View, StyleSheet, Platform, FlatList
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Card, Dialog, Portal, RadioButton, TextInput, Button as RButton, Provider } from 'react-native-paper';
+import { Card, Dialog, Portal, RadioButton,Checkbox, TextInput, Button as RButton, Provider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import { theme } from '../../components/LoginComponents/theme';
@@ -10,6 +10,8 @@ import DatePicker from 'react-native-datepicker';
 import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
 import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
 import Button from '../../components/LoginComponents/Button';
+import CheckboxComponent from './CheckboxComponent';
+const OPTIONS=require('./../../service/options2.json');
 
 //import RNPickerSelect from 'react-native-picker-select';
 
@@ -27,23 +29,23 @@ export default class SMPForm extends React.Component {
       hours:'',
       duration:'',
       frequency:'',
+      data1 :OPTIONS.question1,
+      data2 :OPTIONS.question2,
+      data3 :OPTIONS.question3,
+      data4 :OPTIONS.question4,
       DOB: new Date,
       DOP: new Date,
       onMedication: 'Yes',
       medicalConditions: [],
       medicalHistory: '',
       medication:'',
-      emergencyContact : 
-        {
-          name:'',
-          relationship:'',
-          phoneNo:'',
-          phoneNoHome:''
-        },
+      ambulance:'',
       warningSign :'Distracted',
       typesOfSeizure : 'Epileptic',
       seizureAtPresent:'',
       assistanceRequired: '',
+      afterSeizure:'',
+      agree: false
 
     };
     this.showDialog = this.showDialog.bind(this);
@@ -358,7 +360,8 @@ export default class SMPForm extends React.Component {
     // this.setState({medicalConditions: array})
     // const  b = array;
   }
-  
+  renderItem = ({ item }) => <CheckboxComponent data={item} navigation={this.props.navigation} />;
+
  
   render() {
     return (
@@ -510,48 +513,35 @@ export default class SMPForm extends React.Component {
             </Card>
 
 
-            {/* Question 7 */}
+            {/* Question 6 */}
               <Card style = {styles.card}>
                 <Card.Content>
                   <Text style={styles.questions}>Warning signs prior to a Seizure</Text>
-                      <RadioButton.Group onValueChange={newValue => this.setState({warningSign:newValue})} value={this.state.warningSign}>
-                      <View style = {styles.parent}>
-                          <View style = {styles.child}>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Distracted" />
-                                <Text>Distracted</Text>
-                              </View>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Fatigued" />
-                                <Text>Fatigued</Text>
-                              </View>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Feeling of an aura" />
-                                <Text>Feeling of an aura</Text>
-                              </View>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Other behaviour change" />
-                                <Text>Other behaviour change</Text>
-                              </View>
-                          </View>
-
-                          <View style = {styles.child}>
-                            <View style = {styles.radio}>
-                              <RadioButton value="Dissociated" />
-                              <Text>Dissociated</Text>
-                            </View>
-                            <View style = {styles.radio}>
-                              <RadioButton value="Sad" />
-                              <Text>Sad</Text>
-                            </View>
-                            <View style = {styles.radio}>
-                              <RadioButton value="Agitated" />
-                              <Text>Agitated</Text>
-                            </View>
-                          </View>
-                        </View>
-                      </RadioButton.Group>
-                    
+                  <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data1}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
                   
                 </Card.Content>
               </Card>
@@ -560,43 +550,31 @@ export default class SMPForm extends React.Component {
               <Card style = {styles.card}>
                   <Card.Content>
                     <Text style={styles.questions}>Types of Seizure you have.</Text>
-                        <RadioButton.Group onValueChange={newValue => this.setState({typesOfSeizure:newValue})} value={this.state.typesOfSeizure}>
-                        <View style = {styles.parent}>
-                            <View style = {styles.child}>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Epileptic" />
-                                  <Text>Epileptic</Text>
-                                </View>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Functional" />
-                                  <Text>Functional</Text>
-                                </View>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Blank spells" />
-                                  <Text>Blank spells</Text>
-                                </View>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Hyperkinetic" />
-                                  <Text>Hyperkinetic</Text>
-                                </View>
-                            </View>
-
-                            <View style = {styles.child}>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Non-Epileptic" />
-                                <Text>Non-Epileptic</Text>
-                              </View>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Dissocaitive" />
-                                <Text>Dissocaitive</Text>
-                              </View>
-                              <View style = {styles.radio}>
-                                <RadioButton value="Hypokinetic" />
-                                <Text>Hypokinetic</Text>
-                              </View>
-                            </View>
-                          </View>
-                        </RadioButton.Group>
+                    <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data2}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
                   </Card.Content>
                 </Card>
                 {/* Question 4 */}
@@ -656,34 +634,129 @@ export default class SMPForm extends React.Component {
                 <Card style = {styles.card}>
                     <Card.Content>
                       <Text style={styles.questions}>Assistance required from people.</Text>
-                          <RadioButton.Group onValueChange={newValue => this.setState({assistanceRequired:newValue})} value={this.state.assistanceRequired}>
+                      <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data3}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
+                    </Card.Content>
+                  </Card> 
+
+                {/* Question 8 */}
+                <Card style = {styles.card}>
+                    <Card.Content>
+                      <Text style={styles.questions}>Things you do not want during Seizure.</Text>
+                      <FlatList
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  data={this.state.data4}
+                  renderItem={this.renderItem}
+                  horizontal={false}
+                  columnWrapperStyle={{
+                    width:'100%',
+                    display:'flex',
+                    flexDirection:'row',
+                    justifyContent: "space-between"
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: 10,
+                }}
+              />
+              <TextInput
+                      mode="outlined"
+                      theme={{ colors: { primary: theme.colors.primary}}}
+                      multiline={true}
+                      placeholder="Type Here"
+                      //value={this.state.storeName}
+                      //onChangeText={(value) => this.setState({ storeName: value })}
+                    />
+                    </Card.Content>
+                  </Card> 
+
+                {/* Question 8 */}
+                <Card style = {styles.card}>
+                    <Card.Content>
+                      <Text style={styles.questions}>What you may need after Seizure?</Text>
+                          <RadioButton.Group onValueChange={newValue => this.setState({afterSeizure:newValue})} value={this.state.afterSeizure}>
                           <View style = {styles.parent}>
                               <View style = {styles.child}>
                                   <View style = {styles.radio}>
-                                    <RadioButton value="Place cushion around me " />
-                                    <Text numberOfLines={2} style={{width:'50%'}}>Place cushion around me </Text>
+                                    <RadioButton value="Rest" />
+                                    <Text numberOfLines={2} style={{width:'50%'}}>Rest</Text>
                                   </View>
-                                  <View style = {styles.radio}>
-                                    <RadioButton value="Help to keep you calm" />
-                                    <Text numberOfLines={2} style={{width:'50%'}}>Help to keep you calm</Text>
-                                  </View>
+                                  
                               </View>
 
                               <View style = {styles.child}>
                                 <View style = {styles.radio}>
-                                  <RadioButton value="Keep safe from Injury" />
-                                  <Text numberOfLines={2} style={{width:'50%'}}>Keep safe from Injury</Text>
+                                  <RadioButton value="Remain Quiet" />
+                                  <Text numberOfLines={2} style={{width:'50%'}}>Remain Quiet</Text>
                                 </View>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Remain calm around you" />
-                                  <Text numberOfLines={2} style={{width:'50%'}}>Remain calm around you</Text>
-                                </View>
+                               
                                 
                               </View>
                             </View>
                           </RadioButton.Group>
                     </Card.Content>
                   </Card> 
+
+                 {/* Question 8 */}
+                 <Card style = {styles.card}>
+                    <Card.Content>
+                      <Text style={styles.questions}>When you may need to call an ambulance?</Text>
+                          <RadioButton.Group onValueChange={newValue => this.setState({ambulance:newValue})} value={this.state.ambulance}>
+                          <View style = {styles.parent}>
+                              <View style = {styles.child}>
+                                  <View style = {styles.radio}>
+                                    <RadioButton value="During Injury" />
+                                    <Text numberOfLines={2} style={{width:'50%'}}>During Injury</Text>
+                                  </View>
+                                  
+                              </View>
+
+                              <View style = {styles.child}>
+                                <View style = {styles.radio}>
+                                  <RadioButton value="During Emergency" />
+                                  <Text numberOfLines={2} style={{width:'50%'}}>During Emergency</Text>
+                                </View>
+                               
+                                
+                              </View>
+                            </View>
+                          </RadioButton.Group>
+                    </Card.Content>
+                  </Card> 
+
+                  <Checkbox.Android
+                  status={this.state.agree ? 'checked' : 'unchecked'}
+                  color={theme.colors.primary}
+                 
+                  onPress={() => {
+                    this.setState({agree:!this.state.agree});
+                  }}
+                />
+                  <Text style={{paddingHorizontal:10}}>I have discussed this above seizure management plan with my treating doctor named on page my doctor's detail. I confirm that this is the agreed management plan in the  event  that  I experience functional or dissociative seizures. I understand that this plan does not constitute medical advice or instruction and that an ambulance will be called in an emergency.</Text>
                   <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
                     <Button style={{width:'80%'}} mode="contained"  >
                       Submit

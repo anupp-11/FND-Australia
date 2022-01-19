@@ -5,14 +5,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FAIcons from 'react-native-vector-icons/FontAwesome';
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import ExploreScreen from '../screens/ExploreScreen';
+import SymptomScreen from '../screens/SymptomScreen';
 import MediaScreen from '../screens/MediaScreen';
 
 import { theme } from '../components/LoginComponents/theme';
 import ProfileNavigator from './navigators/ProfileNavigator';
 import HomeNavigator from './navigators/HomeNavigator';
+import SymptomNavigator from './navigators/SymptomNavigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -42,8 +41,8 @@ const BottomTabNav = () => {
       />
 
        <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="Symptom"
+        component={SymptomNavigator}
         options={{
           tabBarIcon: ({color}) => (
             <FAIcons name="user-md" color={color} size={20} />

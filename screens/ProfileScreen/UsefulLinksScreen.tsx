@@ -34,8 +34,8 @@ export default class UsefulLinksScreen extends React.Component {
           }}
         />
         <View style={{padding:20}}>
-          <Text style={{fontSize:16, fontWeight:'700',marginBottom:10}}>Other Links</Text>
-          <Button color={"#f46036"} title="View Other Links" onPress={ ()=>{ Linking.openURL("")}} />
+          <Text style={{fontSize:16, fontWeight:'700',marginBottom:10}}>Useful Link</Text>
+          <Button color={"#f46036"} title="Visit Useful Links" onPress={ ()=>{ Linking.openURL("https://www.neurosymptoms.org/en_GB/")}} />
         
         </View>
         <View

@@ -56,8 +56,8 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
             </View>
             <View style={{padding:10}}>
               <TouchableOpacity onPress={()=>{ Linking.openURL('https://fndaus.org.au/functional-neurological-disorder-recovery/')}}>
-                <Card>
-                  <Card.Cover source={require('../../assets/images/post1img.png')} style={{flex:1, width:'100%', resizeMode:"cover" }} />
+                <Card style={{height:310}}>
+                  <Card.Cover source={require('../../assets/images/homeimage.png')} style={{flex:1, width:'100%', resizeMode:"fit" }} />
                   <Card.Content>
                     <Title style={{marginTop:10}}>A path to FND recovery</Title>
                   </Card.Content>
