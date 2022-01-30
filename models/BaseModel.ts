@@ -24,11 +24,32 @@ export abstract class BaseModel{
     public status!: Status;
 
 }
+export class SMRForm{
+  constructor(
+    public dateOfSeizure:Date,
+    public timeOfSeizure: Date,
+    public whatDoingSeizureStarted:string,
+    public howFeelingSeizureStarted: string[],
+    public howFeelingSeizureStartedText: string,
+    public actionsTaken: string[],
+    public actionsTakenText: string,
+    public seizurePresent : string[],
+    public seizurePresentText : string,
+    public seizureResolve : string,
+    public feelAfterSeizure : string[],
+    public feelAfterSeizureText : string,
+    public emergencyService : string,
+    
+  ){}
+
+}
 
 export class UserInfo{
     constructor(
       public email:string,
       public mobileNumber:string,
+      public DOB:Date,
+      public gender: string,
       public emergencyContact:EmergencyContact,
       public doctorDetail: DoctorDetail,
     ){}

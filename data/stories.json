@@ -1,7 +1,7 @@
 [
     {
         "name":"Julie Wright",
-        "imgurl":"",
+        "imgurl":"require('../../assets/images/stories/story1.png')",
         "title1":"Diagnosis",
         "t1p1":"I knew for some months that something was wrong. Normally a very fit person capable of walking kilometres on a work shift in the Emergency Department, and walking the steep hill to my workplace all of a sudden left me breathless and weak.  I kept pushing through the worsening fatigue, until I collapsed one morning at work.  A priority chest x-ray ruled out pulmonary embolism. My doctor prescribed rest for the next week and diagnosed probable burn out.  I was unable to return to the job, I loved.",
         "t1p2":"The following 18 months were confusing with overwhelming symptoms that were growing by the week.  My GP did many blood tests, x-rays, scans, and brain MRI, looking for abnormalities.   I experienced disabling fatigue, tremors, global weakness, extreme sweating, hair loss by the handful, global body pain, falling backwards or sideways, with what felt like no reflexes and worsening cognition with word finding problems, made communication a hardship. I was now on two walking canes to drag myself around, and any movement was a hardship. This was a very frightening experience with no diagnosis. My GP referred me to a public Neurology Outpatient’s Clinic at a major Brisbane hospital, and I waited.  Without work and being single, I had to cancel my health insurance, and severe financial hardship followed.",
@@ -26,37 +26,26 @@
     },
     {
         "name":"John",
-        "imgurl":"",
+        "imgurl":"require('../../assets/images/stories/story2.png')",
         "t1p1":"Although a while ago, my experience with (at the time called) Conversion Syndrome, now known as FND was super challenging.",
         "t1p2":"I was 15 years old, and had been at my new high school for about 10 weeks. I was out with family and all of a sudden, I experienced symptoms of vertigo, dizziness and weakness in limbs. I laid down for the day and rested up over the next few days.  Mum finally decided to take me to the doctor where he advised, I immediately get an MRI.  This started 9 months’ of being flung between different specialists – neurologists, ENTs, cardiologists, endocrinologists. Even though I had private health insurance, at every stage there was about an 8 week wait, and that didn’t even include the second appointment or going to all of the tests for various appointments. ",
         "t1p3":"This time was when I was supposed to be going to school, but I could barely leave the house. I had no friends to talk to and was completely alone, with no hope of knowing what was wrong with me. As the specialists threw suggestions about what it could possibly be, I wished it could have been whatever they said, so I could get treated and this could all be over.",
         "t1p4":"For about six months, my day involved a short walk from the bed to a couch, being brought food and not leaving the house.  My sisters hated me because when their friends visited, they were too loud. I had to get my parents to buy a new kettle because the old one was super loud.",
-        "title2":"",
         "t2p1":"One of the next specialists noted that the isolation I was under, may have been detrimental to my mental health and referred me to a psychiatrist.  After a few appointments with him I was diagnosed with Conversion Disorder (FND) and finally began some sort of plan for recovery. I never liked the explanation that I had Conversion Disorder simply because there was nothing else that it could be. I still wanted there to be some cause so I could know and get better.",
         "t2p2":"My psychiatrist was great at coordinating my care and also helping with my mental health. I had anxiety and depression, previously untreated. My psychiatrist also referred my family to a counsellor, which greatly improved all of our relationships and meant when I was better, we were somewhat of a normal family.  At this vital stage I was able to get physiotherapy, including hydrotherapy to build back the muscle, I had lost over the past year and to learn how to walk again. An in-patient hospital stay taught me how to socialise and eventually my parents said I could go out of the house by myself, because they knew I could walk, talk and handle any noise or lights outside. Finally, back to normal!",
-        "t2p3":"Back to being functional, my life looked different from all of my friends who were in year 12. I had dropped out of school because I refused to go drop back an academic year.  I tried to join the Army but got rejected on medical grounds.  But soon, I was working my first job, I then had enough to spend on an overseas adventure.  In the six years since recovery, I’ve travelled the world, gone to university and lived in three states.  I would never have imagined at the time I was ill with Conversion Disorder (FND), that there was a way out or that there was hope for what life can be after Conversion Disorder (FND).",
-        "t2p4":"",
-        "t2p5":"",
-        "t2p6":"",
-        "title3":"",
-        "t3p1":"",
-        "t3p2":"",
-        "t3p3":"",
-        "t3p4":"",
-        "t3p5":"",
-        "t3p6":""
+        "t2p3":"Back to being functional, my life looked different from all of my friends who were in year 12. I had dropped out of school because I refused to go drop back an academic year.  I tried to join the Army but got rejected on medical grounds.  But soon, I was working my first job, I then had enough to spend on an overseas adventure.  In the six years since recovery, I’ve travelled the world, gone to university and lived in three states.  I would never have imagined at the time I was ill with Conversion Disorder (FND), that there was a way out or that there was hope for what life can be after Conversion Disorder (FND)."
 
 
     },
     {
         "name":"Madeline",
-        "imgurl":"",
+        "imgurl":"require('../../assets/images/stories/story3.png')",
         "t1p1":"My journey thus far has taught me some valuable life lessons. From early on, I have decided to view it, not as a difficult challenge, but instead as more of an opportunity. Sure, it has its’ challenges. It is hard. It almost breaks you some days. But overall, I try to look for how I can use this set of circumstances to grow as a person. It was once said that you could either view your difficult circumstances as though you were being buried by them, or like they were giving you the chance to grow. I choose to grow."
     },
     {
         "name":"FND's Puppet by Kerri Diplock",
-        "imgurl":"",
-        "t1p1":"There's a problem with my circuitry\nThat assuming eyes won't see.\nIt's all in your head. You are faking it.\nIt's just anxiety.",
+        "imgurl":"require('../../assets/images/stories/story4.png')",
+        "t1p1":"There's a problem with my circuitry\nThat assuming eyes won't see.\nIt's all in your head. You are faking it.\nIt's just anxiety.\n",
         "t1p2":"Round and round the medical-go-round\nIn different states I've been.\nTested. Prodded. Old world knowledge\nThey all haven't been able to see.\n",
         "t1p3":"In silence I have protested,\nKnowing it can't be me,\nI am not a person to feign my health\nWhy couldn't anyone believe?\n",
         "t1p4":"I'm tired, my child,\nI can't come over my friend.\nI'm in pain, my love.\nThere seems to be no end.\n",
@@ -71,15 +60,15 @@
         "t3p3":"I breathe steady to calm my senses\nBut the storm has already begun\nI lose my speech, control of me\nAnd know the next few hours will not be fun.\n",
         "t3p4":"My children are scared to see me,\nWhat is wrong with Mum?\nI am not their mother when\nAnother seizure is about to come.\n",
         "t3p5":"Don't tell me that it's all stress.\nPlease don't tell me how I feel.\nPlease don't tell me that my MRI is clear\nSo, it can't possibly be real.\n",
-        "t3p6":"I don't know when or how\nMy wiring went wrong.\nBut I have finally found people like me\nAnd I know I will be strong.",
+        "t3p6":"I don't know when or how\nMy wiring went wrong.\nBut I have finally found people like me\nAnd I know I will be strong.\n",
         "t3p7":"For, FND won't define me\nBut for now, it will calm my fears\nAs I have tried to understand my body\nFor many many years.\n",
         "t3p8":"Please don't put me into a box\nAnd think I'm just crazy.\nI have struggles, I am human\nBut please, let the whole world know about FND.\n"
     },
     {
         "name":"Leanne Shelton",
-        "imgurl":"",
+        "imgurl":"require('../../assets/images/stories/story5.png')",
         "title1":"FND AND ME",
-        "t1p1":"I see their mouths moving\nEverything a blur\nAn out of body experience\nHow can this occur",
+        "t1p1":"I see their mouths moving\nEverything a blur\nAn out of body experience\nHow can this occur\n",
         "t1p2":"I’m told it was a seizure\nSpecialists appointments made\nThen told: No need to worry\nGo on with your day\n",
         "t1p3":"If only I had a crystal ball\nThe future I would seek\nMy life changed forever \nAll within a week\n",
         "t1p4":"THIS WILL NOT BEAT ME \nNOR WILL IT DEFINE ME\nI WILL MOVE MOUNTAINS \nSEIZURES AND ALL\n",
@@ -99,5 +88,22 @@
         "t3p8":"THIS WILL NOT BEAT ME\nNOR WILL IT DEFINE ME\nI WILL MOVE MOUNTAINS\nFND AND ALL\n",
         "t3p9":"So now you see\nThis Me\nThis is Me and\n FND\n"
 
+    },
+    {
+        "name":"Lea-Anne",
+        "imgurl":"require('../../assets/images/stories/story6.png')",
+        "t1p1":"At age 50, I was exhausted. I’d had a tough previous 5 years, starting with severe anaemia and an emergency life-saving hysterectomy and finishing with another major surgery, Pelvic Organ Prolapse. In the interim, I’d started menopause and was having trouble with exposure to strong odours and chemicals, my digestion was behaving badly, my blood pressure was erratic, and my weekends were wiped out with migraine. Work stress was increasing and I was struggling with panic attacks and strong feelings of self-doubt. My own children were in high school or university and that brought changes to routines and I had the inevitable immediate and extended family-related issues that brought their own pressures and stresses. I was seeing a psychologist, and I had a lot of medical tests and referrals through my GP, trying to work out what was ‘wrong’ with me. ",
+        "t1p2":"One day, I was at school, crossing the quadrangle to visit a classroom. I got half way across and just stopped – I could not go forwards, backwards or sidewards. I could not move…. I felt ‘lost’ and confused and then incredibly weak. Eventually, I was able to make my way to the nearest seat, but my legs were like lead and I was no longer walking properly; my balance was ‘wonky’ and my gait had changed to compensate. I felt nauseous, dizzy and light-headed, weak and my brain hurt. My bp was high and then low and off I went to hospital. ‘We can’t find anything physically wrong with you,” was the reply from the caring ED staff.",
+        "t1p3":"My GP wrote me a medical certificate for work and said, “My job now was to take the medicine.  I did – for 5 months. I experienced temporary paralysis, from my head to my toes and loss of speech. I was taken off that and put on a specific migraine tablet – tingling, pins and needles, burning from the inside, and pain in my hips and arm and leg muscles were my new symptoms.  While I was on a break from medication, I developed seizures and dystonia and was finally given the additional diagnosis of Functional Neurological Disorder.",
+        "t1p4":"FND? What is that? Am I going to die? “It’s basically a mismatch between the messages being sent and received from the brain to the rest of the nervous system,” rattled off my well-meaning neurologist. “Your symptoms are real”, I was relieved my symptoms were real and I had an answer, BUT “What the hell was Functional Neurological Disorder?” I thought. What does that even mean? Questions flooded the car on the trip home.",
+        
+        "t2p1":"I reviewed neurosymptoms.org searching for answers. I joined FND Australia Support Services – a positive, consumer-active Facebook support group keen on changing the FND space. I learnt about my symptoms and searched for answers in the 7 months it took to see the psychiatrist and 13 months to see the FND Specialist neurologist.",
+        "t2p2":"My Neuropsychiatrist prescribed anti-depressants and physiotherapy… and said my reactions to the medication were because of my severe anxiety. He told me to find a physio I began exercises for improving my balance and strength and for conditioning my muscles. I started with relearning how to stand up from a chair and sit down again. I also began hydrotherapy exercises in my own pool. The exercises have helped to improve my stamina, balance and gait, and pacing and flare management have been essential in learning how to manage my energy levels.",
+        "t2p3":"The neurologist tested me using Hoover’s sign, spoke to me about my medical history and we joked about the number of tests I’d had to endure. It was the first time I remember feeling totally valued, respected and believed.",
+        "t2p4":"The acceptance of needing medication and psychotherapy took time, but it has been an important part of my treatment plan and my living with FND - not just surviving with it. EMDR Therapy, Art Therapy, Acceptance and Commitment Therapy, Self-compassion, Mindfulness and meditation have empowered and enabled me to step outside of my own illness to support others… and I have learnt so much about myself.",
+        "t2p5":"I still have all my original symptoms; their frequency and severity are all that changes. I have been off work for 3.5 years and do not look like being able to work again. I have had a video EEG to check the status of my seizures. They are non-epileptic and so are referred to as Functional Non-epileptic Seizures. Magnesium Chelate supplements and distraction strategies, such as Tapping [see tappingsolutions.org], phone games and checking in on Facebook have been so beneficial in helping manage my seizures, and when they happen having someone hold my shoulder seems to help ‘ground’ me. My speech has deteriorated and I am having trouble with dry mouth, swallowing and choking. I eat small-sized moist food with my chin on my chest and suffer a coughing fit if I forget. If I begin to choke, I turn my head towards my left or right shoulder. My walking stick has turned into a walker that converts into a wheelchair. It has opened up the world of travel for me and given me back some of my independence.",
+        "t2p6":"I have other FND symptoms such as a broken inner thermostat and a tightness in my chest that is not only anxiety or asthma-related, but makes breathing and speaking difficult, and a range of sensory sensitivities that act as triggers, overloading my brain. I have dark glasses and wrap-around sunglasses; I use earplugs, hot and cold packs, and products that are skin-sensitive and odour-free. I have changed my diet to low FODMAP and low carbohydrates, and I try every day to exercise, meditate/appreciate/show gratitude, work in my garden and be creative…. Oh yeah … and do some cleaning! I am not always successful, and know when I need to rest and accept that rest is necessary.",
+        "t3p1":"My care team now consists of a Neurologist, Neuro Physiotherapist, a Psychologist, a Psychiatrist, a Speech Therapist and a GP whom I email with new research and anything that is happening to me that I think they all should know about. I am the case manager, and we work together to decide my FND Journey. I expect in the future I will need an Occupational Therapist as well, especially if/when I apply for NDIS.",
+        "t3p2":"Being my own advocate and being knowledgeable about my FND has helped in my own treatment; and being a positive, supportive and productive member of FND Australia Support Services has helped give me new purpose."
     }
 ]

@@ -16,6 +16,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 // import RNPickerSelect from 'react-native-picker-select';
 import { HOURS } from '../../service/utils';
 import CheckboxComponent from './CheckboxComponent';
+import { SMRForm } from '../../models/BaseModel';
 const OPTIONS=require('./../../service/options.json');
 
 
@@ -26,13 +27,16 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
    
     this.state = {
       date: new Date,
+      whatDoing:'',
       mode : 'date',
       show : false,
-      feel:'Stressed',
-      action:'Keep Calm',
-      how:'Black',
-      feelAfter:'Tired',
+      feeling:'',
+      actionText:'',
+      seizurePresentText:'',
+      howResolve:'',
+      feelAfter:'',
       service : 'Yes',
+      data :OPTIONS.question1,
       data1 :OPTIONS.question1,
       data2 :OPTIONS.question2,
       data3 :OPTIONS.question3,
@@ -40,6 +44,10 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
       hour:'',
       selectedFruits:[]
     };
+    this.onChange = this.onChange.bind(this);
+    this.getSelectedOptions = this.getSelectedOptions.bind(this);
+    this.renderFruits = this.renderFruits.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
    
   }
   componentDidMount(){
@@ -145,40 +153,73 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
    _onSMRPressed = () => {
 
   }
-  // onChecked = (id) => {
-  //   const Data = this.state.data;
-  //   debugger;
-  //   const index = Data.findIndex(x=>x.id===id);
-  //   Data[index].checked=!this.state.data[index].checked;
-  //   this.setState({data:Data});
+
+  onSubmit(){
+    const feelingData = this.getSelectedOptions(this.state.data1);
+    const action = this.getSelectedOptions(this.state.data2);
+    const seizurePresent = this.getSelectedOptions(this.state.data3);
+    const feelAfterSeizure = this.getSelectedOptions(this.state.data4);
+
+    const SMRFromdata = new SMRForm(
+      this.state.date,
+      this.state.date,
+      this.state.whatDoing,
+      feelingData,
+      this.state.feeling,
+      action,
+      this.state.actionText,
+      seizurePresent,
+      this.state.seizurePresentText,
+      this.state.howResolve,
+      feelAfterSeizure,
+      this.state.feelAfter,
+      this.state.service
+    )
+    console.log("Form Data:",SMRFromdata);
+
+  }
+  onChecked = (id,data) => {
+    const Data = data;
+    debugger;
+    const index = Data.findIndex(x=>x.id===id);
+    Data[index].checked=!data[index].checked;
+    if(data[id].questionGroup=="1"){
+      this.setState({data1:Data});
+    }else if(data[id].questionGroup=="2"){
+      this.setState({data2:Data});
+    }else if(data[id].questionGroup=="3"){
+      this.setState({data3:Data});
+    }else if(data[id].questionGroup=="4"){
+      this.setState({data4:Data});
+    }
+    
    
-  // }
+  }
 
 
 
  
-  // renderFruits ()  {
-  //   return this.state.data.map((item)=>{
-  //     debugger;
-  //     return(
-  //       <View>
-  //         <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id)}}/>
-  //       </View>
-  //     )
-  //   })
-  // }
-  // getSelectedOptions(){
-  //   var keys = this.state.data.map((t)=>t.key)
-  //   var checks = this.state.data.map((t)=>t.checked)
-  //   let Selected = []
-  //   for(let i=0;i<checks.length;i++){
-  //     if(checks[i]==true){
-  //       Selected.push(keys[i])
-  //     }
-  //   }
-  //   debugger;
-  //   alert(Selected);
-  // }
+  renderFruits (data)  {
+    return data.map((item)=>{
+      debugger;
+      return(
+        <View>
+          <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+        </View>
+      )
+    })
+  }
+  getSelectedOptions(data){
+    var keys = data.map((t)=>t.key)
+    var checks = data.map((t)=>t.checked)
+    let Selected = []
+    for(let i=0;i<checks.length;i++){
+      if(checks[i]==true){
+        Selected.push(keys[i])
+      }
+    }
+    return Selected;
+  }
   renderItem = ({ item }) => <CheckboxComponent data={item} navigation={this.props.navigation} />;
 
   //const navigation = useNavigation();
@@ -219,15 +260,9 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.whatDoing}
+                      onChangeText={(value) => this.setState({ whatDoing: value })}
                     />
-                  
-
-              
-
-             
-  
             </Card.Content>
           </Card>
           
@@ -235,30 +270,15 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How were you feeling before Seizure started?</Text>
-                <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data1}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+        
+              {this.renderFruits(this.state.data1)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.feeling}
+                      onChangeText={(value) => this.setState({ feeling: value })}
                     />
                 
               
@@ -269,30 +289,15 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>What actions were taken?</Text>
-              <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data2}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+              
+              {this.renderFruits(this.state.data2)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.actionText}
+                      onChangeText={(value) => this.setState({ actionText: value })}
                     />   
                 
               
@@ -303,30 +308,14 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How did the seizure present?</Text>
-              <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data3}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+              {this.renderFruits(this.state.data3)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.seizurePresentText}
+                      onChangeText={(value) => this.setState({ seizurePresentText: value })}
                     />
                 
               
@@ -342,8 +331,8 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.howResolve}
+                      onChangeText={(value) => this.setState({ howResolve: value })}
                     />
             </Card.Content>
           </Card>
@@ -352,30 +341,14 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           <Card style = {styles.card}>
             <Card.Content>
               <Text style={styles.questions}>How did you feel after the Seizure?</Text>
-              <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data4}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+              {this.renderFruits(this.state.data4)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.feelAfter}
+                      onChangeText={(value) => this.setState({ feelAfter: value })}
                     />
                 
               
@@ -393,10 +366,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                             <RadioButton value="Yes" />
                             <Text>Yes</Text>
                           </View>
-                          {/* <View style = {styles.radio}>
-                            <RadioButton value="Placed Cushions" />
-                            <Text>Placed Cushions</Text>
-                          </View> */}
+                          
                       </View>
   
                       <View style = {styles.child}>
@@ -413,7 +383,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           </Card>
   
           <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-            <Button style={{width:'80%'}} mode="contained" onPress={this.getSelectedOptions}>
+            <Button style={{width:'80%'}} mode="contained" onPress={this.onSubmit()}>
                Submit
             </Button>
           </View>

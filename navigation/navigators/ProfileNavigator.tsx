@@ -19,6 +19,7 @@ import ManageProfileScreen from "../../screens/ProfileScreen/ManageProfileScreen
 import MusicScreen from "../../screens/ProfileScreen/MusicScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
 import StoryScreen from "../../screens/ProfileScreen/Stories";
+import StoryInfoComponent from "../../screens/ProfileScreen/StoryInfoComponent";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
 
 import { ProfileTabParamList } from "../../types";
@@ -86,6 +87,10 @@ export default function ProfileNavigator() {
       <ProfileStack.Screen
         name="Soothing Music"
         component={MusicScreen}
+      />
+      <ProfileStack.Screen
+        name="Story"
+        component={StoryInfoComponent}
       />
       
     </ProfileStack.Navigator>

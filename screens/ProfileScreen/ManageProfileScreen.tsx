@@ -84,6 +84,8 @@ export default class ManageProfileScreen extends React.Component {
     const userData = new UserInfo(
       this.state.name,
       this.state.mobileNumber,
+      this.state.DOB,
+      this.state.gender,
       userEmergencyContact,
       userDoctorDetail
     );
