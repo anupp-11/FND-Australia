@@ -5,6 +5,7 @@ import {
   View,Text
 } from "react-native";
 import { Button, Checkbox, List } from "react-native-paper";
+import { theme } from "../../components/LoginComponents/theme";
 
 
 
@@ -49,7 +50,7 @@ export default class CheckboxComponent extends React.Component{
   render() {
     return (
       <View style={{display:'flex',flexDirection:'row',alignItems:'center',paddingHorizontal:20,width:'50%'}}>
-        <Checkbox.Android status={this.state.data.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(this.state.data.id)}}/>
+        <Checkbox.Android color={theme.colors.primary} status={this.state.data.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(this.state.data.id)}}/>
         <Text>{this.state.data.key}</Text>
       </View>
     );

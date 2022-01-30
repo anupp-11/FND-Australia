@@ -33,30 +33,27 @@
                 "key":"Epileptic",
                 "checked":false
             },{
-                "id":1,
-                "key":"Non-Epileptic",
-                "checked":false
-            },{
                 "id":2,
-                "key":"Functional",
-                "checked":false
-            },{
-                "id":3,
-                "key":"Dissociative",
-                "checked":false
-            },{
-                "id":4,
-                "key":"Blank Spells",
-                "checked":false
-            },{
-                "id":5,
-                "key":"Hypokinetic",
-                "checked":false
-            },{
-                "id":6,
-                "key":"Hyperkinetic",
+                "key":"Functional(Non-Epileptic/Dissociative)",
                 "checked":false
             }
+        ],
+        
+            "question5":[
+               {
+                    "id":1,
+                    "key":"Blank Spells(Absent)",
+                    "checked":false
+                },{
+                    "id":2,
+                    "key":"Hypokinetic",
+                    "checked":false
+                },{
+                    "id":3,
+                    "key":"Hyperkinetic",
+                    "checked":false
+                }
+
         ],
         "question3":[
             {
@@ -74,6 +71,14 @@
             },{
                 "id":3,
                 "key":"Remain calm around you",
+                "checked":false
+            },{
+                "id":4,
+                "key":"Sensory Input",
+                "checked":false
+            },{
+                "id":5,
+                "key":"Distraction",
                 "checked":false
             }
         ],"question4":[

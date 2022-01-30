@@ -148,7 +148,7 @@ const RegisterScreen = () => {
             <View style={styles.row}>
               <Text style={styles.label}>Already have an account? </Text>
               <TouchableOpacity onPress={Login}>
-                <Text style={styles.link}>Login</Text>
+                <Text style={styles.link}>Sign In</Text>
               </TouchableOpacity>
             </View>                                                 
             

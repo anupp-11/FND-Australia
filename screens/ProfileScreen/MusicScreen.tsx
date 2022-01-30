@@ -32,16 +32,16 @@ export default class MusicScreen extends React.Component {
   render(){
     return (
       <ScrollView style={styles.container}>
-        <Text style={{fontSize:16,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Many people with FND experience sensory sensitivities. Some people are acutely sensitive to 
+        <Text style={{fontSize:16,lineHeight: 25,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Many people with FND experience sensory sensitivities. Some people are acutely sensitive to 
           sounds. Some sounds may trigger and overload a person’s nervous system, leading to 
           symptom exacerbation and functional seizures. Other sounds, may be healing and soothing 
           to a person’s nervous system. What is healing and soothing to one person, may be 
           aggravating and stimulating to another person.
           </Text>
-        <Text style={{fontSize:16,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Often sounds of nature are calming. If you are unable to get out and connect with nature, 
+        <Text style={{fontSize:16,lineHeight: 25,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Often sounds of nature are calming. If you are unable to get out and connect with nature, 
           there are various apps and YouTube tracks that can be freely accessed.
           </Text>
-        <Text style={{fontSize:16,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Some examples are below:</Text>
+        <Text style={{fontSize:16,lineHeight: 25,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Some examples are below:</Text>
 
         <FlatList
                initialNumToRender={7}

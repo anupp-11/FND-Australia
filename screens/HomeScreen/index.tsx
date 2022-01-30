@@ -59,7 +59,7 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
                 <Card style={{height:310}}>
                   <Card.Cover source={require('../../assets/images/homeimage.png')} style={{flex:1, width:'100%', resizeMode:"fit" }} />
                   <Card.Content>
-                    <Title style={{marginTop:10}}>A path to FND recovery</Title>
+                    <Title style={{marginTop:10}}>A path to FND Wellbeing</Title>
                   </Card.Content>
                 </Card>
               </TouchableOpacity>

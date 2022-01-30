@@ -15,43 +15,7 @@ export default class SymptomScreen extends React.Component {
     this.state = {
       isProcessing: true,
       symptoms:SYMPTOMS
-      // symptoms: [
-      //   {
-      //     title:"Functional Limb Weakness",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Tremor",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Movement Disorder",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Dystonia",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Gait Disorder",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Facial Symptoms",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Tics",
-      //     detail:"Detail for Symptom."
-      //   },
-      //   {
-      //     title:"Functional Drop Attacks",
-      //     detail:"Detail for Symptom."
-      //   },
-
-      // ],
-      
-
+     
     };
    
   }

@@ -33,6 +33,7 @@ export default class SMPForm extends React.Component {
       data2 :OPTIONS.question2,
       data3 :OPTIONS.question3,
       data4 :OPTIONS.question4,
+      data5 :OPTIONS.question5,
       DOB: new Date,
       DOP: new Date,
       onMedication: 'Yes',
@@ -580,7 +581,24 @@ export default class SMPForm extends React.Component {
                 {/* Question 4 */}
                 <Card style = {styles.card}>
                   <Card.Content>
-                    <Text style={styles.questions}>How is your Seizure at present?</Text>
+                    <Text style={styles.questions}>How does your seizures typically  present?</Text>
+                    <FlatList
+                      numColumns={2}
+                      showsVerticalScrollIndicator={false}
+                      data={this.state.data5}
+                      renderItem={this.renderItem}
+                      horizontal={false}
+                      columnWrapperStyle={{
+                        width:'100%',
+                        display:'flex',
+                        flexDirection:'row',
+                        justifyContent: "space-between"
+                      }}
+                      style={{
+                        width: "100%",
+                        marginTop: 10,
+                    }}
+                  />
                     <TextInput
                             mode="outlined"
                             theme={{ colors: { primary: theme.colors.primary}}}
@@ -595,7 +613,7 @@ export default class SMPForm extends React.Component {
                 {/* Question 8 */}
                 <Card style = {styles.card}>
                     <Card.Content>
-                      <Text style={styles.questions}>Duration of Seizure</Text>
+                      <Text style={styles.questions}>Typical Duration of Seizures</Text>
                         <View
                           style={{
                             display: "flex",
@@ -614,7 +632,7 @@ export default class SMPForm extends React.Component {
                 {/* Question 8 */}
                 <Card style = {styles.card}>
                     <Card.Content>
-                      <Text style={styles.questions}>Frequency of Seizure</Text>
+                      <Text style={styles.questions}>Typical Frequency of Seizures</Text>
                         <View
                           style={{
                             display: "flex",
@@ -665,7 +683,7 @@ export default class SMPForm extends React.Component {
                 {/* Question 8 */}
                 <Card style = {styles.card}>
                     <Card.Content>
-                      <Text style={styles.questions}>Things you do not want during Seizure.</Text>
+                      <Text style={styles.questions}>What to not do during a seizure?</Text>
                       <FlatList
                   numColumns={2}
                   showsVerticalScrollIndicator={false}
@@ -697,7 +715,7 @@ export default class SMPForm extends React.Component {
                 {/* Question 8 */}
                 <Card style = {styles.card}>
                     <Card.Content>
-                      <Text style={styles.questions}>What you may need after Seizure?</Text>
+                      <Text style={styles.questions}>What you may need after a seizure?</Text>
                           <RadioButton.Group onValueChange={newValue => this.setState({afterSeizure:newValue})} value={this.state.afterSeizure}>
                           <View style = {styles.parent}>
                               <View style = {styles.child}>
@@ -718,33 +736,57 @@ export default class SMPForm extends React.Component {
                               </View>
                             </View>
                           </RadioButton.Group>
+                          <TextInput
+                              mode="outlined"
+                              theme={{ colors: { primary: theme.colors.primary}}}
+                              multiline={true}
+                              placeholder="Type Here"
+                              //value={this.state.storeName}
+                              //onChangeText={(value) => this.setState({ storeName: value })}
+                            />
                     </Card.Content>
                   </Card> 
 
                  {/* Question 8 */}
                  <Card style = {styles.card}>
                     <Card.Content>
-                      <Text style={styles.questions}>When you may need to call an ambulance?</Text>
+                      <Text style={styles.questions}>An ambulance may be needed in the event of?</Text>
                           <RadioButton.Group onValueChange={newValue => this.setState({ambulance:newValue})} value={this.state.ambulance}>
                           <View style = {styles.parent}>
                               <View style = {styles.child}>
                                   <View style = {styles.radio}>
-                                    <RadioButton value="During Injury" />
-                                    <Text numberOfLines={2} style={{width:'50%'}}>During Injury</Text>
+                                    <RadioButton value="Injury" />
+                                    <Text numberOfLines={2} style={{width:'50%'}}>Injury</Text>
+                                  </View>
+                                  <View style = {styles.radio}>
+                                    <RadioButton value="Unable to breathe" />
+                                    <Text numberOfLines={2} style={{width:'50%'}}>Unable to breathe</Text>
                                   </View>
                                   
                               </View>
 
                               <View style = {styles.child}>
                                 <View style = {styles.radio}>
-                                  <RadioButton value="During Emergency" />
-                                  <Text numberOfLines={2} style={{width:'50%'}}>During Emergency</Text>
+                                  <RadioButton value="Seizure is different to normal" />
+                                  <Text numberOfLines={2} style={{width:'50%'}}>Seizure is different to normal</Text>
+                                </View>
+                                <View style = {styles.radio}>
+                                  <RadioButton value="Seizure not resolving" />
+                                  <Text numberOfLines={2} style={{width:'50%'}}>Seizure not resolving</Text>
                                 </View>
                                
                                 
                               </View>
                             </View>
                           </RadioButton.Group>
+                          <TextInput
+                            mode="outlined"
+                            theme={{ colors: { primary: theme.colors.primary}}}
+                            multiline={true}
+                            placeholder="Type Here"
+                            //value={this.state.storeName}
+                            //onChangeText={(value) => this.setState({ storeName: value })}
+                          />
                     </Card.Content>
                   </Card> 
 

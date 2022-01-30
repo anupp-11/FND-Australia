@@ -148,7 +148,7 @@ const LoginScreen = () => {
               <View >
                 <TouchableOpacity style={styles.row} onPress={handleBiometricAuth}>
                   <IoIcon name="finger-print-outline" color={theme.colors.primary} size={20} style={{marginRight:10}} />
-                  <Text style={styles.label}>Tap to login with biometric</Text>
+                  <Text style={styles.label}>Tap to sign in with biometric</Text>
                 </TouchableOpacity>
               </View>)
               : (
