@@ -43,6 +43,33 @@ export class SMRForm{
   ){}
 
 }
+export class SMPFormModel{
+  constructor(
+    public dateOfBirth:Date,
+    public dateOfPlan: Date,
+    public onMedication:string,
+    public medication: string,
+    public medicalConditions: string[],
+    public medicalHistory: string,
+    public warningSigns: string[],
+    public warningSignText: string,
+    public seizureType : string,
+    public seizureTypeText : string,
+    public seizurePresent : string[],
+    public seizurePresentText : string,
+    public durationOfSeizure : string,
+    public frequencyOfSeizure : string,
+    public assistanceRequired : string[],
+    public assistanceRequiredText : string,
+    public notDo : string[],
+    public notDoText : string,
+    public needAfterSeizure : string,
+    public needAfterSeizureText : string,
+    public ambulanceNeeded : string[],
+    public ambulanceNeededText : string,
+  ){}
+
+}
 
 export class UserInfo{
     constructor(

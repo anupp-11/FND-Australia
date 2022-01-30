@@ -47,54 +47,66 @@
             {
                 "id":0,
                 "key":"Keep Calm",
-                "checked":false
+                "checked":false,
+                "questionGroup":"2"
             },{
                 "id":1,
                 "key":"Placed Cushions",
-                "checked":false
+                "checked":false,
+                "questionGroup":"2"
             },{
                 "id":2,
                 "key":"Stroking",
-                "checked":false
+                "checked":false,
+                "questionGroup":"2"
             },{
                 "id":3,
                 "key":"Sensory Input",
-                "checked":false
+                "checked":false,
+                "questionGroup":"2"
             },{
                 "id":4,
                 "key":"Distraction",
-                "checked":false
+                "checked":false,
+                "questionGroup":"2"
             }
         ],
         "question3":[
             {
                 "id":0,
                 "key":"Blackout",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":1,
                 "key":"Dissociative",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":2,
                 "key":"Drop Attacks",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":3,
                 "key":"Convulsing",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":4,
                 "key":"Shaking",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":5,
                 "key":"Tremor",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             },{
                 "id":6,
                 "key":"Blank Spells/Absent",
-                "checked":false
+                "checked":false,
+                "questionGroup":"3"
             }
 
 
@@ -102,19 +114,23 @@
             {
                 "id":0,
                 "key":"Tired",
-                "checked":false
+                "checked":false,
+                "questionGroup":"4"
             },{
                 "id":1,
                 "key":"Paralyzed",
-                "checked":false
+                "checked":false,
+                "questionGroup":"4"
             },{
                 "id":2,
                 "key":"Confused",
-                "checked":false
+                "checked":false,
+                "questionGroup":"4"
             },{
                 "id":3,
                 "key":"Disoriented",
-                "checked":false
+                "checked":false,
+                "questionGroup":"4"
             }
 
 

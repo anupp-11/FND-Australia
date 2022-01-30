@@ -195,16 +195,12 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
     
    
   }
-
-
-
- 
   renderFruits (data)  {
     return data.map((item)=>{
       debugger;
       return(
         <View>
-          <Checkbox.Item label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
         </View>
       )
     })

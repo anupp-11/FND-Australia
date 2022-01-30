@@ -11,6 +11,8 @@ import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
 import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
 import Button from '../../components/LoginComponents/Button';
 import CheckboxComponent from './CheckboxComponent';
+import { SMPFormModel } from '../../models/BaseModel';
+
 const OPTIONS=require('./../../service/options2.json');
 
 //import RNPickerSelect from 'react-native-picker-select';
@@ -34,6 +36,7 @@ export default class SMPForm extends React.Component {
       data3 :OPTIONS.question3,
       data4 :OPTIONS.question4,
       data5 :OPTIONS.question5,
+      data6 :OPTIONS.question6,
       DOB: new Date,
       DOP: new Date,
       onMedication: 'Yes',
@@ -42,16 +45,23 @@ export default class SMPForm extends React.Component {
       medication:'',
       ambulance:'',
       warningSign :'Distracted',
-      typesOfSeizure : 'Epileptic',
-      seizureAtPresent:'',
+      typesOfSeizure : '',
+      typesOfSeizureText : '',
+      seizurePresent:'',
       assistanceRequired: '',
+      notDo:'',
       afterSeizure:'',
+      afterSeizureText:'',
+      ambulanceNeededText:'',
       agree: false
 
     };
     this.showDialog = this.showDialog.bind(this);
     this.hideDialog = this.hideDialog.bind(this);
     this.updateMedication = this.updateMedication.bind(this);
+    this.getSelectedOptions = this.getSelectedOptions.bind(this);
+    this.renderFruits = this.renderFruits.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount(){
     
@@ -363,6 +373,83 @@ export default class SMPForm extends React.Component {
   }
   renderItem = ({ item }) => <CheckboxComponent data={item} navigation={this.props.navigation} />;
 
+
+  onChecked = (id,data) => {
+    const Data = data;
+    debugger;
+    const index = Data.findIndex(x=>x.id===id);
+    Data[index].checked=!data[index].checked;
+    if(data[id].questionGroup=="1"){
+      this.setState({data1:Data});
+    }else if(data[id].questionGroup=="2"){
+      this.setState({data2:Data});
+    }else if(data[id].questionGroup=="3"){
+      this.setState({data3:Data});
+    }else if(data[id].questionGroup=="4"){
+      this.setState({data4:Data});
+    }else if(data[id].questionGroup=="5"){
+      this.setState({data5:Data});
+    }
+    
+   
+  }
+  renderFruits (data)  {
+    return data.map((item)=>{
+      debugger;
+      return(
+        <View>
+          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+        </View>
+      )
+    })
+  }
+  getSelectedOptions(data){
+    var keys = data.map((t)=>t.key)
+    var checks = data.map((t)=>t.checked)
+    let Selected = []
+    for(let i=0;i<checks.length;i++){
+      if(checks[i]==true){
+        Selected.push(keys[i])
+      }
+    }
+    return Selected;
+  }
+
+  onSubmit(){
+    const warningSigns =this.getSelectedOptions(this.state.data1);
+    const seizuresPresent=this.getSelectedOptions(this.state.data5);
+    const assistancesRequired=this.getSelectedOptions(this.state.data3);
+    const notDos=this.getSelectedOptions(this.state.data4);
+    const ambulanceNeeded=this.getSelectedOptions(this.state.data6);
+
+    const SMRFormData = new SMPFormModel(
+      this.state.DOB,
+      this.state.DOP,
+      this.state.onMedication,
+      this.state.medication,
+      this.state.medicalConditions,
+      this.state.medicalHistory,
+      warningSigns,
+      this.state.warningSign,
+      this.state.typesOfSeizure,
+      this.state.typesOfSeizureText,
+      seizuresPresent,
+      this.state.seizurePresent,
+      this.state.duration,
+      this.state.frequency,
+      assistancesRequired,
+      this.state.assistanceRequired,
+      notDos,
+      this.state.notDo,
+      this.state.afterSeizure,
+      this.state.afterSeizureText,
+      ambulanceNeeded,
+      this.state.ambulanceNeededText,
+
+
+
+    )
+  }
  
   render() {
     return (
@@ -518,30 +605,14 @@ export default class SMPForm extends React.Component {
               <Card style = {styles.card}>
                 <Card.Content>
                   <Text style={styles.questions}>Warning signs prior to a Seizure</Text>
-                  <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data1}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+                  {this.renderFruits(this.state.data1)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.warningSign}
+                      onChangeText={(value) => this.setState({ warningSign: value })}
                     />
                   
                 </Card.Content>
@@ -551,30 +622,31 @@ export default class SMPForm extends React.Component {
               <Card style = {styles.card}>
                   <Card.Content>
                     <Text style={styles.questions}>Types of Seizure you have.</Text>
-                    <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data2}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+                    <RadioButton.Group onValueChange={newValue => this.setState({typesOfSeizure : newValue})} value={this.state.typesOfSeizure}>
+                    <View style = {styles.parent}>
+                        <View style = {styles.child}>
+                            <View style = {styles.radio}>
+                              <RadioButton value="Epileptic" />
+                              <Text>Epileptic</Text>
+                            </View>
+                        </View>
+
+                        <View style = {styles.child}>
+                          <View style = {styles.radio}>
+                            <RadioButton value="Functional(Non-Epileptic/Dissociative)" />
+                            <Text>Functional(Non-Epileptic/Dissociative)</Text>
+                          </View>
+                        </View>
+                      </View>
+                    </RadioButton.Group>
+                    {/* {this.renderFruits(this.state.data2)} */}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.typesOfSeizureText}
+                      onChangeText={(value) => this.setState({ typesOfSeizureText: value })}
                     />
                   </Card.Content>
                 </Card>
@@ -582,30 +654,14 @@ export default class SMPForm extends React.Component {
                 <Card style = {styles.card}>
                   <Card.Content>
                     <Text style={styles.questions}>How does your seizures typically  present?</Text>
-                    <FlatList
-                      numColumns={2}
-                      showsVerticalScrollIndicator={false}
-                      data={this.state.data5}
-                      renderItem={this.renderItem}
-                      horizontal={false}
-                      columnWrapperStyle={{
-                        width:'100%',
-                        display:'flex',
-                        flexDirection:'row',
-                        justifyContent: "space-between"
-                      }}
-                      style={{
-                        width: "100%",
-                        marginTop: 10,
-                    }}
-                  />
+                    {this.renderFruits(this.state.data5)}
                     <TextInput
                             mode="outlined"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             multiline={true}
                             placeholder="Type Here"
-                            value={this.state.seizureAtPresent}
-                            onChangeText={(value) => this.setState({ seizureAtPresent: value })}
+                            value={this.state.seizurePresent}
+                            onChangeText={(value) => this.setState({ seizurePresent: value })}
                           />
                   </Card.Content>
                 </Card>
@@ -652,30 +708,14 @@ export default class SMPForm extends React.Component {
                 <Card style = {styles.card}>
                     <Card.Content>
                       <Text style={styles.questions}>Assistance required from people.</Text>
-                      <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data3}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+                      {this.renderFruits(this.state.data3)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.assistanceRequired}
+                      onChangeText={(value) => this.setState({ assistanceRequired: value })}
                     />
                     </Card.Content>
                   </Card> 
@@ -684,30 +724,14 @@ export default class SMPForm extends React.Component {
                 <Card style = {styles.card}>
                     <Card.Content>
                       <Text style={styles.questions}>What to not do during a seizure?</Text>
-                      <FlatList
-                  numColumns={2}
-                  showsVerticalScrollIndicator={false}
-                  data={this.state.data4}
-                  renderItem={this.renderItem}
-                  horizontal={false}
-                  columnWrapperStyle={{
-                    width:'100%',
-                    display:'flex',
-                    flexDirection:'row',
-                    justifyContent: "space-between"
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: 10,
-                }}
-              />
+                      {this.renderFruits(this.state.data4)}
               <TextInput
                       mode="outlined"
                       theme={{ colors: { primary: theme.colors.primary}}}
                       multiline={true}
                       placeholder="Type Here"
-                      //value={this.state.storeName}
-                      //onChangeText={(value) => this.setState({ storeName: value })}
+                      value={this.state.notDo}
+                      onChangeText={(value) => this.setState({ notDo: value })}
                     />
                     </Card.Content>
                   </Card> 
@@ -741,8 +765,8 @@ export default class SMPForm extends React.Component {
                               theme={{ colors: { primary: theme.colors.primary}}}
                               multiline={true}
                               placeholder="Type Here"
-                              //value={this.state.storeName}
-                              //onChangeText={(value) => this.setState({ storeName: value })}
+                              value={this.state.afterSeizureText}
+                              onChangeText={(value) => this.setState({ afterSeizureText: value })}
                             />
                     </Card.Content>
                   </Card> 
@@ -751,41 +775,14 @@ export default class SMPForm extends React.Component {
                  <Card style = {styles.card}>
                     <Card.Content>
                       <Text style={styles.questions}>An ambulance may be needed in the event of?</Text>
-                          <RadioButton.Group onValueChange={newValue => this.setState({ambulance:newValue})} value={this.state.ambulance}>
-                          <View style = {styles.parent}>
-                              <View style = {styles.child}>
-                                  <View style = {styles.radio}>
-                                    <RadioButton value="Injury" />
-                                    <Text numberOfLines={2} style={{width:'50%'}}>Injury</Text>
-                                  </View>
-                                  <View style = {styles.radio}>
-                                    <RadioButton value="Unable to breathe" />
-                                    <Text numberOfLines={2} style={{width:'50%'}}>Unable to breathe</Text>
-                                  </View>
-                                  
-                              </View>
-
-                              <View style = {styles.child}>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Seizure is different to normal" />
-                                  <Text numberOfLines={2} style={{width:'50%'}}>Seizure is different to normal</Text>
-                                </View>
-                                <View style = {styles.radio}>
-                                  <RadioButton value="Seizure not resolving" />
-                                  <Text numberOfLines={2} style={{width:'50%'}}>Seizure not resolving</Text>
-                                </View>
-                               
-                                
-                              </View>
-                            </View>
-                          </RadioButton.Group>
+                          {this.renderFruits(this.state.data6)}
                           <TextInput
                             mode="outlined"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             multiline={true}
                             placeholder="Type Here"
-                            //value={this.state.storeName}
-                            //onChangeText={(value) => this.setState({ storeName: value })}
+                            value={this.state.ambulanceNeededText}
+                            onChangeText={(value) => this.setState({ ambulanceNeededText: value })}
                           />
                     </Card.Content>
                   </Card> 
