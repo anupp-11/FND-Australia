@@ -61,12 +61,15 @@ const LoginScreen = () => {
   const _onLoginPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
-    //const response = await authUser(email.value, password.value);
-    // if (emailError || passwordError) {
-    //   setEmail({...email, error: emailError});
-    //   setPassword({...password, error: passwordError});
-    //   return;
-    // }
+   
+    if (emailError || passwordError) {
+      setEmail({...email, error: emailError});
+      setPassword({...password, error: passwordError});
+      return;
+    }
+
+    const response = await authUser(email.value, password.value);
+    
     debugger;
     navigation.navigate('Home');
   };
@@ -110,22 +113,7 @@ const LoginScreen = () => {
                   secureTextEntry={hidePass ? true : false}
                   onChangeText={text => setPassword({value: text, error: ''})}
                 />
-              {/* <TextInput
-                returnKeyType="done"
-                value={password.value}
-                onChangeText={text => setPassword({value: text, error: ''})}
-                error={!!password.error}
-                errorText={password.error}
-                secureTextEntry={hidePass ? true : false}
-                //right={<TextInput.Input.Icon name="border-color" />}
-                //right={<TextInput.Icon name="border-color" onPress={() => setHidePass(!hidePass)} />}
-              />
-              <FAIcon
-                name={hidePass ? 'eye-slash' : 'eye'}
-                size={15}
-                color="grey"
-                onPress={() => setHidePass(!hidePass)}
-              /> */}
+              
             </View>
             <View style={styles.forgotPassword}>
               <TouchableOpacity onPress={ForgotPassword}>

@@ -83,6 +83,16 @@ export class UserInfo{
   
   }
 
+  
+export class AuthUserInfo{
+  constructor(
+    public name:string,
+    public email:string,
+    public password:string,
+  ){}
+
+}
+
   export class EmergencyContact{
     constructor(
       public name:string,

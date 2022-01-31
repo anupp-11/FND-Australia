@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {memo, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Alert, ActivityIndicator} from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import TextInput from '../../components/LoginComponents/TextInput';
@@ -14,6 +14,8 @@ import Button from '../../components/LoginComponents/Button';
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import {TextInput as TextInputP} from 'react-native-paper';
+import { AuthUserInfo } from '../../models/BaseModel';
+import { registerUser } from '../../service/AccountService';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -24,11 +26,12 @@ const RegisterScreen = () => {
   const [name, setName] = useState({value: '', error: ''});
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
-  const [gender, setGender] = useState('Male');
-  const [DOB, setDOB] = useState(new Date);
   const [hidePass, setHidePass] = useState(true);
+  const [isProcessing, setisProcessing ] = React.useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const _onSignUpPressed = () => {
+  const _onSignUpPressed = async () => {
+    setisProcessing(true);
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -39,14 +42,24 @@ const RegisterScreen = () => {
       setPassword({...password, error: passwordError});
       return;
     }
-    const n = name.value;
-    const e = email.value;
-    const p = password.value;
-    const g = gender;
-    const d = DOB;
+    
+    const userInfo = new AuthUserInfo(
+      name.value,
+      email.value,
+      password.value
+    );
+    const response = await registerUser(userInfo);
+    setisProcessing(false);
     debugger;
-
-    navigation.navigate('Login');
+    if(response?.hasError){
+      setErrorMessage(response.message);
+      Alert.alert(response.message);
+      navigation.navigate('Register');
+    }
+    else{
+      Alert.alert("Registration Successful");
+      navigation.navigate('Login');
+    }
   };
 
   return (
@@ -98,48 +111,14 @@ const RegisterScreen = () => {
                   secureTextEntry={hidePass ? true : false}
                   onChangeText={text => setPassword({value: text, error: ''})}
                 />
-              {/* <TextInput
-                returnKeyType="done"
-                value={password.value}
-                onChangeText={text => setPassword({value: text, error: ''})}
-                error={!!password.error}
-                errorText={password.error}
-                secureTextEntry
-              /> */}
+             
             </View>
-            {/* <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Gender</Text>
-                <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
-                  <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
-                    <View style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-                      <Text>Male</Text>
-                      <RadioButton color={theme.colors.primary} value="Male" />
-                    </View> 
-                    <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                      <Text>Female</Text>
-                      <RadioButton color={theme.colors.primary} value="Female" />
-                    </View>
-                    <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                      <Text>Other</Text>
-                      <RadioButton color={theme.colors.primary} value="Other" />
-                    </View>
-                  </View>
-                </RadioButton.Group>
-            </View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Date of Birth</Text>
-              <DatePicker
-                style={{width: '100%'}}
-                date={DOB}
-                placeholder="Select Date"
-                format="YYYY-MM-DD"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-               
-                onDateChange={(date) => setDOB(date)}
-              />
-               
-            </View> */}
+
+            {isProcessing ==true ? (
+            <View>
+              <ActivityIndicator size="large" color={theme.colors.primary}/> 
+            </View>):(<View></View>)}
+              
 
             <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
               Sign Up
