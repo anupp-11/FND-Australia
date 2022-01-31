@@ -77,7 +77,7 @@ const ProfileScreen = () => {
         </View>
       </TouchableRipple>
      
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() =>navigation.navigate('Diagnosis')}>
         <View style={styles.menuItem}>
           <FAIcon name="user-md" color="#28cd00" size={22}/>
           <Text style={{color: '#777777',marginLeft: 26,fontWeight: '600',fontSize: 16,lineHeight: 26}}>Diagnosis</Text>
@@ -159,7 +159,7 @@ const ProfileScreen = () => {
         <Dialog visible={visible} onDismiss={hideDialog}>
         <Dialog.Title>Signout</Dialog.Title>
             <Dialog.Content>
-              <Paragraph>Are you sure you want to logout?</Paragraph>
+              <Paragraph>Are you sure you want to signout?</Paragraph>
             </Dialog.Content>
           <Dialog.Actions style={{display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}>
             <Button color={theme.colors.primary} onPress={logout}>Yes</Button>

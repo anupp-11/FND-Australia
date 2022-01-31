@@ -12,6 +12,7 @@ import SMPForm from "../../screens/Forms/SMPForm";
 import SymptomMonitoringRecordScreen from "../../screens/Forms/SymptomMonitoringRecordScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
 import AppSettingScreen from "../../screens/ProfileScreen/AppSettingScreen";
+import DiagnosisScreen from "../../screens/ProfileScreen/DiagnosisScreen";
 import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
 import ExerciseScreen from "../../screens/ProfileScreen/ExerciseScreen";
 import FAQs from "../../screens/ProfileScreen/FAQs";
@@ -92,6 +93,11 @@ export default function ProfileNavigator() {
         name="Story"
         component={StoryInfoComponent}
       />
+      <ProfileStack.Screen
+        name="Diagnosis"
+        component={DiagnosisScreen}
+      />
+     
       
     </ProfileStack.Navigator>
   );
