@@ -6,7 +6,7 @@ export enum API{
 }
 export const API_TYPE = API.SERVER;
 
-export const BASE_URL ="https://api.ahaorders.com"; //"http://10.0.2.2:5005";
+export const BASE_URL ="https://api.ahaorders.com";
 
 export const ACCOUNT_ID = "f7b45fcc-33a0-4067-aee3-04389f556347";
 export const PRODUCT_API = "/api/products/account";
@@ -15,6 +15,8 @@ export const ORDER_API = "/api/orders";
 export const CATEGORY_API = "/api/categories/account";
 export const CAROUSEL_API = "/api/carousel/account";
 export const DEVICE_TYPE = "?type=Mobile";
+
+
 
 export const ACCOUNT_CATEGORY_URL = `${BASE_URL}${CATEGORY_API}/${ACCOUNT_ID}`;
 export const ACCOUNT_PRODUCT_URL = `${BASE_URL}${PRODUCT_API}/${ACCOUNT_ID}`;
