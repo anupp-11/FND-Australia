@@ -62,14 +62,14 @@ const LoginScreen = () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
    
-    if (emailError || passwordError) {
-      setEmail({...email, error: emailError});
-      setPassword({...password, error: passwordError});
-      return;
-    }
+    // if (emailError || passwordError) {
+    //   setEmail({...email, error: emailError});
+    //   setPassword({...password, error: passwordError});
+    //   return;
+    // }
 
-    const response = await authUser(email.value, password.value);
-    
+    // const response = await authUser(email.value, password.value);
+
     debugger;
     navigation.navigate('Home');
   };

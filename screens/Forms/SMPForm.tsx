@@ -398,7 +398,7 @@ export default class SMPForm extends React.Component {
       debugger;
       return(
         <View>
-          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+          <Checkbox.Item color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
         </View>
       )
     })

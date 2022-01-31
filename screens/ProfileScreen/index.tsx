@@ -17,7 +17,8 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-import MAIcon from 'react-native-vector-icons/MaterialIcons';
+import FIcon from 'react-native-vector-icons/FontAwesome';
+import AIcon from 'react-native-vector-icons/AntDesign';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
@@ -95,14 +96,21 @@ const ProfileScreen = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('My Seizure Management Plan')}>
         <View style={styles.menuItem}>
-          <Icon name="form-select" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
+          <AIcon name="form" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
           <Text style={styles.menuItemText}>My Seizure Management Plan</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={() => navigation.navigate('Seizure Monitoring Record')}>
         <View style={styles.menuItem}>
-          <Icon name="file-cabinet" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
+          <AIcon name="form" color="#28cd00" size={25} style={{marginLeft:-3,marginRight:3}}/>
           <Text style={styles.menuItemText}>Seizure Monitoring Record</Text>
+        </View>
+      </TouchableRipple>
+
+      <TouchableRipple onPress={() => navigation.navigate('My Records')}>
+        <View style={styles.menuItem}>
+          <FIcon name="wpforms" color="#28cd00" size={25} style={{marginLeft:-1,marginRight:5}}/>
+          <Text style={styles.menuItemText}>My Records</Text>
         </View>
       </TouchableRipple>
      

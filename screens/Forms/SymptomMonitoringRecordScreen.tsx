@@ -12,8 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-// import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
-// import RNPickerSelect from 'react-native-picker-select';
+
 import { HOURS } from '../../service/utils';
 import CheckboxComponent from './CheckboxComponent';
 import { SMRForm } from '../../models/BaseModel';
@@ -192,15 +191,13 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
     }else if(data[id].questionGroup=="4"){
       this.setState({data4:Data});
     }
-    
-   
   }
   renderFruits (data)  {
     return data.map((item)=>{
       debugger;
       return(
         <View>
-          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+          <Checkbox.Item color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
         </View>
       )
     })

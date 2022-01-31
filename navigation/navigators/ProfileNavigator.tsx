@@ -16,9 +16,12 @@ import DiagnosisScreen from "../../screens/ProfileScreen/DiagnosisScreen";
 import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
 import ExerciseScreen from "../../screens/ProfileScreen/ExerciseScreen";
 import FAQs from "../../screens/ProfileScreen/FAQs";
+import FilledFormScreen from "../../screens/ProfileScreen/FilledFormScreen";
 import ManageProfileScreen from "../../screens/ProfileScreen/ManageProfileScreen";
 import MusicScreen from "../../screens/ProfileScreen/MusicScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
+import SMPInfoComponent from "../../screens/ProfileScreen/SMPInfoComponent";
+import SMPList from "../../screens/ProfileScreen/SMPList";
 import StoryScreen from "../../screens/ProfileScreen/Stories";
 import StoryInfoComponent from "../../screens/ProfileScreen/StoryInfoComponent";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
@@ -97,7 +100,18 @@ export default function ProfileNavigator() {
         name="Diagnosis"
         component={DiagnosisScreen}
       />
-     
+       <ProfileStack.Screen
+        name="My Records"
+        component={FilledFormScreen}
+      />
+      <ProfileStack.Screen
+        name="Seizure Management Plan"
+        component={SMPList}
+      />
+      <ProfileStack.Screen
+        name="Form Info"
+        component={SMPInfoComponent}
+      />
       
     </ProfileStack.Navigator>
   );
