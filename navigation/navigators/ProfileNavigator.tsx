@@ -12,6 +12,8 @@ import SMPForm from "../../screens/Forms/SMPForm";
 import SymptomMonitoringRecordScreen from "../../screens/Forms/SymptomMonitoringRecordScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
 import AppSettingScreen from "../../screens/ProfileScreen/AppSettingScreen";
+import DailyLogInfoComponent from "../../screens/ProfileScreen/DailyLogInfoComponent";
+import DailyLogList from "../../screens/ProfileScreen/DailyLogList";
 import DiagnosisScreen from "../../screens/ProfileScreen/DiagnosisScreen";
 import DonationScreen from "../../screens/ProfileScreen/DonationScreen";
 import ExerciseScreen from "../../screens/ProfileScreen/ExerciseScreen";
@@ -22,6 +24,8 @@ import MusicScreen from "../../screens/ProfileScreen/MusicScreen";
 import MWBSScreen from "../../screens/ProfileScreen/MWBSScreen";
 import SMPInfoComponent from "../../screens/ProfileScreen/SMPInfoComponent";
 import SMPList from "../../screens/ProfileScreen/SMPList";
+import SMRInfoComponent from "../../screens/ProfileScreen/SMRInfoComponent";
+import SMRList from "../../screens/ProfileScreen/SMRList";
 import StoryScreen from "../../screens/ProfileScreen/Stories";
 import StoryInfoComponent from "../../screens/ProfileScreen/StoryInfoComponent";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
@@ -111,6 +115,22 @@ export default function ProfileNavigator() {
       <ProfileStack.Screen
         name="Form Info"
         component={SMPInfoComponent}
+      />
+       <ProfileStack.Screen
+        name="Seizure Monitoring Records"
+        component={SMRList}
+      />
+      <ProfileStack.Screen
+        name="Form Information"
+        component={SMRInfoComponent}
+      />
+       <ProfileStack.Screen
+        name="My Daily Logs"
+        component={DailyLogList}
+      />
+       <ProfileStack.Screen
+        name="Daily Log"
+        component={DailyLogInfoComponent}
       />
       
     </ProfileStack.Navigator>

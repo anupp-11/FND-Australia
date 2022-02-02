@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'column',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        
       },
       head: {
         paddingHorizontal: 30,
@@ -58,6 +59,15 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 16,
         lineHeight: 26,
+      },
+      card: {
+        paddingHorizontal: 30,
+        marginBottom: 15,
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'white'
       },
 });
 
