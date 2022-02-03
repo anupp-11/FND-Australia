@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -22,14 +22,27 @@ import Background from '../../components/LoginComponents/Background';
 import { Card, Paragraph, Title } from 'react-native-paper';
 import WebView from 'react-native-webview';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getUserFromDevice } from '../../service/AccountService';
 
 
 
 const HomeScreen = ({searchValue}: {searchValue: string}) => {
   const navigation = useNavigation();
+  const [userName, setuserName] = useState("User"); 
   const onButtonPress = () => {
     navigation.navigate('DailyLogsScreen');
   };
+
+  useEffect(() => {
+    async function getUser() {
+      const user = await getUserFromDevice();
+      console.log("Username",userName);
+      setuserName(user.name);
+      debugger;
+    }
+    debugger;
+    getUser();
+  },[]);
   
   return (
     <View  >
@@ -49,7 +62,7 @@ const HomeScreen = ({searchValue}: {searchValue: string}) => {
               </Text>
               {" "}
               <Text style = {{color : theme.colors.primary}}>
-                  Sohit ! 
+                  {userName} 
               </Text>
             </Text>
            

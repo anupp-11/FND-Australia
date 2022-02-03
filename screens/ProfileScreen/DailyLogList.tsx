@@ -19,6 +19,8 @@ export default class SMRList extends React.Component {
       symptoms:SYMPTOMS,
       forms : [
         {
+          date : new Date().toDateString(),
+          recordedTime : new Date().toLocaleTimeString(),
           createdAt:"2022-01-31",
           mood:"2",
           moodText:"I was happy today",
@@ -33,6 +35,7 @@ export default class SMRList extends React.Component {
           physicalActivityLevel:"low",
           physicalActivityLevelText:"I slept all day.",
           goalAchievement:"I completed my daily achievement.",
+          
         },
         {
           createdAt:"2022-01-31",

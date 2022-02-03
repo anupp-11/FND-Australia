@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, StyleSheet, Alert} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Alert, ActivityIndicator} from 'react-native';
 import {
   Avatar,
   Title,
@@ -19,8 +19,9 @@ import Button from '../../components/LoginComponents/Button';
 import Background from '../../components/LoginComponents/Background';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
-import { DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
+import { Contact, DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
 import DatePicker from 'react-native-datepicker';
+import { getUserFromDevice, getUserInfoFromDevice, saveUserInfoToDevice, updateExistingUserInfo, updateUserInfo } from '../../service/AccountService';
 
 export default class ManageProfileScreen extends React.Component {
   constructor(props) {
@@ -29,67 +30,96 @@ export default class ManageProfileScreen extends React.Component {
     this.state = {
       tempGender:'',
       visible: false,
-      isProcessing: true,
-      email: "abc@gmail.com",
-      gender:"Male",
-      DOB:"1998-05-18",
-      mobileNumber: "98273648172",
-      emergencyContact: {
-        name:null,
-        relationship:null,
-        address:null,
-        phoneNumber:null,
-      },
-      doctorDetail: {
-        name:null,
-        profession:null,
-        address:null,
-        phoneNumber:null,
-      }
+      isProcessing: false,
+      user:"",
+      name:"",
+      email: "",
+      gender:"",
+      DOB:"",
+      mobileNumber: "",
+      emergencyName:"",
+      emergencyRelationship:"",
+      emergencyProfession:"",
+      emergencyAddress:"",
+      emergencyPhone:"",
+      doctorName:"",
+      doctorRelationship:"",
+      doctorProfession:"",
+      doctorAddress:"",
+      doctorPhone:"",
       
     };
     this.showDialog = this.showDialog.bind(this);
     this.hideDialog = this.hideDialog.bind(this);
     this.updateGender = this.updateGender.bind(this);
+    this.updateUserData = this.updateUserData.bind(this);
+    this.getDate = this.getDate.bind(this);
   }
 
   componentDidMount = async () => {
     this.setState({tempGender:this.state.gender})
-   // var userInfo = await getUserInfo();
+    const userInfo = await getUserInfoFromDevice();
       
-    // if (userInfo) {
-    //   this.setState({
-    //     email: userInfo.email,
-    //     mobileNumber: userInfo.mobileNumber,
-    //     emergencyContact: userInfo.emergencyContact,
-    //     doctorDetail: userInfo.doctorDetail
-
-    //   });
-    // }
+    if (userInfo) {
+      debugger;
+      this.setState({
+        email: userInfo.user.email,
+        name: userInfo.user.name,
+        gender: userInfo.gender,
+        DOB : userInfo.DOB,
+        mobileNumber: userInfo.phone, 
+        emergencyName : userInfo.emergencyEontact.name,
+        emergencyRelationship:userInfo.emergencyEontact.relationship,
+        emergencyProfession:userInfo.emergencyEontact.profession,
+        emergencyAddress:userInfo.emergencyEontact.address,
+        emergencyPhone:userInfo.emergencyEontact.phoneNumber,
+        doctorName:userInfo.doctorDetail.name,
+        doctorRelationship:userInfo.doctorDetail.relationship,
+        doctorProfession:userInfo.doctorDetail.profession,
+        doctorAddress:userInfo.doctorDetail.address,
+        doctorPhone:userInfo.doctorDetail.phoneNumber,
+      });
+    }
   };
   
-  updateUserData(){
-    const userEmergencyContact = new EmergencyContact(
-      this.state.emergencyContact.name,
-      this.state.emergencyContact.relationship,
-      this.state.emergencyContact.phoneNumber,
-      this.state.emergencyContact.address,
+  updateUserData = async () => {
+    this.setState({isProcessing:true});
+    const userEmergencyContact = new Contact(
+      this.state.emergencyName,
+      this.state.emergencyRelationship,
+      this.state.emergencyProfession,
+      this.state.emergencyPhone,
+      this.state.emergencyAddress,
     )
-    const userDoctorDetail = new DoctorDetail(
-      this.state.emergencyContact.name,
-      this.state.emergencyContact.relationship,
-      this.state.emergencyContact.phoneNumber,
-      this.state.emergencyContact.address,
+    const userDoctorDetail = new Contact(
+      this.state.doctorName,
+      this.state.doctorRelationship,
+      this.state.doctorProfession,
+      this.state.doctorPhone,
+      this.state.doctorAddress,
     )
     const userData = new UserInfo(
-      this.state.name,
+      this.state.user,
       this.state.mobileNumber,
       this.state.DOB,
       this.state.gender,
       userEmergencyContact,
       userDoctorDetail
     );
-    //send userData to service
+      debugger;
+      const userInfo = await getUserInfoFromDevice();
+      const response = await updateExistingUserInfo(userData, userInfo?.id);
+      this.setState({isProcessing:false});
+        debugger;
+        if(response?.isSuccess){
+          Alert.alert("","Data Updated Successfully.");
+          saveUserInfoToDevice(response.result);
+        }else {
+          Alert.alert("","Update Unsuccessful");
+        }
+      
+      
+   
   }
   showDialog(){
     this.setState({visible:true});
@@ -100,6 +130,12 @@ export default class ManageProfileScreen extends React.Component {
   updateGender(){
     this.setState({gender:this.state.tempGender});
     this.hideDialog();
+  }
+  getDate(){
+    if(this.state.DOB)
+      return this.state.DOB;
+    else
+      return "Select Date"
   }
   render(){
     return (
@@ -119,7 +155,7 @@ export default class ManageProfileScreen extends React.Component {
             <Title style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>User Name</Title>
+            }]}>{this.state.name}</Title>
           </View>
           
       </View>
@@ -130,6 +166,12 @@ export default class ManageProfileScreen extends React.Component {
           paddingHorizontal:5
         }}
       />
+      {this.state.isProcessing ==true ? (
+            <View style={{
+              margin:10
+              }}>
+            <ActivityIndicator size="large" color={theme.colors.primary}/> 
+            </View>):(<View></View>)}
       <View style={{padding: 10
                 }}>
         <TextInput
@@ -189,7 +231,7 @@ export default class ManageProfileScreen extends React.Component {
                     <DatePicker
                       style={{width:'100%'}}
                       date={this.state.DOB}
-                      placeholder="Select Date"
+                      placeholder={this.getDate()}
                       format="YYYY-MM-DD"
                       confirmBtnText="Confirm"
                       cancelBtnText="Cancel"
@@ -198,15 +240,7 @@ export default class ManageProfileScreen extends React.Component {
                     />
                   </View>
               </View>
-                {/* <TextInput
-                  mode="flat"
-                  label="Date of Birth"
-                  right={<TextInput.Icon name="border-color" onPress={this.showDialog} />}
-                  style={{ backgroundColor: 'white',margin:10,flex:1 }}
-                  value={this.state.DOB}
-                  disabled={true}
-                  //onChangeText={(value) => this.setState({ mobileNumber: value })}
-                /> */}
+         
                 </View>
                  {/* Emergency Contact */}
                   <Card style = {{margin:10}}>
@@ -217,32 +251,32 @@ export default class ManageProfileScreen extends React.Component {
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label="Name"
-                            value={this.state.emergencyContact.name}
-                            onChangeText={(value) => this.setState({ name : value })}
+                            value={this.state.emergencyName}
+                            onChangeText={(value) => this.setState({ emergencyName : value })}
                           />
                     <TextInput
                             mode="flat"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label="Relationship"
-                            value={this.state.emergencyContact.relationship}
-                            onChangeText={(value) => this.setState({ relationship : value })}
+                            value={this.state.emergencyRelationship}
+                            onChangeText={(value) => this.setState({ emergencyRelationship : value })}
                           />
                     <TextInput
                             mode="flat"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label='Phone Number'
-                            value={this.state.emergencyContact.phoneNumber}
-                            onChangeText={(value) => this.setState({ phoneNo : value })}
+                            value={this.state.emergencyPhone}
+                            onChangeText={(value) => this.setState({ emergencyPhone : value })}
                           />
                     <TextInput
                           mode="flat"
                           theme={{ colors: { primary: theme.colors.primary}}}
                           right={<TextInput.Icon name="border-color" />}
                           label='Address'
-                          value={this.state.emergencyContact.address}
-                          onChangeText={(value) => this.setState({ address : value })}
+                          value={this.state.emergencyAddress}
+                          onChangeText={(value) => this.setState({ emergencyAddress : value })}
                         />
                     
                   </Card.Content>
@@ -257,32 +291,32 @@ export default class ManageProfileScreen extends React.Component {
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label="Name"
-                            value={this.state.doctorDetail.name}
-                            onChangeText={(value) => this.setState({ name : value })}
+                            value={this.state.doctorName}
+                            onChangeText={(value) => this.setState({ doctorName : value })}
                           />
                     <TextInput
                             mode="flat"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
-                            label="Relationship"
-                            value={this.state.doctorDetail.profession}
-                            onChangeText={(value) => this.setState({ relationship : value })}
+                            label="Profession"
+                            value={this.state.doctorProfession}
+                            onChangeText={(value) => this.setState({ doctorProfession : value })}
                           />
                     <TextInput
                             mode="flat"
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label='Phone Number'
-                            value={this.state.doctorDetail.phoneNumber}
-                            onChangeText={(value) => this.setState({ phoneNo : value })}
+                            value={this.state.doctorPhone}
+                            onChangeText={(value) => this.setState({ doctorPhone : value })}
                           />
                     <TextInput
                           mode="flat"
                           theme={{ colors: { primary: theme.colors.primary}}}
                           right={<TextInput.Icon name="border-color" />}
                           label='Address'
-                          value={this.state.doctorDetail.address}
-                          onChangeText={(value) => this.setState({ address : value })}
+                          value={this.state.doctorAddress}
+                          onChangeText={(value) => this.setState({ doctorAddress : value })}
                         />
                     
                   </Card.Content>

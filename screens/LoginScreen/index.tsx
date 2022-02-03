@@ -1,5 +1,5 @@
 import React, {memo, useEffect, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions, Alert, } from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions, Alert, ActivityIndicator, } from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
 import Button from '../../components/LoginComponents/Button';
 import TextInput from '../../components/LoginComponents/TextInput';
@@ -12,13 +12,15 @@ import {
   emailValidator,
   passwordValidator,
 } from '../../components/LoginComponents/utils';
-import { authUser } from '../../service/AccountService';
+import { authUser, saveUserToDevice } from '../../service/AccountService';
 import * as LocalAuthentication from 'expo-local-authentication';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [hidePass, setHidePass] = useState(true);
   const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
+  const [isProcessing, setisProcessing ] = React.useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   // Check if hardware supports biometrics
   useEffect(() => {
@@ -59,19 +61,28 @@ const LoginScreen = () => {
   const [password, setPassword] = useState({value: '', error: ''});
 
   const _onLoginPressed = async () => {
+    setisProcessing(true);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
    
-    // if (emailError || passwordError) {
-    //   setEmail({...email, error: emailError});
-    //   setPassword({...password, error: passwordError});
-    //   return;
-    // }
+    if (emailError || passwordError) {
+      setEmail({...email, error: emailError});
+      setPassword({...password, error: passwordError});
+      return;
+    }
 
-    // const response = await authUser(email.value, password.value);
-
+    const response = await authUser(email.value, password.value);
     debugger;
-    navigation.navigate('Home');
+    setisProcessing(false);
+    if(response?.isError){
+      setErrorMessage(response.message);
+      Alert.alert(response.message);
+      navigation.navigate('Register');
+    }
+    else{
+      saveUserToDevice(response.result);
+      navigation.navigate('Home');
+    }  
   };
 
   return (
@@ -115,6 +126,16 @@ const LoginScreen = () => {
                 />
               
             </View>
+            {isProcessing ==true ? (
+            <View style={{
+              margin:10
+              }}>
+            <ActivityIndicator size="large" color={theme.colors.primary}/> 
+            </View>):(<View></View>)}
+            {errorMessage ? (
+              <View>
+                <Text style={{color:'red',margin:5}}>{errorMessage}</Text>
+              </View>):(<View></View>)}
             <View style={styles.forgotPassword}>
               <TouchableOpacity onPress={ForgotPassword}>
                 <Text style={styles.label}>Forgot your password?</Text>

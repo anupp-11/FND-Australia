@@ -14,8 +14,8 @@ import Button from '../../components/LoginComponents/Button';
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import {TextInput as TextInputP} from 'react-native-paper';
-import { AuthUserInfo } from '../../models/BaseModel';
-import { registerUser } from '../../service/AccountService';
+import { AuthUserInfo, Contact, UserInfo } from '../../models/BaseModel';
+import { registerUser, saveUserInfoToDevice, updateUserInfo } from '../../service/AccountService';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -46,17 +46,42 @@ const RegisterScreen = () => {
     const userInfo = new AuthUserInfo(
       name.value,
       email.value,
-      password.value
+      password.value,
+      ""
     );
     const response = await registerUser(userInfo);
     setisProcessing(false);
     debugger;
-    if(response?.hasError){
+    if(response?.isError){
       setErrorMessage(response.message);
       Alert.alert(response.message);
       navigation.navigate('Register');
     }
     else{
+      const userEmergencyContact = new Contact(
+        "",
+        "",
+        "",
+        "",
+        ""
+      )
+      const userDoctorDetail = new Contact(
+        "",
+        "",
+        "",
+        "",
+        ""
+      )
+      const userData = new UserInfo(
+        response.result,
+        "",
+        new Date(),
+        "",
+        userEmergencyContact,
+        userDoctorDetail
+      );
+      const resp = await updateUserInfo(userData);
+      saveUserInfoToDevice(resp.result);
       Alert.alert("Registration Successful");
       navigation.navigate('Login');
     }

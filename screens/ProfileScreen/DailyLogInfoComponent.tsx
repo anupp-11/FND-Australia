@@ -53,6 +53,13 @@ export default class SMRInfoComponent extends React.Component{
   render() {
     return (
       <ScrollView >
+        <Card style={styles.card}>
+          <Text style={styles.title}>Recorded At</Text>
+            <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',paddingHorizontal:10}}>
+            <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.date}</Text></View>
+            <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.recordedTime}</Text></View>
+            </View>
+        </Card>
         {/* Mood Monitor */}
         <Card style={styles.card}>
           <Text style={styles.title}>Mood Monitor</Text>
@@ -62,7 +69,7 @@ export default class SMRInfoComponent extends React.Component{
             </View>
         </Card>
 
-        {/* Mood Monitor */}
+        {/* Sleep Quality */}
         <Card style={styles.card}>
           <Text style={styles.title}>Sleep Quality</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
@@ -75,6 +82,60 @@ export default class SMRInfoComponent extends React.Component{
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.sleepQualityText}</Text></View>
             </View>
         </Card>
+
+        {/* Stress Level */}
+        <Card style={styles.card}>
+          <Text style={styles.title}>Stress Level</Text>
+            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
+              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.stressLevel/10} color={theme.colors.primary} theme={{}}/></View>
+              <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                <Text>0</Text>
+                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.stressLevel}</Text>
+                <Text>10</Text>
+              </View>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.stressLevelText}</Text></View>
+            </View>
+        </Card>
+
+        {/* Physical Wellbeing Rating */}
+        <Card style={styles.card}>
+          <Text style={styles.title}>Physical Wellbeing Rating</Text>
+            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
+              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.physicalWellbeingRating/10} color={theme.colors.primary} theme={{}}/></View>
+              <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                <Text>0</Text>
+                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.physicalWellbeingRating}</Text>
+                <Text>10</Text>
+              </View>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.physicalWellbeingRatingText}</Text></View>
+            </View>
+        </Card>
+
+        {/* Sleep Duration */}
+        <Card style={styles.card}>
+          <Text style={styles.title}>Sleep Duration</Text>
+            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
+            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.sleepDuration}</Text>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.sleepDurationText}</Text></View>
+            </View>
+        </Card>
+
+        <Card style={styles.card}>
+          <Text style={styles.title}>Physical Activity Level</Text>
+            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
+            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700',textTransform: 'uppercase'}}>{this.state.form.physicalActivityLevel}</Text>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.physicalActivityLevelText}</Text></View>
+            </View>
+        </Card>
+
+        <Card style={styles.card}>
+          <Text style={styles.title}>Goal Achievement</Text>
+            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
+           
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.goalAchievement}</Text></View>
+            </View>
+        </Card>
+
 
         {/* <LineChart
     data={{

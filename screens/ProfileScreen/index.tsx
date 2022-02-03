@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, SafeAreaView, StyleSheet, BackHandler} from 'react-native';
 import {
   Avatar,
@@ -22,6 +22,7 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
+import { getUserFromDevice } from '../../service/AccountService';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -30,6 +31,19 @@ const ProfileScreen = () => {
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+
+  const [userName, setuserName] = useState("User");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    async function getUser() {
+      const user = await getUserFromDevice();
+      setuserName(user?.name);
+      setEmail(user?.email);
+      debugger;
+    }
+    getUser();
+  },[]);
 
   const _onSMRPressed = () => {
     navigation.navigate('SMRScreen');
@@ -55,8 +69,8 @@ const ProfileScreen = () => {
           <Title style={[styles.title, {
             marginTop:15,
             marginBottom: 5,
-          }]}>Saurab</Title>
-          <Caption style={styles.caption}>@saurab</Caption>
+          }]}>{userName}</Title>
+          <Caption style={styles.caption}>{email}</Caption>
         </View>
       </View>
     </View>

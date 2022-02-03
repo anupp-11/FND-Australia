@@ -71,14 +71,23 @@ export class SMPFormModel{
 
 }
 
+// public string Id { get; set; }
+// public User User { get; set; }
+// public string Phone { get; set; }
+
+
+// public string Gender { get; set; }
+// public Contact EmergencyEontact { get; set; }
+// public Contact DoctorDetail { get; set; }
+
 export class UserInfo{
     constructor(
-      public email:string,
-      public mobileNumber:string,
+      public user:AuthUserInfo,
+      public phone:string,
       public DOB:Date,
       public gender: string,
-      public emergencyContact:EmergencyContact,
-      public doctorDetail: DoctorDetail,
+      public emergencyEontact:Contact,
+      public doctorDetail: Contact,
     ){}
   
   }
@@ -89,6 +98,7 @@ export class AuthUserInfo{
     public name:string,
     public email:string,
     public password:string,
+    public jwtToken:string,
   ){}
 
 }
@@ -97,6 +107,16 @@ export class AuthUserInfo{
     constructor(
       public name:string,
       public relationship: string,
+      public phoneNumber: string,
+      public address: string,
+    ){}
+  }
+
+  export class Contact{
+    constructor(
+      public name:string,
+      public relationship: string,
+      public profession: string,
       public phoneNumber: string,
       public address: string,
     ){}
