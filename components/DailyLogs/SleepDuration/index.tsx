@@ -7,6 +7,7 @@ import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
 //import RNPickerSelect from 'react-native-picker-select';
 import { HOURS, MINUTES } from '../../../service/utils';
 import { theme } from '../../LoginComponents/theme';
+import { saveDataToDevice } from '../../../service/DailyLogsService';
 
 export default class SleepDuration  extends React.Component {
   constructor(props) {
@@ -14,9 +15,25 @@ export default class SleepDuration  extends React.Component {
 
     this.state = {
       minutes:'',
-      hours:''
+      hours:'',
+      value:'0',
+      textValue:""
     };
   }
+
+  changeHourValue = async (val) => {
+    this.setState({hours:val});
+    await saveDataToDevice(val,"SLEEP_DURATION_HOUR")
+  };
+  changeMinValue = async (val) => {
+    this.setState({minutes:val});
+    await saveDataToDevice(val,"SLEEP_DURATION_MIN")
+  };
+
+  changeText = async (value) => {
+    this.setState({textValue:value});
+    await saveDataToDevice(value,"SLEEP_DURATION_TEXT")
+  };
   getHourPicker(){
 
     if(Platform.OS === "android"){
@@ -35,7 +52,8 @@ export default class SleepDuration  extends React.Component {
                 selectedValue={this.state.hours}
                 style={{ width: 60, flex: 1,textAlign:'center'}}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ hours: itemValue })
+                  //this.setState({ hours: itemValue })
+                  this.changeHourValue(itemValue)
                 }
               >
                 {HOURS.map((x) => (
@@ -105,7 +123,8 @@ export default class SleepDuration  extends React.Component {
                 selectedValue={this.state.minutes}
                 style={{ width: 60, flex: 1,textAlign:'center'}}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ minutes: itemValue })
+                  this.changeMinValue(itemValue)
+                  //this.setState({ minutes: itemValue })
                 }
               >
                 {MINUTES.map((x) => (
@@ -182,6 +201,8 @@ export default class SleepDuration  extends React.Component {
           </View>
           
           <TextInput
+             value={this.state.textValue}
+             onChangeText={text => this.changeText(text)}
             style={[
               styles.input,{
                 height:100,

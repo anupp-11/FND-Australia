@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Platform, FlatList} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Platform, FlatList, Alert} from 'react-native';
 import {
   Card,
   Text,
@@ -16,6 +16,8 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { HOURS } from '../../service/utils';
 import CheckboxComponent from './CheckboxComponent';
 import { SMRForm } from '../../models/BaseModel';
+import { smrFormAdd } from '../../service/FormService';
+import { getUserFromDevice } from '../../service/AccountService';
 const OPTIONS=require('./../../service/options.json');
 
 
@@ -153,13 +155,14 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
 
   }
 
-  onSubmit(){
+  onSubmit = async () => {
     const feelingData = this.getSelectedOptions(this.state.data1);
     const action = this.getSelectedOptions(this.state.data2);
     const seizurePresent = this.getSelectedOptions(this.state.data3);
-    const feelAfterSeizure = this.getSelectedOptions(this.state.data4);
-
+    const feelingAfterSeizure = this.getSelectedOptions(this.state.data4);
+    const user = await getUserFromDevice();
     const SMRFromdata = new SMRForm(
+      user,
       this.state.date,
       this.state.date,
       this.state.whatDoing,
@@ -170,11 +173,21 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
       seizurePresent,
       this.state.seizurePresentText,
       this.state.howResolve,
-      feelAfterSeizure,
+      feelingAfterSeizure,
       this.state.feelAfter,
       this.state.service
     )
     console.log("Form Data:",SMRFromdata);
+
+    const response = await smrFormAdd(SMRFromdata);
+    if(response?.isError){
+      Alert.alert("Error",response?.message);
+    }
+    else{
+      Alert.alert("Congratulations","Form Submitted Successfully!");
+      this.props.navigation.navigate('Home');
+    }
+    debugger;
 
   }
   onChecked = (id,data) => {
@@ -376,7 +389,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
           </Card>
   
           <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-            <Button style={{width:'80%'}} mode="contained" onPress={this.onSubmit()}>
+            <Button style={{width:'80%'}} mode="contained" onPress={this.onSubmit}>
                Submit
             </Button>
           </View>

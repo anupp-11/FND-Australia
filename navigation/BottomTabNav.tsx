@@ -32,7 +32,7 @@ const BottomTabNav = () => {
       }}>
       <Tab.Screen
         component={ HomeNavigator }
-        name="Home"
+        name="BHome"
         options={{
           tabBarIcon: ({color}) => (
             <Feather name="home" color={color} size={20} />

@@ -1,36 +1,32 @@
 import axios from "axios";
-import { ADD_USER_URL, API, API_TYPE, LOGIN_URL, REGISTER_URL, UPDATE_USER_URL } from "../constants/api";
+import { ADD_USER_URL, API, API_TYPE, GET_USER_URL, LOGIN_URL, REGISTER_URL, UPDATE_USER_URL } from "../constants/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthUserInfo, UserInfo } from "../models/BaseModel";
+import { AuthUserInfo, RegUserInfo, UserInfo } from "../models/BaseModel";
 
 const USERDATA_STORAGE = `USERDATA_STORAGE`;
 const USERINFO_STORAGE = `USERINFO_STORAGE`;
 
 export async function authUser(email:string, pass:string) {
-  debugger;
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email, password:pass })
   };
-  debugger;
   const response = await fetch(LOGIN_URL, requestOptions);
   debugger;
   const data = await response.json();
-  
-    debugger;
-   
-    return data;
+  debugger;
+  return data.value;
 }
 
-export async function registerUser(userInfo : AuthUserInfo) {
+export async function registerUser(userInfo : RegUserInfo) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userInfo)
   };
-  debugger;
   const response = await fetch(REGISTER_URL, requestOptions);
+  debugger;
   const data = await response.json();
   debugger;
   return data;
@@ -38,7 +34,6 @@ export async function registerUser(userInfo : AuthUserInfo) {
 }
 
 export async function updateUserInfo(userInfo : UserInfo) {
-
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
@@ -57,7 +52,8 @@ export async function updateExistingUserInfo(userInfo : UserInfo,userId) {
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
-  const response = await axios.post<UserInfo>(`${UPDATE_USER_URL}/${userId}`, userInfo, 
+  const url = `${UPDATE_USER_URL}/${userId}`;
+  const response = await axios.post<UserInfo>(url, userInfo, 
     { 
       headers: {
           "Authorization": `Bearer ${token}`
@@ -69,7 +65,6 @@ export async function updateExistingUserInfo(userInfo : UserInfo,userId) {
 
 export async function saveUserToDevice(authDetail: AuthUserInfo) { 
   await AsyncStorage.setItem(USERDATA_STORAGE, JSON.stringify(authDetail));
- 
   return authDetail;
 }
 
@@ -77,14 +72,12 @@ export async function getUserFromDevice() {
   const userString = await AsyncStorage.getItem(USERDATA_STORAGE);
   if (userString) {
     var user = JSON.parse(userString) as AuthUserInfo;
-    debugger;
     return user;
   }
 }
 
 export async function saveUserInfoToDevice(userInfo: UserInfo) { 
   await AsyncStorage.setItem(USERINFO_STORAGE, JSON.stringify(userInfo));
-  debugger;
   return userInfo;
 }
 
@@ -92,8 +85,26 @@ export async function getUserInfoFromDevice() {
   const userString = await AsyncStorage.getItem(USERINFO_STORAGE);
   if (userString) {
     var user = JSON.parse(userString) as UserInfo;
-    debugger;
     return user;
   }
+}
+
+export async function getUserInfo(userId) {
+
+  const user = await getUserFromDevice();
+  const token = user?.jwtToken;
+  const url = `${GET_USER_URL}/${userId}`;
+  debugger;
+  const requestOptions = {
+    method: 'POST',
+    headers: { "Authorization": `Bearer ${token}` }
+  };
+  const response = await fetch(url,requestOptions);
+  const data = await response.json();
+  if(data?.result){
+    await saveUserInfoToDevice(data.result);
+  }
+  debugger;
+  return data.result;
 }
 

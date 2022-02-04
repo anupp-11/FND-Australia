@@ -5,18 +5,26 @@ import {
 } from 'react-native-paper';
 import styles from './styles';
 import AIcon from 'react-native-vector-icons/AntDesign';
+import { getUserFromDevice } from '../../service/AccountService';
+import { getSmpForm, getSmrForm } from '../../service/FormService';
 
 export default class FilledFormScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      
+      smrLength:"0",
+      smpLength:"0"
     };
   }
 
   componentDidMount = async () => {
-   
+    const user = await getUserFromDevice();
+    const smpResponse = await getSmpForm(user?.id);
+    const smrResponse = await getSmrForm(user?.id);
+    this.setState({smrLength : smrResponse.length});
+    this.setState({smpLength : smpResponse.length});
+    debugger;
   };
   
   render(){
@@ -35,7 +43,7 @@ export default class FilledFormScreen extends React.Component {
                 Seizure Management Plan
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
-                Total Forms : 2
+                Total Forms : {this.state.smpLength}
               </Text>
             </View>
           </TouchableOpacity>
@@ -52,7 +60,7 @@ export default class FilledFormScreen extends React.Component {
                 Seizure Monitoring Record
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
-                Total Forms : 2
+                Total Forms : {this.state.smrLength}
               </Text>
             </View>
           </TouchableOpacity>

@@ -3,23 +3,32 @@ import { View, Image, TextInput, FlatList } from 'react-native';
 import RadioButton from './RadioButton';
 import styles from '../Mood/styles';
 import Paragraph from '../../LoginComponents/Paragraph';
+import { saveDataToDevice } from '../../../service/DailyLogsService';
 
 
 
 const PhysicalActivityLevel = () => {
 
- 
-
+  const [textValue, setTextValue] = useState("");
   const [option, setOption] = useState(null);
   const data = [
     { value: 'Low' },
     { value: 'Medium' },
     { value: 'High' },
   ];
-  const [level, setLevel] = useState('Low');
-  const onPress =  () => {
-    console.log("Button Pressed = " + level);
-  }
+  const changeValue = async (value) => {
+    setOption(value);
+    await saveDataToDevice(value,"PAL_VALUE")
+  };
+
+  const changeText = async (value) => {
+    setTextValue(value);
+    await saveDataToDevice(value,"PAL_TEXT")
+  };
+ 
+
+
+ 
   return (
     <View style = {{backgroundColor:'white', borderRadius: 10, padding:10, marginBottom:20}}>
         <Paragraph> Physical Activity Level </Paragraph>
@@ -29,10 +38,12 @@ const PhysicalActivityLevel = () => {
           source={require('../../../assets/images/PAL.png')}
         />
         <View style={{display:'flex',flexDirection:'row'}}>
-          <RadioButton data={data} onSelect={(value) => setOption(value)} />
+          <RadioButton data={data} onSelect={(value) => changeValue(value)} />
         </View>
         
         <TextInput
+          value={textValue}
+          onChangeText={text => changeText(text)}
           style={[
             styles.input,{
               height:100,

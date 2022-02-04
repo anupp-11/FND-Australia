@@ -3,6 +3,8 @@ import {
   FlatList,
 } from 'react-native';
 import { Appbar } from 'react-native-paper';
+import { getUserFromDevice } from '../../service/AccountService';
+import { getSmrForm } from '../../service/FormService';
 import SMPComponent from './SMPComponent';
 import SMRComponent from './SMRComponent';
 const SYMPTOMS=require('./../../data/symptoms.json');
@@ -16,44 +18,20 @@ export default class SMRList extends React.Component {
     this.state = {
       isProcessing: true,
       symptoms:SYMPTOMS,
-      forms : [
-        {
-          createdAt:"2022-01-31",
-          dateOfSeizure:"2022-01-31",
-          timeOfSeizure: "5:45 PM",
-          whatDoingSeizureStarted:"string",
-          howFeelingSeizureStarted: ["string","string"],
-          howFeelingSeizureStartedText: "string",
-          actionsTaken: ["string","string"],
-          actionsTakenText: "string",
-          seizurePresent : ["string","string"],
-          seizurePresentText : "string",
-          seizureResolve : "string",
-          feelAfterSeizure : ["string","string"],
-          feelAfterSeizureText : "string",
-          emergencyService : "string",
-        },
-        {
-          createdAt:"2022-01-31",
-          dateOfSeizure:"2022-01-31",
-          timeOfSeizure: "6:51 PM",
-          whatDoingSeizureStarted:"string",
-          howFeelingSeizureStarted: ["string","string"],
-          howFeelingSeizureStartedText: "string",
-          actionsTaken: ["string","string"],
-          actionsTakenText: "string",
-          seizurePresent : ["string","string"],
-          seizurePresentText : "string",
-          seizureResolve : "string",
-          feelAfterSeizure : ["string","string"],
-          feelAfterSeizureText : "string",
-          emergencyService : "string",
-        },
-      ]
+      forms : []
      
     };
    
   }
+
+  componentDidMount = async () => {
+    const user = await getUserFromDevice();
+    const smrResponse = await getSmrForm(user?.id);
+    debugger;
+    this.setState({forms : smrResponse});
+    this.setState({smrLength : smrResponse.length});
+    
+  };
 
    renderItem = ({ item }) => <SMRComponent form={item} navigation={this.props.navigation} />;
  

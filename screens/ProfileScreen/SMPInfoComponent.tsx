@@ -21,14 +21,32 @@ export default class SMPInfoComponent extends React.Component{
     };
   }
   componentDidMount(){
+    console.log("Form Data,",this.state.form);
+  }
+
+  getDate(dateTime: Date){
+    const date = new Date(dateTime).toLocaleDateString();
+    debugger;
+    return date;
+    
+  }
+  getTime(dateTime: Date){
+    const time = new Date(dateTime).toLocaleTimeString();
+    debugger;
+    return time;
     
   }
 
   arrayData(data){
     debugger;
-    const Data = data.map(item => item).join(', ');
-    debugger;
-    return Data;
+    if(data){
+      const Data = data.map(item => item).join(', ');
+      debugger;
+      return Data;
+    }else{
+      return data;
+    }
+    
   }
 
  
@@ -40,11 +58,11 @@ export default class SMPInfoComponent extends React.Component{
             <View style={styles.crow}>
               <View style={styles.row}>
                 <Text style={styles.title}>Date of Birth: </Text>
-                <Text style={styles.data}>{this.state.form.dateOfBirth}</Text>
+                <Text style={styles.data}>{this.getDate(this.state.form.dateOfBirth)}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.title}>Date of Plan: </Text>
-                <Text style={styles.data}>{this.state.form.dateOfPlan}</Text>
+                <Text style={styles.data}>{this.getDate(this.state.form.dateOfPlan)}</Text>
               </View>
             </View>
           </Card>
@@ -58,7 +76,7 @@ export default class SMPInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>Medical Conditions: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.medicalConditions)}</Text>
+              {this.state.form.medicalConditions? ( <Text style={styles.data}>{this.arrayData(this.state.form.medicalConditions)}</Text>):(<View></View>)}
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
@@ -70,8 +88,8 @@ export default class SMPInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>Warning signs prior to a Seizure: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.warningSigns)}</Text>
-              <Text style={styles.data}>{this.state.form.warningSignText}</Text>
+              {this.state.form.warningSigns? ( <Text style={styles.data}>{this.arrayData(this.state.form.warningSigns)}</Text>):(<View></View>)}
+              <Text style={styles.data}>{this.state.form.warningSignsText}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
@@ -84,7 +102,7 @@ export default class SMPInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>How does your seizures typically present?: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.seizurePresent)}</Text>
+              {this.state.form.seizurePresent? ( <Text style={styles.data}>{this.arrayData(this.state.form.seizurePresent)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.seizurePresentText}</Text>
             </View>
           </Card>
@@ -97,20 +115,20 @@ export default class SMPInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>Typical Frequency of Seizure: </Text>
-              <Text style={styles.data}>{this.state.form.durationOfSeizure}</Text>
+              <Text style={styles.data}>{this.state.form.frequency} times a {this.state.form.frequencyUnit}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>Assistance required from people?: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.assistanceRequired)}</Text>
+              {this.state.form.assistanceRequired? ( <Text style={styles.data}>{this.arrayData(this.state.form.assistanceRequired)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.assistanceRequiredText}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>What to not do during a seizure?: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.notDo)}</Text>
+              {this.state.form.notDo? ( <Text style={styles.data}>{this.arrayData(this.state.form.notDo)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.notDoText}</Text>
             </View>
           </Card>
@@ -124,7 +142,7 @@ export default class SMPInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>An ambulance may be needed in the event of?: </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.ambulanceNeeded)}</Text>
+              {this.state.form.ambulanceNeeded? ( <Text style={styles.data}>{this.arrayData(this.state.form.ambulanceNeeded)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.ambulanceNeededText}</Text>
             </View>
           </Card>

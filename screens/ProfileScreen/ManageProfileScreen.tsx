@@ -21,7 +21,7 @@ import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Contact, DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
 import DatePicker from 'react-native-datepicker';
-import { getUserFromDevice, getUserInfoFromDevice, saveUserInfoToDevice, updateExistingUserInfo, updateUserInfo } from '../../service/AccountService';
+import { getUserFromDevice, getUserInfo, getUserInfoFromDevice, saveUserInfoToDevice, updateExistingUserInfo, updateUserInfo } from '../../service/AccountService';
 
 export default class ManageProfileScreen extends React.Component {
   constructor(props) {
@@ -58,7 +58,8 @@ export default class ManageProfileScreen extends React.Component {
 
   componentDidMount = async () => {
     this.setState({tempGender:this.state.gender})
-    const userInfo = await getUserInfoFromDevice();
+    const user = await getUserFromDevice();  
+    const userInfo = await getUserInfo(user?.id);
       
     if (userInfo) {
       debugger;
@@ -106,8 +107,8 @@ export default class ManageProfileScreen extends React.Component {
       userEmergencyContact,
       userDoctorDetail
     );
+      const userInfo = await getUserFromDevice();
       debugger;
-      const userInfo = await getUserInfoFromDevice();
       const response = await updateExistingUserInfo(userData, userInfo?.id);
       this.setState({isProcessing:false});
         debugger;

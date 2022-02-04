@@ -7,9 +7,34 @@ import styles from './styles';
 import Header from '../../LoginComponents/Header';
 import Paragraph from '../../LoginComponents/Paragraph';
 import { TouchableRipple } from 'react-native-paper';
+import { saveDataToDevice } from '../../../service/DailyLogsService';
+import RadioButton from './RadioButton';
 
 
 const Mood = () => {
+
+  
+  const [option, setOption] = useState(null);
+  const [textValue, setTextValue] = useState("");
+
+  const data = [
+    { value: '5'},
+    { value: '4'},
+    { value: '3'},
+    { value: '2'},
+    { value: '1'}
+  ];
+
+  const changeValue = async (value) => {
+    setOption(value);
+    await saveDataToDevice(value,"MOOD_VALUE")
+  };
+
+  const changeText = async (value) => {
+    setTextValue(value);
+    await saveDataToDevice(value,"MOOD_TEXT")
+  };
+ 
 
   return (
     <View style = {{backgroundColor:'white', borderRadius: 10, padding:10, marginBottom:20}}>
@@ -20,27 +45,14 @@ const Mood = () => {
             source={require('../../../assets/images/Mood.png')}
           />
         
-        <View style = {{display:'flex', flexDirection : 'row', justifyContent:'space-around', marginTop: 10, marginBottom:20}}>
-          <View style={{height:50, width:50}}>
-           <TouchableRipple onPress={() => {}}>
-            <Image source={require('../../../assets/emojis/vhappy.png')} style={{height:50, width: 50}} />
+    
 
-           </TouchableRipple>
-          </View>
-          <View style={{height:50, width:50,}}>
-          <Image source={require('../../../assets/emojis/happy.png')} style={{height:50, width: 50}} />
-          </View>
-          <View style={{height:50, width:50,}}>
-          <Image source={require('../../../assets/emojis/numb.png')} style={{height:50, width: 50}} />
-          </View>
-          <View style={{height:50, width:50, }}>
-          <Image source={require('../../../assets/emojis/angry.png')} style={{height:50, width: 50}} />
-          </View>
-          <View style={{height:50, width:50, }}>
-          <Image source={require('../../../assets/emojis/sad.png')} style={{height:50, width: 50}} />
-          </View>
+        <View style={{display:'flex',flexDirection:'row'}}>
+          <RadioButton data={data} onSelect={(value) => changeValue(value)} />
         </View>
         <TextInput
+          value={textValue}
+          onChangeText={text => changeText(text)}
           style={[
             styles.input,{
               height:100,

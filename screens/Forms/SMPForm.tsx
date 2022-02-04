@@ -1,5 +1,5 @@
 import {
-  Text, View, StyleSheet, Platform, FlatList
+  Text, View, StyleSheet, Platform, FlatList, Alert
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, Dialog, Portal, RadioButton,Checkbox, TextInput, Button as RButton, Provider } from 'react-native-paper';
@@ -12,6 +12,8 @@ import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
 import Button from '../../components/LoginComponents/Button';
 import CheckboxComponent from './CheckboxComponent';
 import { SMPFormModel } from '../../models/BaseModel';
+import { getUserFromDevice } from '../../service/AccountService';
+import { smpFormAdd } from '../../service/FormService';
 
 const OPTIONS=require('./../../service/options2.json');
 
@@ -44,7 +46,7 @@ export default class SMPForm extends React.Component {
       medicalHistory: '',
       medication:'',
       ambulance:'',
-      warningSign :'Distracted',
+      warningSign :'',
       typesOfSeizure : '',
       typesOfSeizureText : '',
       seizurePresent:'',
@@ -415,17 +417,21 @@ export default class SMPForm extends React.Component {
     return Selected;
   }
 
-  onSubmit(){
+  onSubmit= async () => {
     const warningSigns =this.getSelectedOptions(this.state.data1);
     const seizuresPresent=this.getSelectedOptions(this.state.data5);
     const assistancesRequired=this.getSelectedOptions(this.state.data3);
     const notDos=this.getSelectedOptions(this.state.data4);
     const ambulanceNeeded=this.getSelectedOptions(this.state.data6);
-
-    const SMRFormData = new SMPFormModel(
+    const dur = `${this.state.hours}Hr ${this.state.minutes}Min`;
+    //const freq = `${this.state.frequency} times a ${this.state.duration}`;
+    const user = await getUserFromDevice();
+   
+    const SMPFormData = new SMPFormModel(
+      user,
       this.state.DOB,
       this.state.DOP,
-      this.state.onMedication,
+      true,
       this.state.medication,
       this.state.medicalConditions,
       this.state.medicalHistory,
@@ -435,8 +441,9 @@ export default class SMPForm extends React.Component {
       this.state.typesOfSeizureText,
       seizuresPresent,
       this.state.seizurePresent,
-      this.state.duration,
+      dur,
       this.state.frequency,
+      this.state.duration,
       assistancesRequired,
       this.state.assistanceRequired,
       notDos,
@@ -445,10 +452,26 @@ export default class SMPForm extends React.Component {
       this.state.afterSeizureText,
       ambulanceNeeded,
       this.state.ambulanceNeededText,
-
-
-
     )
+      debugger;
+    try {
+      const response = await smpFormAdd(SMPFormData);
+      //setisProcessing(false);
+      debugger;
+      if(response?.isError){
+        //setErrorMessage(response.message);
+        Alert.alert(response.message);
+        //navigation.navigate('Register');
+      }
+      else{
+        Alert.alert("Successful","Form has been Submitted.");
+        this.props.navigation.navigate('Home');
+      }
+    } catch (error) {
+      //setisProcessing(false);
+      console.log(error);
+      Alert.alert("Failed",error.message);
+    }
   }
  
   render() {
@@ -797,7 +820,7 @@ export default class SMPForm extends React.Component {
                 />
                   <Text style={{paddingHorizontal:10}}>I have discussed this above seizure management plan with my treating doctor named on page my doctor's detail. I confirm that this is the agreed management plan in the  event  that  I experience functional or dissociative seizures. I understand that this plan does not constitute medical advice or instruction and that an ambulance will be called in an emergency.</Text>
                   <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-                    <Button style={{width:'80%'}} mode="contained"  >
+                    <Button style={{width:'80%'}} mode="contained" onPress={this.onSubmit} >
                       Submit
                     </Button>
                   </View>

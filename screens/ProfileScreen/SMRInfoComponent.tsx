@@ -21,14 +21,31 @@ export default class SMRInfoComponent extends React.Component{
     };
   }
   componentDidMount(){
-    
+    console.log("GOt form data:",this.state.form);
   }
 
   arrayData(data){
     debugger;
-    const Data = data.map(item => item).join(', ');
+    if(data){
+      const Data = data.map(item => item).join(', ');
+      debugger;
+      return Data;
+    }else{
+      return data;
+    }
+  }
+
+  getDate(dateTime: Date){
+    const date = new Date(dateTime).toLocaleDateString();
     debugger;
-    return Data;
+    return date;
+    
+  }
+  getTime(dateTime: Date){
+    const time = new Date(dateTime).toLocaleTimeString();
+    debugger;
+    return time;
+    
   }
 
  
@@ -37,14 +54,14 @@ export default class SMRInfoComponent extends React.Component{
       <ScrollView >
         <View style={{padding:10}}>
           <Card style={{padding:10,marginVertical:5}}>
-            <View style={styles.crow}>
+            <View style={styles.col}>
               <View style={styles.row}>
                 <Text style={styles.title}>Date of Seizure: </Text>
-                <Text style={styles.data}>{this.state.form.dateOfSeizure}</Text>
+                <Text style={styles.data}>{this.getDate(this.state.form.dateOfSeizure)}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.title}>Time of Seizure: </Text>
-                <Text style={styles.data}>{this.state.form.timeOfSeizure}</Text>
+                <Text style={styles.data}>{this.getTime(this.state.form.timeOfSeizure)}</Text>
               </View>
             </View>
           </Card>
@@ -64,8 +81,8 @@ export default class SMRInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>What actions were taken? </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.actionsTaken)}</Text>
-              <Text style={styles.data}>{this.state.form.actionsTakenText}</Text>
+              <Text style={styles.data}>{this.arrayData(this.state.form.actionTaken)}</Text>
+              <Text style={styles.data}>{this.state.form.actionTakenText}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
@@ -85,8 +102,8 @@ export default class SMRInfoComponent extends React.Component{
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
               <Text style={styles.title}>How did you feel after the Seizure? </Text>
-              <Text style={styles.data}>{this.arrayData(this.state.form.feelAfterSeizure)}</Text>
-              <Text style={styles.data}>{this.state.form.feelAfterSeizureText}</Text>
+              <Text style={styles.data}>{this.arrayData(this.state.form.feelingAfterSeizure)}</Text>
+              <Text style={styles.data}>{this.state.form.feelingAfterSeizureText}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>

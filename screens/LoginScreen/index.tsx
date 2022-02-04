@@ -4,7 +4,7 @@ import BackButton from '../../components/LoginComponents/BackButton';
 import Button from '../../components/LoginComponents/Button';
 import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import {TextInput as TextInputP} from 'react-native-paper';
 import IoIcon from 'react-native-vector-icons/Ionicons';
@@ -48,7 +48,10 @@ const LoginScreen = () => {
       // Authenticate user
       const resp = await LocalAuthentication.authenticateAsync();
       if(resp.success){
-        navigation.navigate('Home');
+        navigation.dispatch(
+          StackActions.replace('Home',{
+          })
+        );
       }else{
         Alert.alert('Fingerprint didnot match.');
       }
@@ -70,19 +73,24 @@ const LoginScreen = () => {
       setPassword({...password, error: passwordError});
       return;
     }
-
-    const response = await authUser(email.value, password.value);
-    debugger;
-    setisProcessing(false);
-    if(response?.isError){
-      setErrorMessage(response.message);
-      Alert.alert(response.message);
-      navigation.navigate('Register');
+    try {
+      const response = await authUser(email.value, password.value);
+      debugger;
+      setisProcessing(false);
+      if(response?.isError){
+        setErrorMessage(response.message);
+        navigation.navigate('Login');
+      }
+      else{
+        saveUserToDevice(response.result);
+        navigation.navigate('Home');
+      }
+    } catch (error) {
+      setisProcessing(false);
+      console.log(error);
+      Alert.alert("Registration Failed",error.message);
     }
-    else{
-      saveUserToDevice(response.result);
-      navigation.navigate('Home');
-    }  
+    
   };
 
   return (

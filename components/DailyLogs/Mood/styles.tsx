@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { theme } from '../../LoginComponents/theme';
 
 const styles = StyleSheet.create({
     page: {
@@ -25,7 +26,43 @@ const styles = StyleSheet.create({
         backgroundColor: '#f1f3f6',
         borderRadius: 6,
         paddingHorizontal : 10,
-      }
+      },
+      selectedOption: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+        fontWeight:'700'
+      },
+      unselectedOption: {
+        fontSize: 18,
+        color: theme.colors.primary,
+        textAlign: 'center',
+      },
+      unselected: {
+        backgroundColor: 'white',
+        borderWidth : 2,
+        borderColor : theme.colors.primary,
+        borderRadius: 25,
+        width:50,
+        height:50,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+        //paddingHorizontal:10,
+      },
+      selected: {
+        backgroundColor: 'white',
+        borderWidth : 8,
+        borderColor : theme.colors.primary,
+        borderRadius: 25,
+        width:53,
+        height:53,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+      },
 });
 
 export default styles;

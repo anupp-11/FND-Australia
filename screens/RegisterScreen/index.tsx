@@ -14,7 +14,7 @@ import Button from '../../components/LoginComponents/Button';
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import {TextInput as TextInputP} from 'react-native-paper';
-import { AuthUserInfo, Contact, UserInfo } from '../../models/BaseModel';
+import { AuthUserInfo, Contact, RegUserInfo, UserInfo } from '../../models/BaseModel';
 import { registerUser, saveUserInfoToDevice, updateUserInfo } from '../../service/AccountService';
 
 const RegisterScreen = () => {
@@ -43,47 +43,53 @@ const RegisterScreen = () => {
       return;
     }
     
-    const userInfo = new AuthUserInfo(
+    const userInfo = new RegUserInfo(
       name.value,
       email.value,
       password.value,
-      ""
     );
-    const response = await registerUser(userInfo);
-    setisProcessing(false);
-    debugger;
-    if(response?.isError){
-      setErrorMessage(response.message);
-      Alert.alert(response.message);
-      navigation.navigate('Register');
-    }
-    else{
-      const userEmergencyContact = new Contact(
-        "",
-        "",
-        "",
-        "",
-        ""
-      )
-      const userDoctorDetail = new Contact(
-        "",
-        "",
-        "",
-        "",
-        ""
-      )
-      const userData = new UserInfo(
-        response.result,
-        "",
-        new Date(),
-        "",
-        userEmergencyContact,
-        userDoctorDetail
-      );
-      const resp = await updateUserInfo(userData);
-      saveUserInfoToDevice(resp.result);
-      Alert.alert("Registration Successful");
-      navigation.navigate('Login');
+    try {
+      const response = await registerUser(userInfo);
+      setisProcessing(false);
+      debugger;
+      if(response?.isError){
+        setErrorMessage(response.message);
+        Alert.alert(response.message);
+        navigation.navigate('Register');
+      }
+      else{
+        const userEmergencyContact = new Contact(
+          "",
+          "",
+          "",
+          "",
+          ""
+        )
+        const userDoctorDetail = new Contact(
+          "",
+          "",
+          "",
+          "",
+          ""
+        )
+        const userData = new UserInfo(
+          response.result,
+          "",
+          new Date(),
+          "",
+          userEmergencyContact,
+          userDoctorDetail
+        );
+        const resp = await updateUserInfo(userData);
+        debugger;
+        saveUserInfoToDevice(resp.result);
+        Alert.alert("Registration Successful");
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      setisProcessing(false);
+      console.log(error);
+      Alert.alert("Registration Failed",error.message);
     }
   };
 
@@ -98,6 +104,11 @@ const RegisterScreen = () => {
               <FAIcon name="user" color="#fff" size={50} style = {{}}/>
             </View>
             <Text style={styles.loginTitleText}>Sign Up</Text>
+            
+            {isProcessing ==true ? (
+            <View>
+              <ActivityIndicator size="large" color={theme.colors.primary}/> 
+            </View>):(<View></View>)}
             
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Name</Text>
@@ -139,10 +150,7 @@ const RegisterScreen = () => {
              
             </View>
 
-            {isProcessing ==true ? (
-            <View>
-              <ActivityIndicator size="large" color={theme.colors.primary}/> 
-            </View>):(<View></View>)}
+           
               
 
             <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>

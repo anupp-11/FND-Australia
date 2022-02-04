@@ -10,10 +10,22 @@ import Header from '../../LoginComponents/Header';
 import Slider from 'react-native-custom-slider';
 import { theme } from '../../LoginComponents/theme';
 import Paragraph from '../../LoginComponents/Paragraph';
+import { saveDataToDevice } from '../../../service/DailyLogsService';
 
 
 const PhysicalHealthRating = () => {
   const [value, setValue] = useState(0);
+  const [textValue, setTextValue] = useState("");
+
+  const changeValue = async (val) => {
+    setValue(val);
+    await saveDataToDevice(value,"PWR_VALUE")
+  };
+
+  const changeText = async (value) => {
+    setTextValue(value);
+    await saveDataToDevice(value,"PWR_TEXT")
+  };
   return (
     <View style = {styles.page}>
         <Paragraph> Physical Wellbeing Rating</Paragraph>
@@ -35,7 +47,7 @@ const PhysicalHealthRating = () => {
             minimumValue={0}
             maximumValue={10}
             step = {1}
-            onValueChange={(value) => setValue(value)}
+            onValueChange={(value) => changeValue(value)}
             thumbStyle={{ justifyContent: 'center', alignItems: 'center', width: 30 }}
             trackStyle={{height: 20, borderRadius:10}}
             maximumTrackTintColor = {'#6C6C6C'}
@@ -56,26 +68,10 @@ const PhysicalHealthRating = () => {
             style={{width: '100%', height: 40}}
         />
         </View>
-        
-            
-            
-   
-        {/* <View style = {styles.container}>
-          <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
-            <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>0</Text>
-            <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
-          </View>
-          
-          <View style = {{display : 'flex',flexDirection : 'row',alignItems: "center",justifyContent: "center",}}>
-            <Text style = {{fontSize: 18,fontWeight:'700', zIndex: 1, color: 'white'}}>10</Text>
-            <View style = {{height: 35, width:35,borderRadius:20, backgroundColor: theme.colors.secondary, position: 'absolute'}}></View>
-          </View>
-        </View>
-        <View style = {styles.Txtcontainer}>
-          <Text>Bad</Text>
-          <Text>Good</Text>
-        </View> */}
+ 
         <TextInput
+          value={textValue}
+          onChangeText={text => changeText(text)}
           style={[
             styles.input,{
               height:100,
