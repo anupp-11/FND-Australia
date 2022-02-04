@@ -23,6 +23,7 @@ import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
 import { getUserFromDevice, saveUserToDevice } from '../../service/AccountService';
+import { clearDailyLogs } from '../../service/DailyLogsService';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -50,6 +51,7 @@ const ProfileScreen = () => {
   }
   const logout = async () =>{
     hideDialog();
+    await clearDailyLogs();
     var data = {
       "id": "",
       "name": "",

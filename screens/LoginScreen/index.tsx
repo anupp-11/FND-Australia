@@ -25,13 +25,6 @@ const LoginScreen = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [checked, setChecked] = React.useState(false);
 
-
-
-  
-
-
-
-
   // Check if hardware supports biometrics
   useEffect(() => {
     async function fetchMyAPI() {

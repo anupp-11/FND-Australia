@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import {
   StyleSheet, 
   Dimensions,
-  View, Text, ScrollView
+  View, Text, ScrollView,Image
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Card, Image } from "react-native-elements";
+import { Card } from "react-native-elements";
 import { theme } from "../../components/LoginComponents/theme";
 
 let width = Dimensions.get("screen").width / 2;
@@ -25,6 +25,20 @@ export default class StoryInfoComponent extends React.Component{
   componentDidMount(){
      
   }
+  renderImage(value){
+    if(value=="1")
+      return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10}} source={require('../../assets/images/stories/story1.png')}/>;
+    else if(value=="2")
+    return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10 }} source={require('../../assets/images/stories/story2.png')}/>;
+    else if(value=="3")
+    return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10 }} source={require('../../assets/images/stories/story3.png')}/>;
+    else if(value=="4")
+    return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10 }} source={require('../../assets/images/stories/story4.png')}/>;
+    else if(value=="5")
+    return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10 }} source={require('../../assets/images/stories/story5.png')}/>;
+    else if(value == "6")
+    return <Image style={{flex:1, width : "100%", borderRadius:10,marginBottom:10 }} source={require('../../assets/images/stories/story6.png')}/>;
+  }
 
  
   render() {
@@ -33,9 +47,8 @@ export default class StoryInfoComponent extends React.Component{
         <View style={{padding:10}}>
 
         <View style={{height:310}}>
-        <Image style = {{flex:1, width:'100%',  }}
-                  source={{uri: this.props.route.params.story.imgurl}}
-              />
+          {this.renderImage(this.props.route.params.story.imgurl)}
+        
         </View>
           
           <Text style={{fontSize:18,fontWeight:'700',color:theme.colors.primary}}>{this.props.route.params.story.name}</Text>

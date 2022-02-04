@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Image, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View,Image, SafeAreaView, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import {
   Text,
 } from 'react-native-paper';
@@ -7,27 +7,39 @@ import styles from './styles';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import { getUserFromDevice } from '../../service/AccountService';
 import { getDailyLog, getSmpForm, getSmrForm } from '../../service/FormService';
+import { theme } from '../../components/LoginComponents/theme';
 
 export default class FilledFormScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      smrLength:"0",
-      smpLength:"0",
-      dailyLogLenth:"0"
+      smrLength:"",
+      smpLength:"",
+      dailyLogLenth:"",
+      isProcessing:false
     };
   }
 
   componentDidMount = async () => {
-    const user = await getUserFromDevice();
-    //const smpResponse = await getSmpForm(user?.id);
-    const smrResponse = await getSmrForm(user?.id);
-    const dailyLogResponse = await getDailyLog(user?.id);
-    this.setState({smrLength : smrResponse.length});
-    //this.setState({smpLength : smpResponse.length});
-    this.setState({dailyLogLenth : dailyLogResponse.length});
-    debugger;
+    this.setState({isProcessing:true});
+    try {
+      const user = await getUserFromDevice();
+      const smpResponse = await getSmpForm(user?.id);
+      const smrResponse = await getSmrForm(user?.id);
+      const dailyLogResponse = await getDailyLog(user?.id);
+      this.setState({smrLength : smrResponse.length});
+      this.setState({smpLength : smpResponse.length});
+      this.setState({dailyLogLenth : dailyLogResponse.length});
+      this.setState({isProcessing:false});
+      debugger;
+      
+    } catch (error) {
+      this.setState({isProcessing:false});
+      console.log(error);
+      Alert.alert("Failed",error.message);
+    }
+    
   };
   
   render(){
@@ -46,7 +58,11 @@ export default class FilledFormScreen extends React.Component {
                 Seizure Management Plan
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
-                Total Forms : {this.state.smpLength}
+                Total Forms : {this.state.smpLength} 
+                {this.state.isProcessing ==true ? (
+                
+                <ActivityIndicator size="small" color={theme.colors.primary}/> 
+                ):(<View></View>)}
               </Text>
             </View>
           </TouchableOpacity>
@@ -64,6 +80,10 @@ export default class FilledFormScreen extends React.Component {
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
                 Total Forms : {this.state.smrLength}
+                {this.state.isProcessing ==true ? (
+                
+                <ActivityIndicator size="small" color={theme.colors.primary}/> 
+                ):(<View></View>)}
               </Text>
             </View>
           </TouchableOpacity>
@@ -81,6 +101,10 @@ export default class FilledFormScreen extends React.Component {
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
                 Total Logs : {this.state.dailyLogLenth}
+                {this.state.isProcessing ==true ? (
+                
+                <ActivityIndicator size="small" color={theme.colors.primary}/> 
+                ):(<View></View>)}
               </Text>
             </View>
           </TouchableOpacity>

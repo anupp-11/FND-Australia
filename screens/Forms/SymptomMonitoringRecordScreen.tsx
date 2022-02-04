@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Platform, FlatList, Alert} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Platform, FlatList, Alert, ActivityIndicator} from 'react-native';
 import {
   Card,
   Text,
@@ -43,7 +43,9 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
       data3 :OPTIONS.question3,
       data4 :OPTIONS.question4,
       hour:'',
-      selectedFruits:[]
+      selectedFruits:[],
+      isProcessing:false
+      
     };
     this.onChange = this.onChange.bind(this);
     this.getSelectedOptions = this.getSelectedOptions.bind(this);
@@ -156,6 +158,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
   }
 
   onSubmit = async () => {
+    this.setState({isProcessing:true});
     const feelingData = this.getSelectedOptions(this.state.data1);
     const action = this.getSelectedOptions(this.state.data2);
     const seizurePresent = this.getSelectedOptions(this.state.data3);
@@ -179,17 +182,28 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
     )
     console.log("Form Data:",SMRFromdata);
 
-    const response = await smrFormAdd(SMRFromdata);
-    if(response?.isError){
-      Alert.alert("Error",response?.message);
+    try {
+      const response = await smrFormAdd(SMRFromdata);
+      this.setState({isProcessing:false});
+      debugger;
+      if(response?.isError){
+        Alert.alert("Error",response?.message);
+      }
+      else{
+        Alert.alert("Congratulations","Form Submitted Successfully!");
+        this.props.navigation.dispatch(
+          StackActions.replace('Home',{
+          })
+        );
+      }
+    } catch (error) {
+      this.setState({isProcessing:false});
+      console.log(error);
+      Alert.alert("Registration Failed",error.message);
     }
-    else{
-      Alert.alert("Congratulations","Form Submitted Successfully!");
-      this.props.navigation.dispatch(
-        StackActions.replace('Home',{
-        })
-      );
-    }
+
+    
+    
     debugger;
 
   }
@@ -235,7 +249,21 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
   render(){
     return (
       <SafeAreaView >
+        {this.state.isProcessing ==true ? (
+        <View style={{
+          position:'absolute',
+          top:'50%',
+          marginLeft:'auto',
+          marginRight:'auto',
+          left:0,
+          right:0,
+          zIndex: 1
+          }}>
+        <ActivityIndicator size="large" color={theme.colors.primary}/> 
+        </View>):(<View></View>)}
         <ScrollView>
+
+        
             {/* Date and Time Picker */}
             <Card style = {styles.card}>
               <View style = {{marginHorizontal:10}}>

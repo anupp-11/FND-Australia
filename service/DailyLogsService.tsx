@@ -30,5 +30,24 @@ export async function getDataFromDevice(STORAGE) {
     return val;
   }
 }
+    
+
+export async function clearDailyLogs(){
+    const MOOD_VALUE = await saveDataToDevice("","MOOD_VALUE");
+    const MOOD_TEXT = await saveDataToDevice("","MOOD_TEXT");
+    const SLEEP_QUALITY_VALUE = await saveDataToDevice("","SLEEP_QUALITY_VALUE");
+    const SLEEP_QUALITY_TEXT = await saveDataToDevice("","SLEEP_QUALITY_TEXT");
+    const STRESS_LEVEL_VALUE = await saveDataToDevice("","STRESS_LEVEL_VALUE");
+    const STRESS_LEVEL_TEXT= await saveDataToDevice("","STRESS_LEVEL_TEXT");
+    const PWR_VALUE = await saveDataToDevice("","PWR_VALUE");
+    const PWR_TEXT = await saveDataToDevice("","PWR_TEXT");
+    const SLEEP_DURATION_HOUR = await saveDataToDevice("","SLEEP_DURATION_HOUR");
+    const SLEEP_DURATION_MIN = await saveDataToDevice("","SLEEP_DURATION_MIN");
+    const SLEEP_DURATION_TEXT = await saveDataToDevice("","SLEEP_DURATION_TEXT");
+    const PAL_VALUE = await saveDataToDevice("","PAL_VALUE");
+    const PAL_TEXT = await saveDataToDevice("","PAL_TEXT");
+    const DA_TEXT = await saveDataToDevice("","DA_TEXT");
+    return true;
+}
 
 

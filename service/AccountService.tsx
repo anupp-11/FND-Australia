@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ADD_USER_URL, API, API_TYPE, GET_USER_URL, LOGIN_URL, REGISTER_URL, UPDATE_USER_URL } from "../constants/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthUserInfo, LoginDetail, RegUserInfo, UserInfo } from "../models/BaseModel";
+import { AuthUserInfo, LoginDetail, RegsUserInfo, RegUserInfo, UserInfo } from "../models/BaseModel";
 
 const USERDATA_STORAGE = `USERDATA_STORAGE`;
 const USERINFO_STORAGE = `USERINFO_STORAGE`;
@@ -34,11 +34,11 @@ export async function registerUser(userInfo : RegUserInfo) {
  
 }
 
-export async function updateUserInfo(userInfo : UserInfo) {
+export async function updateUserInfo(userInfo : RegsUserInfo) {
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
-  const response = await axios.post<UserInfo>(ADD_USER_URL, userInfo, 
+  const response = await axios.post<RegsUserInfo>(ADD_USER_URL, userInfo, 
     { 
       headers: {
           "Authorization": `Bearer ${token}`
@@ -48,13 +48,13 @@ export async function updateUserInfo(userInfo : UserInfo) {
   return response.data;
 }
 
-export async function updateExistingUserInfo(userInfo : UserInfo,userId) {
+export async function updateExistingUserInfo(userInfo : UserInfo) {
 
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
-  const url = `${UPDATE_USER_URL}/${userId}`;
-  const response = await axios.post<UserInfo>(url, userInfo, 
+  
+  const response = await axios.post<UserInfo>(UPDATE_USER_URL, userInfo, 
     { 
       headers: {
           "Authorization": `Bearer ${token}`

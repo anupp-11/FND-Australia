@@ -43,7 +43,6 @@ export default class SMRInfoComponent extends React.Component{
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/happy.png')}/>;
     else if(this.state.form.moodValue=="5")
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/vhappy.png')}/>;
-
   }
 
 

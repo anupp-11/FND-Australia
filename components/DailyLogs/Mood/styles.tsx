@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
       },
       selected: {
         backgroundColor: 'white',
-        borderWidth : 8,
+        borderWidth : 10,
         borderColor : theme.colors.primary,
         borderRadius: 25,
         width:53,

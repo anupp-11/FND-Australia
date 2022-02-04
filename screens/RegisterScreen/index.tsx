@@ -14,7 +14,7 @@ import Button from '../../components/LoginComponents/Button';
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import {TextInput as TextInputP} from 'react-native-paper';
-import { AuthUserInfo, Contact, RegUserInfo, UserInfo } from '../../models/BaseModel';
+import { AuthUserInfo, Contact, RegsUserInfo, RegUserInfo, UserInfo } from '../../models/BaseModel';
 import { registerUser, saveUserInfoToDevice, updateUserInfo } from '../../service/AccountService';
 
 const RegisterScreen = () => {
@@ -58,31 +58,7 @@ const RegisterScreen = () => {
         navigation.navigate('Register');
       }
       else{
-        const userEmergencyContact = new Contact(
-          "",
-          "",
-          "",
-          "",
-          ""
-        )
-        const userDoctorDetail = new Contact(
-          "",
-          "",
-          "",
-          "",
-          ""
-        )
-        const userData = new UserInfo(
-          response.result,
-          "",
-          new Date(),
-          "",
-          userEmergencyContact,
-          userDoctorDetail
-        );
-        const resp = await updateUserInfo(userData);
-        debugger;
-        saveUserInfoToDevice(resp.result);
+        
         Alert.alert("Registration Successful");
         navigation.navigate('Login');
       }

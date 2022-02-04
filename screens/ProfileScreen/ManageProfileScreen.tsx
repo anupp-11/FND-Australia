@@ -17,7 +17,7 @@ import styles from './styles';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Contact, DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
+import { Contact, DoctorDetail, EmergencyContact, RegsUserInfo, UserInfo } from '../../models/BaseModel';
 import DatePicker from 'react-native-datepicker';
 import { getUserFromDevice, getUserInfo, getUserInfoFromDevice, saveUserInfoToDevice, updateExistingUserInfo, updateUserInfo } from '../../service/AccountService';
 
@@ -58,7 +58,6 @@ export default class ManageProfileScreen extends React.Component {
     this.setState({tempGender:this.state.gender})
     const user = await getUserFromDevice();  
     const userInfo = await getUserInfo(user?.id);
-      debugger;
     if (userInfo) {
       debugger;
       this.setState({
@@ -79,26 +78,73 @@ export default class ManageProfileScreen extends React.Component {
         doctorPhone:userInfo.doctorDetail.phoneNumber,
       });
     }
+    else {
+      const userEmergencyContact = new Contact(
+        "",
+        "",
+        "",
+        "",
+        ""
+      )
+      const userDoctorDetail = new Contact(
+        "",
+        "",
+        "",
+        "",
+        ""
+      )
+      const userData = new RegsUserInfo(
+        user,
+        "",
+        new Date(),
+        "",
+        userEmergencyContact,
+        userDoctorDetail
+      );
+      const resp = await updateUserInfo(userData);
+      debugger;
+      saveUserInfoToDevice(resp.result);
+      const userr= await getUserInfoFromDevice();
+      this.setState({
+        email: userr.user.email,
+        name: userr.user.name,
+        gender: userr.gender,
+        DOB : userr.DOB,
+        mobileNumber: userr.phone, 
+        emergencyName : userr.emergencyEontact.name,
+        emergencyRelationship:userr.emergencyEontact.relationship,
+        emergencyProfession:userr.emergencyEontact.profession,
+        emergencyAddress:userr.emergencyEontact.address,
+        emergencyPhone:userr.emergencyEontact.phoneNumber,
+        doctorName:userr.doctorDetail.name,
+        doctorRelationship:userr.doctorDetail.relationship,
+        doctorProfession:userr.doctorDetail.profession,
+        doctorAddress:userr.doctorDetail.address,
+        doctorPhone:userr.doctorDetail.phoneNumber,
+      });
+    }
   };
   
   updateUserData = async () => {
     this.setState({isProcessing:true});
+    const userInfo = await getUserFromDevice();
     const userEmergencyContact = new Contact(
       this.state.emergencyName,
       this.state.emergencyRelationship,
-      this.state.emergencyProfession,
+      "",
       this.state.emergencyPhone,
       this.state.emergencyAddress,
     )
     const userDoctorDetail = new Contact(
       this.state.doctorName,
-      this.state.doctorRelationship,
+      "",
       this.state.doctorProfession,
       this.state.doctorPhone,
       this.state.doctorAddress,
     )
     const user = await getUserFromDevice();
     const userData = new UserInfo(
+      userInfo.id,
       user,
       this.state.mobileNumber,
       this.state.DOB,
@@ -106,9 +152,9 @@ export default class ManageProfileScreen extends React.Component {
       userEmergencyContact,
       userDoctorDetail
     );
-      const userInfo = await getUserFromDevice();
+      
       debugger;
-      const response = await updateExistingUserInfo(userData, userInfo?.id);
+      const response = await updateExistingUserInfo(userData);
       this.setState({isProcessing:false});
         debugger;
         if(response?.isSuccess){

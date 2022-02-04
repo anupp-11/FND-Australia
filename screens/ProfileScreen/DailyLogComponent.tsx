@@ -32,7 +32,18 @@ export default class SMRComponent extends React.Component{
     });
    
   }
-  
+  getDate(dateTime: Date){
+    const date = new Date(dateTime).toLocaleDateString();
+    debugger;
+    return date;
+    
+  }
+  getTime(dateTime: Date){
+    const time = new Date(dateTime).toLocaleTimeString();
+    debugger;
+    return time;
+    
+  }
  
 
   render() {
@@ -43,7 +54,7 @@ export default class SMRComponent extends React.Component{
         <View style={{display:'flex',flexDirection:'row',padding:10,alignItems:'center',justifyContent:'space-between',borderWidth: 2, borderColor:"#93A5B9", backgroundColor:"#F5F5F5",height:60,borderRadius:10, margin:5}}>
           <View style={styles.col}>
             <Text>Recorded At: </Text>
-            <Text style={{fontSize:16,fontWeight:'700'}}>{this.state.form.createdAt}</Text>
+            <Text style={{fontSize:16,fontWeight:'700'}}>{this.getDate(this.state.form.createdAt)} {this.getTime(this.state.form.createdAt)}</Text>
           </View>
           
           <Icon name="keyboard-arrow-right" size={25}/>

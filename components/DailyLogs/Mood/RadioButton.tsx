@@ -24,7 +24,7 @@ export default function RadioButton({ data, onSelect }) {
   }
 
   return (
-    <View style={{display : 'flex',flexDirection :'row',width:'100%',justifyContent:'space-around',alignItems:'center',  }}>
+    <View style={{display : 'flex',flexDirection :'row',width:'100%',height:55,justifyContent:'space-around',alignItems:'center',  }}>
       {data.map((item) => {
         return (
             <View style = {{marginBottom: 10, }}>

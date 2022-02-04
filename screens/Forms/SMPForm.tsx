@@ -1,5 +1,5 @@
 import {
-  Text, View, StyleSheet, Platform, FlatList, Alert
+  Text, View, StyleSheet, Platform, FlatList, Alert, ActivityIndicator
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, Dialog, Portal, RadioButton,Checkbox, TextInput, Button as RButton, Provider } from 'react-native-paper';
@@ -27,7 +27,7 @@ export default class SMPForm extends React.Component {
     this.state = {
       tempMedication:"",
       visible:false,
-      isProcessing: true,
+      isProcessing: false,
       minutes:'',
       hours:'',
       duration:'',
@@ -417,6 +417,7 @@ export default class SMPForm extends React.Component {
   }
 
   onSubmit= async () => {
+    this.setState({isProcessing:true});
     const warningSigns =this.getSelectedOptions(this.state.data1);
     const seizuresPresent=this.getSelectedOptions(this.state.data5);
     const assistancesRequired=this.getSelectedOptions(this.state.data3);
@@ -455,12 +456,10 @@ export default class SMPForm extends React.Component {
       debugger;
     try {
       const response = await smpFormAdd(SMPFormData);
-      //setisProcessing(false);
+      this.setState({isProcessing:false});
       debugger;
       if(response?.isError){
-        //setErrorMessage(response.message);
         Alert.alert(response.message);
-        //navigation.navigate('Register');
       }
       else{
         Alert.alert("Successful","Form has been Submitted.");
@@ -468,10 +467,10 @@ export default class SMPForm extends React.Component {
           StackActions.replace('Home',{
           })
         );
-        //this.props.navigation.navigate('Home');
+       
       }
     } catch (error) {
-      //setisProcessing(false);
+      this.setState({isProcessing:false});
       console.log(error);
       Alert.alert("Failed",error.message);
     }
@@ -481,7 +480,19 @@ export default class SMPForm extends React.Component {
     return (
       <Provider>
         <SafeAreaView style={{marginTop:-50}}>
-         
+
+        {this.state.isProcessing ==true ? (
+        <View style={{
+          position:'absolute',
+          top:'50%',
+          marginLeft:'auto',
+          marginRight:'auto',
+          left:0,
+          right:0,
+          zIndex: 1
+          }}>
+        <ActivityIndicator size="large" color={theme.colors.primary}/> 
+        </View>):(<View></View>)}
           <ScrollView>
             {/* Question 1 */}
             <Card style = {styles.card}>
@@ -530,14 +541,14 @@ export default class SMPForm extends React.Component {
                     <View style = {styles.parent}>
                         <View style = {styles.child}>
                             <View style = {styles.radio}>
-                              <RadioButton value="Yes" />
+                              <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Yes" />
                               <Text>Yes</Text>
                             </View>
                         </View>
 
                         <View style = {styles.child}>
                           <View style = {styles.radio}>
-                            <RadioButton value="No" />
+                            <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="No" />
                             <Text>No</Text>
                           </View>
                         </View>
@@ -586,7 +597,7 @@ export default class SMPForm extends React.Component {
                     })
                   }
                 </View>):(<View></View>)}
-                <Button onPress={this.showDialog}>Add</Button>
+                <Button onPress={this.showDialog} labelStyle={{color:'white'}}>Add</Button>
               </Card.Content>
             </Card>
 
@@ -652,14 +663,14 @@ export default class SMPForm extends React.Component {
                     <View style = {styles.parent}>
                         <View style = {styles.child}>
                             <View style = {styles.radio}>
-                              <RadioButton value="Epileptic" />
+                              <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Epileptic" />
                               <Text>Epileptic</Text>
                             </View>
                         </View>
 
                         <View style = {styles.child}>
                           <View style = {styles.radio}>
-                            <RadioButton value="Functional(Non-Epileptic/Dissociative)" />
+                            <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Functional(Non-Epileptic/Dissociative)" />
                             <Text>Functional(Non-Epileptic/Dissociative)</Text>
                           </View>
                         </View>
@@ -770,7 +781,7 @@ export default class SMPForm extends React.Component {
                           <View style = {styles.parent}>
                               <View style = {styles.child}>
                                   <View style = {styles.radio}>
-                                    <RadioButton value="Rest" />
+                                    <RadioButton color = {theme.colors.primary} value="Rest" />
                                     <Text numberOfLines={2} style={{width:'50%'}}>Rest</Text>
                                   </View>
                                   
@@ -778,7 +789,7 @@ export default class SMPForm extends React.Component {
 
                               <View style = {styles.child}>
                                 <View style = {styles.radio}>
-                                  <RadioButton value="Remain Quiet" />
+                                  <RadioButton color = {theme.colors.primary} value="Remain Quiet" />
                                   <Text numberOfLines={2} style={{width:'50%'}}>Remain Quiet</Text>
                                 </View>
                                
@@ -813,6 +824,7 @@ export default class SMPForm extends React.Component {
                     </Card.Content>
                   </Card> 
 
+                 
                   <Checkbox.Android
                   status={this.state.agree ? 'checked' : 'unchecked'}
                   color={theme.colors.primary}
@@ -821,9 +833,10 @@ export default class SMPForm extends React.Component {
                     this.setState({agree:!this.state.agree});
                   }}
                 />
-                  <Text style={{paddingHorizontal:10}}>I have discussed this above seizure management plan with my treating doctor named on page my doctor's detail. I confirm that this is the agreed management plan in the  event  that  I experience functional or dissociative seizures. I understand that this plan does not constitute medical advice or instruction and that an ambulance will be called in an emergency.</Text>
+                  <Text style={{paddingHorizontal:10, textAlign:'justify'}}>I have discussed this above seizure management plan with my treating doctor named on page my doctor's detail. I confirm that this is the agreed management plan in the  event  that  I experience functional or dissociative seizures. I understand that this plan does not constitute medical advice or instruction and that an ambulance will be called in an emergency.</Text>
+                
                   <View style={{display:'flex',justifyContent:'center',alignItems:'center',}}>
-                    <Button style={{width:'80%'}} mode="contained" onPress={this.onSubmit} >
+                    <Button disabled={!this.state.agree} style={{width:'80%'}} mode="contained" onPress={this.onSubmit} >
                       Submit
                     </Button>
                   </View>

@@ -75,6 +75,19 @@ export class SMPFormModel{
 
 export class UserInfo{
     constructor(
+      public id : string,
+      public user:AuthUserInfo,
+      public phone:string,
+      public DOB:Date,
+      public gender: string,
+      public emergencyEontact:Contact,
+      public doctorDetail: Contact,
+    ){}
+  
+  }
+
+  export class RegsUserInfo{
+    constructor(
       public user:AuthUserInfo,
       public phone:string,
       public DOB:Date,
@@ -135,6 +148,7 @@ export class RegUserInfo{
   export class DailyLogModel{
     constructor(
       public user:AuthUserInfo,
+      public createdAt : Date,
       public moodValue:string,
       public moodText: string,
       public sleepQualityValue: string,

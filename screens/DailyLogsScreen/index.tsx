@@ -4,8 +4,9 @@ import {
   Text,
   Image,
   Alert,
+  
 } from 'react-native';
-import styles from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { theme } from '../../components/LoginComponents/theme';
 import SleepDuration from '../../components/DailyLogs/SleepDuration';
 import Mood from '../../components/DailyLogs/Mood';
@@ -16,7 +17,7 @@ import StressLevel from '../../components/DailyLogs/StressLevel';
 import GoalAchievement from '../../components/DailyLogs/GoalAchievement';
 import Stepper from "react-native-stepper-ui";
 import { StackActions, useNavigation } from '@react-navigation/native';
-import { getDataFromDevice } from '../../service/DailyLogsService';
+import { clearDailyLogs, getDataFromDevice } from '../../service/DailyLogsService';
 import { DailyLogModel } from '../../models/BaseModel';
 import { getUserFromDevice } from '../../service/AccountService';
 import { dailyLogsAdd } from '../../service/FormService';
@@ -52,10 +53,12 @@ const DailyLogsScreen = () => {
     const PAL_VALUE = await getDataFromDevice("PAL_VALUE");
     const PAL_TEXT = await getDataFromDevice("PAL_TEXT");
     const DA_TEXT = await getDataFromDevice("DA_TEXT");
+    const dateTime = new Date;
     const SLEEP_DURATION_VALUE = `${SLEEP_DURATION_HOUR}Hr ${SLEEP_DURATION_MIN}Min`
     const user = await getUserFromDevice();
     const dailyLogData = new DailyLogModel(
       user,
+      dateTime,
       MOOD_VALUE,
       MOOD_TEXT,
       SLEEP_QUALITY_VALUE?.toString(),
@@ -72,7 +75,9 @@ const DailyLogsScreen = () => {
     ) 
 
     try {
+      
       const response = await dailyLogsAdd(dailyLogData);
+      await clearDailyLogs();
       //setisProcessing(false);
       debugger;
       if(response?.isError){
@@ -102,6 +107,7 @@ const DailyLogsScreen = () => {
       }
     } catch (error) {
       //setisProcessing(false);
+      await clearDailyLogs();
       console.log(error);
       Alert.alert("Failed",error.message);
     }
