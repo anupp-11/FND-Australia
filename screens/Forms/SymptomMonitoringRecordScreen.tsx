@@ -7,7 +7,7 @@ import {
   Checkbox,
   RadioButton 
 } from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
@@ -185,7 +185,10 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
     }
     else{
       Alert.alert("Congratulations","Form Submitted Successfully!");
-      this.props.navigation.navigate('Home');
+      this.props.navigation.dispatch(
+        StackActions.replace('Home',{
+        })
+      );
     }
     debugger;
 

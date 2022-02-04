@@ -48,7 +48,7 @@ export class SMPFormModel{
     public user:AuthUserInfo,
     public dateOfBirth:Date,
     public dateOfPlan: Date,
-    public onMedication:Boolean,
+    public onMedication:string,
     public medication: string,
     public medicalConditions: string[],
     public medicalHistory: string,
@@ -72,15 +72,6 @@ export class SMPFormModel{
   ){}
 
 }
-
-// public string Id { get; set; }
-// public User User { get; set; }
-// public string Phone { get; set; }
-
-
-// public string Gender { get; set; }
-// public Contact EmergencyEontact { get; set; }
-// public Contact DoctorDetail { get; set; }
 
 export class UserInfo{
     constructor(
@@ -117,7 +108,7 @@ export class RegUserInfo{
     constructor(
       public name:string,
       public relationship: string,
-      public phoneNumber: string,
+      public phone: string,
       public address: string,
     ){}
   }
@@ -127,7 +118,7 @@ export class RegUserInfo{
       public name:string,
       public relationship: string,
       public profession: string,
-      public phoneNumber: string,
+      public phone: string,
       public address: string,
     ){}
   }
@@ -136,7 +127,7 @@ export class RegUserInfo{
      constructor(
       public name:string,
       public profession: string,
-      public phoneNumber: string,
+      public phone: string,
       public address: string,
      ){}
   }
@@ -159,4 +150,11 @@ export class RegUserInfo{
       public dailyAchievementText: string,
     ){}
  }
-    
+
+ export class LoginDetail {
+  constructor(
+    public email:string,
+    public password:string,
+    public checked:Boolean
+  ) {}
+}

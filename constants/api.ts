@@ -23,6 +23,11 @@ export const SMP_FORM_GETALL = "/SMPForm/get-all";
 export const SMP_FORM_GETBYID = "/SMPForm/get-by-id";
 export const SMP_FORM_DELETE = "/SMPForm/delete";
 
+export const DAILY_LOG_ADD = "/DailyLog/add";
+export const DAILY_LOG_GETALL = "/DailyLog/get-all";
+export const DAILY_LOG_GETBYID = "/DailyLog/get-by-id";
+export const DAILY_LOG_DELETE = "/DailyLog/delete";
+
 export const LOGIN_API = "/User/authenticate";
 export const REGISTER_API = "/User/register";
 
@@ -42,3 +47,8 @@ export const SMP_ADD_URL = `${BASE_URL}${SMP_FORM_ADD}`;
 export const SMP_GET_ALL_URL = `${BASE_URL}${SMP_FORM_GETALL}`;
 export const SMP_GET_ONE_URL = `${BASE_URL}${SMP_FORM_GETBYID}`;
 export const SMP_DELETE_URL = `${BASE_URL}${SMP_FORM_DELETE}`;
+
+export const DAILY_LOG_ADD_URL = `${BASE_URL}${DAILY_LOG_ADD}`;
+export const DAILY_LOG_GET_ALL_URL = `${BASE_URL}${DAILY_LOG_GETALL}`;
+export const DAILY_LOG_GET_ONE_URL = `${BASE_URL}${DAILY_LOG_GETBYID}`;
+export const DAILY_LOG_DELETE_URL = `${BASE_URL}${DAILY_LOG_DELETE}`;

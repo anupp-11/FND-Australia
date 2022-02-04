@@ -28,22 +28,20 @@ export default class SMRInfoComponent extends React.Component{
     debugger;
   }
   componentDidMount(){
-    const mood = this.state.mood;
-    const sleepQuality = this.state.sleepQuality;
-    const stressLevel = this.state.stressLevel;
-    const pwr = this.state.physicalWellbeingRating;
+    this.state.form;
+    debugger;
     
   }
   renderMood(){
-    if(this.state.form.mood=="1")
+    if(this.state.form.moodValue=="1")
       return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/sad.png')}/>;
-    else if(this.state.form.mood=="2")
+    else if(this.state.form.moodValue=="2")
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/angry.png')}/>;
-    else if(this.state.form.mood=="3")
+    else if(this.state.form.moodValue=="3")
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/numb.png')}/>;
-    else if(this.state.form.mood=="4")
+    else if(this.state.form.moodValue=="4")
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/happy.png')}/>;
-    else if(this.state.form.mood=="5")
+    else if(this.state.form.moodValue=="5")
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/vhappy.png')}/>;
 
   }
@@ -73,10 +71,10 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Sleep Quality</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
-              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.sleepQuality/10} color={theme.colors.primary} theme={{}}/></View>
+              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.sleepQualityValue/10} color={theme.colors.primary} theme={{}}/></View>
               <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <Text>0</Text>
-                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.sleepQuality}</Text>
+                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.sleepQualityValue}</Text>
                 <Text>10</Text>
               </View>
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.sleepQualityText}</Text></View>
@@ -87,10 +85,10 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Stress Level</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
-              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.stressLevel/10} color={theme.colors.primary} theme={{}}/></View>
+              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.stressLevelValue/10} color={theme.colors.primary} theme={{}}/></View>
               <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <Text>0</Text>
-                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.stressLevel}</Text>
+                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.stressLevelValue}</Text>
                 <Text>10</Text>
               </View>
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.stressLevelText}</Text></View>
@@ -101,13 +99,13 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Physical Wellbeing Rating</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
-              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.physicalWellbeingRating/10} color={theme.colors.primary} theme={{}}/></View>
+              <View style={{height:20,width:'100%',marginTop:10}}><ProgressBar progress={this.state.form.pwrValue/10} color={theme.colors.primary} theme={{}}/></View>
               <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <Text>0</Text>
-                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.physicalWellbeingRating}</Text>
+                <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.pwrValue}</Text>
                 <Text>10</Text>
               </View>
-              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.physicalWellbeingRatingText}</Text></View>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.pwrText}</Text></View>
             </View>
         </Card>
 
@@ -115,7 +113,7 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Sleep Duration</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
-            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.sleepDuration}</Text>
+            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700'}}>{this.state.form.sleepDurationValue}</Text>
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.sleepDurationText}</Text></View>
             </View>
         </Card>
@@ -123,8 +121,8 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Physical Activity Level</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
-            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700',textTransform: 'uppercase'}}>{this.state.form.physicalActivityLevel}</Text>
-              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.physicalActivityLevelText}</Text></View>
+            <Text style={{fontSize:16,color:theme.colors.primary,fontWeight:'700',textTransform: 'uppercase'}}>{this.state.form.palValue}</Text>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.palText}</Text></View>
             </View>
         </Card>
 
@@ -132,7 +130,7 @@ export default class SMRInfoComponent extends React.Component{
           <Text style={styles.title}>Goal Achievement</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
            
-              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.goalAchievement}</Text></View>
+              <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.dailyAchievementText}</Text></View>
             </View>
         </Card>
 

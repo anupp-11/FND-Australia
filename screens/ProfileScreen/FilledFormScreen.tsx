@@ -6,7 +6,7 @@ import {
 import styles from './styles';
 import AIcon from 'react-native-vector-icons/AntDesign';
 import { getUserFromDevice } from '../../service/AccountService';
-import { getSmpForm, getSmrForm } from '../../service/FormService';
+import { getDailyLog, getSmpForm, getSmrForm } from '../../service/FormService';
 
 export default class FilledFormScreen extends React.Component {
   constructor(props) {
@@ -14,16 +14,19 @@ export default class FilledFormScreen extends React.Component {
 
     this.state = {
       smrLength:"0",
-      smpLength:"0"
+      smpLength:"0",
+      dailyLogLenth:"0"
     };
   }
 
   componentDidMount = async () => {
     const user = await getUserFromDevice();
-    const smpResponse = await getSmpForm(user?.id);
+    //const smpResponse = await getSmpForm(user?.id);
     const smrResponse = await getSmrForm(user?.id);
+    const dailyLogResponse = await getDailyLog(user?.id);
     this.setState({smrLength : smrResponse.length});
-    this.setState({smpLength : smpResponse.length});
+    //this.setState({smpLength : smpResponse.length});
+    this.setState({dailyLogLenth : dailyLogResponse.length});
     debugger;
   };
   
@@ -77,7 +80,7 @@ export default class FilledFormScreen extends React.Component {
                 Daily Logs
               </Text>
               <Text style={{fontWeight:'600',fontSize:16,marginTop:10}}>
-                Total Logs : 0
+                Total Logs : {this.state.dailyLogLenth}
               </Text>
             </View>
           </TouchableOpacity>

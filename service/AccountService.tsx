@@ -1,10 +1,11 @@
 import axios from "axios";
 import { ADD_USER_URL, API, API_TYPE, GET_USER_URL, LOGIN_URL, REGISTER_URL, UPDATE_USER_URL } from "../constants/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthUserInfo, RegUserInfo, UserInfo } from "../models/BaseModel";
+import { AuthUserInfo, LoginDetail, RegUserInfo, UserInfo } from "../models/BaseModel";
 
 const USERDATA_STORAGE = `USERDATA_STORAGE`;
 const USERINFO_STORAGE = `USERINFO_STORAGE`;
+const LOGIN_DETAIL_STORAGE = `LOGIN_DETAIL_STORAGE`;
 
 export async function authUser(email:string, pass:string) {
   const requestOptions = {
@@ -108,3 +109,17 @@ export async function getUserInfo(userId) {
   return data.result;
 }
 
+export async function saveLoginDetails(loginDetail: LoginDetail) { 
+  await AsyncStorage.setItem(LOGIN_DETAIL_STORAGE, JSON.stringify(loginDetail));
+  debugger;
+  return loginDetail;
+}
+export async function getLoginDetailFromDevice() {
+  debugger;
+  const loginDetailResp = await AsyncStorage.getItem(LOGIN_DETAIL_STORAGE);
+  if (loginDetailResp) {
+    var loginDetail = JSON.parse(loginDetailResp) as LoginDetail;
+    return loginDetail;
+  }
+ // return new OrderStorageModel([]);
+}

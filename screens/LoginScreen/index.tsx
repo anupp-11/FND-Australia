@@ -1,19 +1,21 @@
 import React, {memo, useEffect, useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions, Alert, ActivityIndicator, } from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Dimensions, Alert, ActivityIndicator, Platform, } from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
 import Button from '../../components/LoginComponents/Button';
 import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-import {TextInput as TextInputP} from 'react-native-paper';
+import {Checkbox, TextInput as TextInputP} from 'react-native-paper';
 import IoIcon from 'react-native-vector-icons/Ionicons';
 import {
   emailValidator,
   passwordValidator,
 } from '../../components/LoginComponents/utils';
-import { authUser, saveUserToDevice } from '../../service/AccountService';
+import { authUser, getLoginDetailFromDevice, getUserFromDevice, saveLoginDetails, saveUserToDevice } from '../../service/AccountService';
 import * as LocalAuthentication from 'expo-local-authentication';
+import { LoginDetail } from '../../models/BaseModel';
+import { isExpired } from 'react-jwt';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -21,15 +23,63 @@ const LoginScreen = () => {
   const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
   const [isProcessing, setisProcessing ] = React.useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [checked, setChecked] = React.useState(false);
+
+
+
+  
+
+
+
 
   // Check if hardware supports biometrics
   useEffect(() => {
+    async function fetchMyAPI() {
+      const user = await getUserFromDevice();
+      
+      if(user){
+        const token = user?.jwtToken;
+        const isMyTokenExpired = isExpired(token);
+        if(isMyTokenExpired){
+          const loginDetail = await getLoginDetailFromDevice();
+          console.log("Token is expired.");
+          var data = {
+            "id": "",
+            "name": "",
+            "userName": "",
+            "jwtToken": ""
+          }
+          await saveUserToDevice(data);
+          if(loginDetail?.checked){
+            setEmail({value : loginDetail?.email,error:''});
+            setPassword({value : loginDetail?.password,error:''});
+            setChecked(true);
+          }
+          navigation.navigate('Login');
+        }
+        else{
+          navigation.dispatch(
+            StackActions.replace('Home',{
+            })
+          );
+        }
+      }else{
+        const loginDetail = await getLoginDetailFromDevice();
+        if(loginDetail?.checked){
+          setEmail({value : loginDetail?.email,error:''});
+          setPassword({value : loginDetail?.password,error:''});
+          setChecked(true);
+        }
+        console.log("Token not present");
+        navigation.navigate('Login');
+      }
+    }
     (async () => {
       const compatible = await LocalAuthentication.hasHardwareAsync();
-      debugger;
       setIsBiometricSupported(compatible);
     })();
-  });
+    fetchMyAPI();
+  },[]);
 
   const ForgotPassword = () => {
     navigation.navigate('ForgotPassword');
@@ -82,8 +132,27 @@ const LoginScreen = () => {
         navigation.navigate('Login');
       }
       else{
+        if(checked){
+          const loginDetail =new LoginDetail(
+            email.value,
+            password.value,
+            checked
+          )
+          saveLoginDetails(loginDetail);
+        }
+        else{
+          var data = {
+            "userName": "",
+            "password": "",
+            "checked":false
+          }
+          saveLoginDetails(data);
+        }
         saveUserToDevice(response.result);
-        navigation.navigate('Home');
+        navigation.dispatch(
+          StackActions.replace('Home',{
+          })
+        );
       }
     } catch (error) {
       setisProcessing(false);
@@ -144,9 +213,34 @@ const LoginScreen = () => {
               <View>
                 <Text style={{color:'red',margin:5}}>{errorMessage}</Text>
               </View>):(<View></View>)}
-            <View style={styles.forgotPassword}>
-              <TouchableOpacity onPress={ForgotPassword}>
-                <Text style={styles.label}>Forgot your password?</Text>
+
+
+            <View style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between',paddingVertical:5,width:'100%'}}>
+                <View style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                  {Platform.OS =='ios'? (
+                  
+                    <Checkbox.Android
+                          status={checked ? 'checked' : 'unchecked'}
+                          color={theme.colors.primary}
+                        
+                          onPress={() => {
+                            setChecked(!checked);
+                          }}
+                        />
+
+                    ):(<Checkbox
+                      status={checked ? 'checked' : 'unchecked'}
+                      
+                      color={theme.colors.primary}
+                      onPress={() => {
+                        setChecked(!checked);
+                      }}
+                    />)
+                  }
+                  <Text>Remember Me?</Text>
+                </View>
+              <TouchableOpacity onPress={()=> navigation.navigate('ForgotPassword')}>
+                <Text style={styles.link}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
             <Button mode="contained" onPress={_onLoginPressed}>

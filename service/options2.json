@@ -39,7 +39,7 @@
                 "key":"Epileptic",
                 "checked":false
             },{
-                "id":2,
+                "id":1,
                 "key":"Functional(Non-Epileptic/Dissociative)",
                 "checked":false
             }
@@ -47,17 +47,17 @@
         
             "question5":[
                {
-                    "id":1,
+                    "id":0,
                     "key":"Blank Spells(Absent)",
                     "checked":false,
                     "questionGroup":"5"
                 },{
-                    "id":2,
+                    "id":1,
                     "key":"Hypokinetic",
                     "checked":false,
                     "questionGroup":"5"
                 },{
-                    "id":3,
+                    "id":2,
                     "key":"Hyperkinetic",
                     "checked":false,
                     "questionGroup":"5"

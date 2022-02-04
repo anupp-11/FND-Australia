@@ -12,7 +12,7 @@ import { theme } from '../../components/LoginComponents/theme';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Paragraph, Title } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { getUserFromDevice } from '../../service/AccountService';
+import { getUserFromDevice, saveUserToDevice } from '../../service/AccountService';
 
 
 
@@ -32,8 +32,8 @@ export default class HomeScreen extends React.Component {
       "userName": "",
       "jwtToken": ""
     }
-    //const resp = await saveUserToDevice(data);
-    this.props.navigation.navigate('Login');
+    const resp = await saveUserToDevice(data);
+    this.props.navigation.navigate('Dashboard');
 
   }
   backAction = () => {
@@ -43,7 +43,7 @@ export default class HomeScreen extends React.Component {
     }
     else{
       debugger;
-      Alert.alert("Hold on!", "Are you sure you want to logout?", [
+      Alert.alert("Hold on!", "Are you sure you want to Signout?", [
         {
           text: "Cancel",
           onPress: () => null,

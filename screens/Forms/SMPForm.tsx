@@ -14,10 +14,9 @@ import CheckboxComponent from './CheckboxComponent';
 import { SMPFormModel } from '../../models/BaseModel';
 import { getUserFromDevice } from '../../service/AccountService';
 import { smpFormAdd } from '../../service/FormService';
+import { StackActions } from '@react-navigation/native';
 
 const OPTIONS=require('./../../service/options2.json');
-
-//import RNPickerSelect from 'react-native-picker-select';
 
 
 export default class SMPForm extends React.Component {
@@ -431,7 +430,7 @@ export default class SMPForm extends React.Component {
       user,
       this.state.DOB,
       this.state.DOP,
-      true,
+      this.state.onMedication,
       this.state.medication,
       this.state.medicalConditions,
       this.state.medicalHistory,
@@ -465,7 +464,11 @@ export default class SMPForm extends React.Component {
       }
       else{
         Alert.alert("Successful","Form has been Submitted.");
-        this.props.navigation.navigate('Home');
+        this.props.navigation.dispatch(
+          StackActions.replace('Home',{
+          })
+        );
+        //this.props.navigation.navigate('Home');
       }
     } catch (error) {
       //setisProcessing(false);

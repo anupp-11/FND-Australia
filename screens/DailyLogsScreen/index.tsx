@@ -15,10 +15,11 @@ import PhysicalActivityLevel from '../../components/DailyLogs/PhysicalActivityLe
 import StressLevel from '../../components/DailyLogs/StressLevel';
 import GoalAchievement from '../../components/DailyLogs/GoalAchievement';
 import Stepper from "react-native-stepper-ui";
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { getDataFromDevice } from '../../service/DailyLogsService';
 import { DailyLogModel } from '../../models/BaseModel';
 import { getUserFromDevice } from '../../service/AccountService';
+import { dailyLogsAdd } from '../../service/FormService';
 
 
 const content = [
@@ -53,15 +54,15 @@ const DailyLogsScreen = () => {
     const DA_TEXT = await getDataFromDevice("DA_TEXT");
     const SLEEP_DURATION_VALUE = `${SLEEP_DURATION_HOUR}Hr ${SLEEP_DURATION_MIN}Min`
     const user = await getUserFromDevice();
-    const SMPFormData = new DailyLogModel(
+    const dailyLogData = new DailyLogModel(
       user,
       MOOD_VALUE,
       MOOD_TEXT,
-      SLEEP_QUALITY_VALUE,
+      SLEEP_QUALITY_VALUE?.toString(),
       SLEEP_QUALITY_TEXT,
-      STRESS_LEVEL_VALUE,
+      STRESS_LEVEL_VALUE?.toString(),
       STRESS_LEVEL_TEXT,
-      PWR_VALUE,
+      PWR_VALUE?.toString(),
       PWR_TEXT,
       SLEEP_DURATION_VALUE,
       SLEEP_DURATION_TEXT,
@@ -70,23 +71,41 @@ const DailyLogsScreen = () => {
       DA_TEXT
     ) 
 
-    
+    try {
+      const response = await dailyLogsAdd(dailyLogData);
+      //setisProcessing(false);
+      debugger;
+      if(response?.isError){
+        //setErrorMessage(response.message);
+        Alert.alert(response.message);
+        //navigation.navigate('Register');
+      }
+      else{
+        Alert.alert(
+          "Successful",
+          "Your Daily Log Has been Submitted.",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressedd"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+        //Alert.alert("Daily Log Submitted Successfully.");
+        navigation.dispatch(
+          StackActions.replace('Home',{
+          })
+        );
+        //this.props.navigation.navigate('Home');
+      }
+    } catch (error) {
+      //setisProcessing(false);
+      console.log(error);
+      Alert.alert("Failed",error.message);
+    }
 
-    debugger;
-    Alert.alert(
-      "Successful",
-      "Your Daily Log Has been Submitted.",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressedd"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
-    //Alert.alert("Daily Log Submitted Successfully.");
-    navigation.navigate("Profile Screen");
   }
   return (
     <View style={{ marginVertical: 80, marginHorizontal: 20 }}>

@@ -22,7 +22,7 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
-import { getUserFromDevice } from '../../service/AccountService';
+import { getUserFromDevice, saveUserToDevice } from '../../service/AccountService';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -48,8 +48,15 @@ const ProfileScreen = () => {
   const _onSMRPressed = () => {
     navigation.navigate('SMRScreen');
   }
-  const logout = () =>{
+  const logout = async () =>{
     hideDialog();
+    var data = {
+      "id": "",
+      "name": "",
+      "userName": "",
+      "jwtToken": ""
+    }
+    const resp = await saveUserToDevice(data);
     navigation.navigate('Dashboard');
   
   }

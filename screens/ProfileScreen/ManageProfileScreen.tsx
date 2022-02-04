@@ -14,9 +14,7 @@ import {
   Button as RButton
 } from 'react-native-paper';
 import styles from './styles';
-import EIcon from 'react-native-vector-icons/Entypo';
 import Button from '../../components/LoginComponents/Button';
-import Background from '../../components/LoginComponents/Background';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Contact, DoctorDetail, EmergencyContact, UserInfo } from '../../models/BaseModel';
@@ -60,7 +58,7 @@ export default class ManageProfileScreen extends React.Component {
     this.setState({tempGender:this.state.gender})
     const user = await getUserFromDevice();  
     const userInfo = await getUserInfo(user?.id);
-      
+      debugger;
     if (userInfo) {
       debugger;
       this.setState({
@@ -99,8 +97,9 @@ export default class ManageProfileScreen extends React.Component {
       this.state.doctorPhone,
       this.state.doctorAddress,
     )
+    const user = await getUserFromDevice();
     const userData = new UserInfo(
-      this.state.user,
+      user,
       this.state.mobileNumber,
       this.state.DOB,
       this.state.gender,
