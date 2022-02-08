@@ -91,10 +91,52 @@ const LoginScreen = () => {
       // Authenticate user
       const resp = await LocalAuthentication.authenticateAsync();
       if(resp.success){
-        navigation.dispatch(
-          StackActions.replace('Home',{
-          })
-        );
+        setisProcessing(true);
+        const loginDetail = await getLoginDetailFromDevice();
+          if(loginDetail?.checked){
+            setEmail({value : loginDetail?.email,error:''});
+            setPassword({value : loginDetail?.password,error:''});
+            setChecked(true);
+          }
+          try {
+            const response = await authUser(email.value, password.value);
+            debugger;
+            setisProcessing(false);
+            if(response?.isError){
+              setErrorMessage(response.message);
+              navigation.navigate('Login');
+            }
+            else{
+              if(checked){
+                const loginDetail =new LoginDetail(
+                  email.value,
+                  password.value,
+                  checked
+                )
+                saveLoginDetails(loginDetail);
+              }
+              else{
+                var data = {
+                  "userName": "",
+                  "password": "",
+                  "checked":false
+                }
+                saveLoginDetails(data);
+              }
+              debugger;
+              saveUserToDevice(response.result);
+              navigation.dispatch(
+                StackActions.replace('Home',{
+                })
+              );
+            }
+          } catch (error) {
+            setisProcessing(false);
+            console.log(error);
+            Alert.alert("Registration Failed",error.message);
+          }
+          setisProcessing(false);
+        
       }else{
         Alert.alert('Fingerprint didnot match.');
       }
@@ -111,9 +153,10 @@ const LoginScreen = () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
    
-    if (emailError || passwordError) {
+    if (emailError || password=="") {
       setEmail({...email, error: emailError});
       setPassword({...password, error: passwordError});
+      setisProcessing(false);
       return;
     }
     try {
@@ -141,6 +184,7 @@ const LoginScreen = () => {
           }
           saveLoginDetails(data);
         }
+        debugger;
         saveUserToDevice(response.result);
         navigation.dispatch(
           StackActions.replace('Home',{
@@ -152,13 +196,27 @@ const LoginScreen = () => {
       console.log(error);
       Alert.alert("Registration Failed",error.message);
     }
-    
+    setisProcessing(false);
   };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
+   
       
       <View style={styles.container}>
+      {isProcessing ==true ? (
+      <View style={{
+        position:'absolute',
+        top:'50%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        left:0,
+        right:0,
+        zIndex: 1
+        }}>
+      <ActivityIndicator size="large" color={theme.colors.primary}/> 
+      </View>):(<View></View>)}
       <BackButton goBack={() => navigation.navigate('Dashboard')} />
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
@@ -185,7 +243,6 @@ const LoginScreen = () => {
               <Text style={styles.inputLabel}>Password</Text>
               <TextInputP
                   mode="outlined"
-                  //label="Mobile Number"
                   right={<TextInputP.Icon name="eye" onPress={() => setHidePass(!hidePass)}/>}
                   style={{ backgroundColor: 'white'}}
                   selectionColor={"#42AF6A"}
@@ -196,12 +253,6 @@ const LoginScreen = () => {
                 />
               
             </View>
-            {isProcessing ==true ? (
-            <View style={{
-              margin:10
-              }}>
-            <ActivityIndicator size="large" color={theme.colors.primary}/> 
-            </View>):(<View></View>)}
             {errorMessage ? (
               <View>
                 <Text style={{color:'red',margin:5}}>{errorMessage}</Text>

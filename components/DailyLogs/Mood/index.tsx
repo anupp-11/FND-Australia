@@ -14,7 +14,7 @@ import RadioButton from './RadioButton';
 const Mood = () => {
 
   
-  const [option, setOption] = useState(null);
+  const [option, setOption] = useState("1");
   const [textValue, setTextValue] = useState("");
 
   const data = [

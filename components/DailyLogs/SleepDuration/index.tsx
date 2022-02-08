@@ -4,7 +4,8 @@ import { View } from '../../Themed';
 import Paragraph from '../../LoginComponents/Paragraph';
 import styles from './styles';
 import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
-//import RNPickerSelect from 'react-native-picker-select';
+// import {RNCPickerSelect as IOSPicker} from 'react-native-picker-select';
+import RNPickerSelect from "react-native-picker-select"
 import { HOURS, MINUTES } from '../../../service/utils';
 import { theme } from '../../LoginComponents/theme';
 import { saveDataToDevice } from '../../../service/DailyLogsService';
@@ -14,8 +15,8 @@ export default class SleepDuration  extends React.Component {
     super(props);
 
     this.state = {
-      minutes:'',
-      hours:'',
+      minutes:'0',
+      hours:'0',
       value:'0',
       textValue:""
     };
@@ -64,7 +65,7 @@ export default class SleepDuration  extends React.Component {
       </View>
       );
     }
-    // else{
+    //else{
     //   return (
     //     <View style={styles.selectSize}>
     //       <RNPickerSelect
@@ -138,7 +139,7 @@ export default class SleepDuration  extends React.Component {
     // else{
     //   return (
     //     <View style={styles.selectSize}>
-    //       <RNPickerSelect
+    //       <RNCPickerSelect
     //         style={{
     //           inputIOS:{
     //             //width: 150, flex: 1

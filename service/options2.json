@@ -45,25 +45,6 @@
             }
         ],
         
-            "question5":[
-               {
-                    "id":0,
-                    "key":"Blank Spells(Absent)",
-                    "checked":false,
-                    "questionGroup":"5"
-                },{
-                    "id":1,
-                    "key":"Hypokinetic",
-                    "checked":false,
-                    "questionGroup":"5"
-                },{
-                    "id":2,
-                    "key":"Hyperkinetic",
-                    "checked":false,
-                    "questionGroup":"5"
-                }
-
-        ],
         "question3":[
             {
                 "id":0,
@@ -96,51 +77,72 @@
                 "checked":false,
                 "questionGroup":"3"
             }
-        ],"question4":[
+        ],
+        "question4":[
             {
                 "id":0,
                 "key":"Sternum rub",
                 "checked":false,
-                "question":"4"
+                "questionGroup":"4"
             },{
                 "id":1,
                 "key":"Pinch",
                 "checked":false,
-                "question":"4"
+                "questionGroup":"4"
             },{
                 "id":2,
                 "key":"Panic",
                 "checked":false,
-                "question":"4"
+                "questionGroup":"4"
             },{
                 "id":3,
                 "key":"Hold you down",
                 "checked":false,
-                "question":"4"
+                "questionGroup":"4"
             }
 
 
-        ],"question6":[
+        ],
+        "question5":[
+            {
+                 "id":0,
+                 "key":"Blank Spells(Absent)",
+                 "checked":false,
+                 "questionGroup":"5"
+             },{
+                 "id":1,
+                 "key":"Hypokinetic",
+                 "checked":false,
+                 "questionGroup":"5"
+             },{
+                 "id":2,
+                 "key":"Hyperkinetic",
+                 "checked":false,
+                 "questionGroup":"5"
+             }
+
+        ],
+        "question6":[
             {
                 "id":0,
                 "key":"Injury",
                 "checked":false,
-                "question":"6"
+                "questionGroup":"6"
             },{
                 "id":1,
                 "key":"Unable to breathe",
                 "checked":false,
-                "question":"6"
+                "questionGroup":"6"
             },{
                 "id":2,
                 "key":"Seizure is different to normal",
                 "checked":false,
-                "question":"6"
+                "questionGroup":"6"
             },{
                 "id":3,
                 "key":"Seizure not resolving",
                 "checked":false,
-                "question":"6"
+                "questionGroup":"6"
             }
 
 

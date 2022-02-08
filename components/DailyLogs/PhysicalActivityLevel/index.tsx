@@ -10,7 +10,7 @@ import { saveDataToDevice } from '../../../service/DailyLogsService';
 const PhysicalActivityLevel = () => {
 
   const [textValue, setTextValue] = useState("");
-  const [option, setOption] = useState(null);
+  const [option, setOption] = useState('Medium');
   const data = [
     { value: 'Low' },
     { value: 'Medium' },

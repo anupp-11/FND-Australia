@@ -75,11 +75,6 @@ export default class StoryInfoComponent extends React.Component{
           <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p4}</Text>
           <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p5}</Text>
           <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p6}</Text>
-          <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p4}</Text>
-          <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p5}</Text>
-          <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.story?.t3p6}</Text>
-
-
         </View>
       </ScrollView>
     );

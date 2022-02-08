@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   Alert,
+  ActivityIndicator,
   
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -37,8 +38,11 @@ const content = [
 const DailyLogsScreen = () => {
   const navigation = useNavigation();
   const [active, setActive] = useState(0);
-  
+  const [isProcessing, setisProcessing ] = React.useState<boolean>(false);
+
   const onSubmit = async () =>{
+
+    setisProcessing(true);
     const MOOD_VALUE = await getDataFromDevice("MOOD_VALUE");
     const MOOD_TEXT = await getDataFromDevice("MOOD_TEXT");
     const SLEEP_QUALITY_VALUE = await getDataFromDevice("SLEEP_QUALITY_VALUE");
@@ -75,15 +79,13 @@ const DailyLogsScreen = () => {
     ) 
 
     try {
-      
       const response = await dailyLogsAdd(dailyLogData);
       await clearDailyLogs();
-      //setisProcessing(false);
+      setisProcessing(false);
       debugger;
       if(response?.isError){
-        //setErrorMessage(response.message);
         Alert.alert(response.message);
-        //navigation.navigate('Register');
+
       }
       else{
         Alert.alert(
@@ -98,15 +100,13 @@ const DailyLogsScreen = () => {
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ]
         );
-        //Alert.alert("Daily Log Submitted Successfully.");
         navigation.dispatch(
           StackActions.replace('Home',{
           })
         );
-        //this.props.navigation.navigate('Home');
       }
     } catch (error) {
-      //setisProcessing(false);
+      setisProcessing(false);
       await clearDailyLogs();
       console.log(error);
       Alert.alert("Failed",error.message);
@@ -115,6 +115,18 @@ const DailyLogsScreen = () => {
   }
   return (
     <View style={{ marginVertical: 80, marginHorizontal: 20 }}>
+      {isProcessing ==true ? (
+        <View style={{
+          position:'absolute',
+          top:'50%',
+          marginLeft:'auto',
+          marginRight:'auto',
+          left:0,
+          right:0,
+          zIndex: 1
+          }}>
+        <ActivityIndicator size="large" color={theme.colors.primary}/> 
+        </View>):(<View></View>)}
       <Stepper
         active={active}
         content={content}

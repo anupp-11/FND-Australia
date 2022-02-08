@@ -17,13 +17,18 @@ export default function SymptomNavigator() {
         name="SymptomScreen"
         component={ExploreScreen}
         options = {{
-          headerShown: false
+          headerShown: false,
+          
         }}
         
       />
       <SymptomStack.Screen
         name="SymptomInfo"
         component={SymptomInfoComponent}
+        options = {{
+          // headerShown: false,
+          headerBackTitle: 'Back'
+        }}
        
       />
       

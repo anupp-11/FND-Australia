@@ -227,7 +227,10 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
       debugger;
       return(
         <View>
-          <Checkbox.Item color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+          <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+          <Text>{item.key}</Text>
+          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+        </View>
         </View>
       )
     })
@@ -400,7 +403,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                   <View style = {styles.parent}>
                       <View style = {styles.child}>
                           <View style = {styles.radio}>
-                            <RadioButton value="Yes" />
+                            <RadioButton.Android value="Yes" />
                             <Text>Yes</Text>
                           </View>
                           
@@ -408,7 +411,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
   
                       <View style = {styles.child}>
                         <View style = {styles.radio}>
-                          <RadioButton value="No" />
+                          <RadioButton.Android value="No" />
                           <Text>No</Text>
                         </View>
                       </View>

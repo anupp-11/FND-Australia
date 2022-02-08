@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import React, {memo, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Alert, ActivityIndicator} from 'react-native';
 import BackButton from '../../components/LoginComponents/BackButton';
@@ -40,6 +40,7 @@ const RegisterScreen = () => {
       setName({...name, error: nameError});
       setEmail({...email, error: emailError});
       setPassword({...password, error: passwordError});
+      setisProcessing(false);
       return;
     }
     
@@ -60,7 +61,10 @@ const RegisterScreen = () => {
       else{
         
         Alert.alert("Registration Successful");
-        navigation.navigate('Login');
+        navigation.dispatch(
+          StackActions.replace('Login',{
+          })
+        );
       }
     } catch (error) {
       setisProcessing(false);
@@ -71,8 +75,19 @@ const RegisterScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      
       <View style={styles.container}>
+      {isProcessing ==true ? (
+        <View style={{
+          position:'absolute',
+          top:'50%',
+          marginLeft:'auto',
+          marginRight:'auto',
+          left:0,
+          right:0,
+          zIndex: 1
+          }}>
+        <ActivityIndicator size="large" color={theme.colors.primary}/> 
+        </View>):(<View></View>)}
       <BackButton goBack={() => navigation.navigate('Dashboard')} />
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
@@ -81,10 +96,7 @@ const RegisterScreen = () => {
             </View>
             <Text style={styles.loginTitleText}>Sign Up</Text>
             
-            {isProcessing ==true ? (
-            <View>
-              <ActivityIndicator size="large" color={theme.colors.primary}/> 
-            </View>):(<View></View>)}
+            
             
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Name</Text>

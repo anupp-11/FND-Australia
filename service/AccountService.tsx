@@ -30,7 +30,7 @@ export async function registerUser(userInfo : RegUserInfo) {
   debugger;
   const data = await response.json();
   debugger;
-  return data;
+  return data.value;
  
 }
 
@@ -53,7 +53,7 @@ export async function updateExistingUserInfo(userInfo : UserInfo) {
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
-  
+  console.log("UserInfo:",userInfo);
   const response = await axios.post<UserInfo>(UPDATE_USER_URL, userInfo, 
     { 
       headers: {

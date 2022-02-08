@@ -44,7 +44,7 @@ export default class FAQComponent extends React.Component{
           />
             <List.Item title={this.state.question.answer} titleNumberOfLines={10} />
             {(this.state.question.points)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.points} titleNumberOfLines={10} />):(<View></View>)}
-            {(this.state.question.p1)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.p1} titleNumberOfLines={10} />):(<View></View>)}
+            {(this.state.question.p1)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.p1} titleNumberOfLines={10}  />):(<View></View>)}
             {(this.state.question.p2)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.p2} titleNumberOfLines={10} />):(<View></View>)}
             {(this.state.question.p3)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.p3} titleNumberOfLines={10} />):(<View></View>)}
             {(this.state.question.p4)?(<List.Item style ={{ marginTop:-20 }} title={this.state.question.p4} titleNumberOfLines={10} />):(<View></View>)}

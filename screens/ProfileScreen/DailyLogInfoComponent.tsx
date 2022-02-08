@@ -45,6 +45,19 @@ export default class SMRInfoComponent extends React.Component{
     return <Image style={{height: 50, width : 50, borderRadius:10, marginBottom: 20 }} source={require('../../assets/emojis/vhappy.png')}/>;
   }
 
+  getDate(dateTime: Date){
+    const date = new Date(dateTime).toLocaleDateString();
+    debugger;
+    return date;
+    
+  }
+  getTime(dateTime: Date){
+    const time = new Date(dateTime).toLocaleTimeString();
+    debugger;
+    return time;
+    
+  }
+
 
  
   render() {
@@ -53,8 +66,7 @@ export default class SMRInfoComponent extends React.Component{
         <Card style={styles.card}>
           <Text style={styles.title}>Recorded At</Text>
             <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',paddingHorizontal:10}}>
-            <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.date}</Text></View>
-            <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.recordedTime}</Text></View>
+            <Text style={{fontSize:16,fontWeight:'700'}}>{this.getDate(this.state.form.createdAt)} {this.getTime(this.state.form.createdAt)}</Text>
             </View>
         </Card>
         {/* Mood Monitor */}
@@ -126,7 +138,7 @@ export default class SMRInfoComponent extends React.Component{
         </Card>
 
         <Card style={styles.card}>
-          <Text style={styles.title}>Goal Achievement</Text>
+          <Text style={styles.title}>Daily Achievement</Text>
             <View style={{display:'flex',flexDirection:'column',justifyContent:'center',paddingHorizontal:10}}>
            
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.dailyAchievementText}</Text></View>

@@ -8,6 +8,7 @@ import React from 'react';
 import { theme } from '../../components/LoginComponents/theme';
 import DatePicker from 'react-native-datepicker';
 import { Picker as SelectPicker, PickerIOS } from '@react-native-picker/picker';
+import RNPickerSelect from "react-native-picker-select"
 import { DURATION, FREQUENCY, HOURS, MINUTES } from '../../service/utils';
 import Button from '../../components/LoginComponents/Button';
 import CheckboxComponent from './CheckboxComponent';
@@ -390,7 +391,10 @@ export default class SMPForm extends React.Component {
       this.setState({data4:Data});
     }else if(data[id].questionGroup=="5"){
       this.setState({data5:Data});
+    }else if(data[id].questionGroup=="6"){
+      this.setState({data6:Data});
     }
+    debugger;
     
    
   }
@@ -398,8 +402,9 @@ export default class SMPForm extends React.Component {
     return data.map((item)=>{
       debugger;
       return(
-        <View>
-          <Checkbox.Item color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
+        <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+          <Text>{item.key}</Text>
+          <Checkbox.Android color={theme.colors.primary} label={item.key} status={item.checked ? 'checked' : 'unchecked'} onPress={()=>{this.onChecked(item.id,data)}}/>
         </View>
       )
     })
@@ -541,14 +546,14 @@ export default class SMPForm extends React.Component {
                     <View style = {styles.parent}>
                         <View style = {styles.child}>
                             <View style = {styles.radio}>
-                              <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Yes" />
+                              <RadioButton.Android color = {theme.colors.primary} color = {theme.colors.primary} value="Yes" />
                               <Text>Yes</Text>
                             </View>
                         </View>
 
                         <View style = {styles.child}>
                           <View style = {styles.radio}>
-                            <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="No" />
+                            <RadioButton.Android color = {theme.colors.primary} color = {theme.colors.primary} value="No" />
                             <Text>No</Text>
                           </View>
                         </View>
@@ -663,14 +668,14 @@ export default class SMPForm extends React.Component {
                     <View style = {styles.parent}>
                         <View style = {styles.child}>
                             <View style = {styles.radio}>
-                              <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Epileptic" />
+                              <RadioButton.Android color = {theme.colors.primary} color = {theme.colors.primary} value="Epileptic" />
                               <Text>Epileptic</Text>
                             </View>
                         </View>
 
                         <View style = {styles.child}>
                           <View style = {styles.radio}>
-                            <RadioButton color = {theme.colors.primary} color = {theme.colors.primary} value="Functional(Non-Epileptic/Dissociative)" />
+                            <RadioButton.Android color = {theme.colors.primary} color = {theme.colors.primary} value="Functional(Non-Epileptic/Dissociative)" />
                             <Text>Functional(Non-Epileptic/Dissociative)</Text>
                           </View>
                         </View>

@@ -181,13 +181,29 @@ export default class ManageProfileScreen extends React.Component {
     if(this.state.DOB)
       return this.state.DOB;
     else
-      return "Select Date"
+      return "Select DOB"
   }
   render(){
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        {this.state.isProcessing ==true ? (
+        <View style={{
+          position:'absolute',
+          top:'50%',
+          marginLeft:'auto',
+          marginRight:'auto',
+          left:0,
+          right:0,
+          zIndex: 1
+          }}>
+        <ActivityIndicator size="large" color={theme.colors.primary}/> 
+        </View>):(<View></View>)}
+
+       
+
         <Provider>
-        <ScrollView>
+       
+        <ScrollView>          
         <View style={styles.userInfoSection}>
         <View style={{display:'flex', flexDirection:'row',justifyContent:'center', marginTop: 15}}>
           <Avatar.Image 
@@ -212,12 +228,7 @@ export default class ManageProfileScreen extends React.Component {
           paddingHorizontal:5
         }}
       />
-      {this.state.isProcessing ==true ? (
-            <View style={{
-              margin:10
-              }}>
-            <ActivityIndicator size="large" color={theme.colors.primary}/> 
-            </View>):(<View></View>)}
+     
       <View style={{padding: 10
                 }}>
         <TextInput
@@ -377,7 +388,7 @@ export default class ManageProfileScreen extends React.Component {
       </View>
         </ScrollView>
         </Provider>
-      </SafeAreaView>
+      </View>
     );
   }
   
