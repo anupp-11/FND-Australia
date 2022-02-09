@@ -127,7 +127,7 @@ export default class ManageProfileScreen extends React.Component {
   
   updateUserData = async () => {
     this.setState({isProcessing:true});
-    const userInfo = await getUserFromDevice();
+    const userInfo = await getUserInfoFromDevice();
     const userEmergencyContact = new Contact(
       this.state.emergencyName,
       this.state.emergencyRelationship,
@@ -154,7 +154,7 @@ export default class ManageProfileScreen extends React.Component {
     );
       
       debugger;
-      const response = await updateExistingUserInfo(userData);
+      const response = await updateUserInfo(userData);
       this.setState({isProcessing:false});
         debugger;
         if(response?.isSuccess){
