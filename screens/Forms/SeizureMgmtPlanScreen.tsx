@@ -11,7 +11,7 @@ import {
   RadioButton,Paragraph
 } from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 import Button from '../../components/LoginComponents/Button';
 import { theme } from '../../components/LoginComponents/theme';
 import { ScrollView } from 'react-native-gesture-handler';

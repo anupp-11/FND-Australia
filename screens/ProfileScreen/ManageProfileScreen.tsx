@@ -33,7 +33,7 @@ export default class ManageProfileScreen extends React.Component {
       name:"",
       email: "",
       gender:"",
-      DOB:"",
+      dob:"",
       mobileNumber: "",
       emergencyName:"",
       emergencyRelationship:"",
@@ -58,24 +58,25 @@ export default class ManageProfileScreen extends React.Component {
     this.setState({tempGender:this.state.gender})
     const user = await getUserFromDevice();  
     const userInfo = await getUserInfo(user?.id);
+    debugger;
     if (userInfo) {
       debugger;
       this.setState({
         email: userInfo.user.email,
         name: userInfo.user.name,
         gender: userInfo.gender,
-        DOB : userInfo.DOB,
+        dob : userInfo.dob,
         mobileNumber: userInfo.phone, 
         emergencyName : userInfo.emergencyEontact.name,
-        emergencyRelationship:userInfo.emergencyEontact.relationship,
+        emergencyRelationShip:userInfo.emergencyEontact.relationShip,
         emergencyProfession:userInfo.emergencyEontact.profession,
         emergencyAddress:userInfo.emergencyEontact.address,
-        emergencyPhone:userInfo.emergencyEontact.phoneNumber,
+        emergencyPhone:userInfo.emergencyEontact.phone,
         doctorName:userInfo.doctorDetail.name,
-        doctorRelationship:userInfo.doctorDetail.relationship,
+        doctorRelationShip:userInfo.doctorDetail.relationShip,
         doctorProfession:userInfo.doctorDetail.profession,
         doctorAddress:userInfo.doctorDetail.address,
-        doctorPhone:userInfo.doctorDetail.phoneNumber,
+        doctorPhone:userInfo.doctorDetail.phone,
       });
     }
     else {
@@ -105,22 +106,23 @@ export default class ManageProfileScreen extends React.Component {
       debugger;
       saveUserInfoToDevice(resp.result);
       const userr= await getUserInfoFromDevice();
+      debugger;
       this.setState({
         email: userr.user.email,
         name: userr.user.name,
         gender: userr.gender,
-        DOB : userr.DOB,
+        dob : userr.dob,
         mobileNumber: userr.phone, 
         emergencyName : userr.emergencyEontact.name,
-        emergencyRelationship:userr.emergencyEontact.relationship,
+        emergencyRelationShip:userr.emergencyEontact.relationShip,
         emergencyProfession:userr.emergencyEontact.profession,
         emergencyAddress:userr.emergencyEontact.address,
-        emergencyPhone:userr.emergencyEontact.phoneNumber,
+        emergencyPhone:userr.emergencyEontact.phone,
         doctorName:userr.doctorDetail.name,
-        doctorRelationship:userr.doctorDetail.relationship,
+        doctorRelationShip:userr.doctorDetail.relationShip,
         doctorProfession:userr.doctorDetail.profession,
         doctorAddress:userr.doctorDetail.address,
-        doctorPhone:userr.doctorDetail.phoneNumber,
+        doctorPhone:userr.doctorDetail.phone,
       });
     }
   };
@@ -130,7 +132,7 @@ export default class ManageProfileScreen extends React.Component {
     const userInfo = await getUserInfoFromDevice();
     const userEmergencyContact = new Contact(
       this.state.emergencyName,
-      this.state.emergencyRelationship,
+      this.state.emergencyRelationShip,
       "",
       this.state.emergencyPhone,
       this.state.emergencyAddress,
@@ -147,7 +149,7 @@ export default class ManageProfileScreen extends React.Component {
       userInfo.id,
       user,
       this.state.mobileNumber,
-      this.state.DOB,
+      this.state.dob,
       this.state.gender,
       userEmergencyContact,
       userDoctorDetail
@@ -177,9 +179,10 @@ export default class ManageProfileScreen extends React.Component {
     this.setState({gender:this.state.tempGender});
     this.hideDialog();
   }
-  getDate(){
-    if(this.state.DOB)
-      return this.state.DOB;
+  getDate(date){
+    debugger;
+    if(date)
+      return date;
     else
       return "Select DOB"
   }
@@ -206,12 +209,13 @@ export default class ManageProfileScreen extends React.Component {
         <ScrollView>          
         <View style={styles.userInfoSection}>
         <View style={{display:'flex', flexDirection:'row',justifyContent:'center', marginTop: 15}}>
-          <Avatar.Image 
-            source={{
-              uri: 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
-            }}
-            size={80}
-          />
+        {this.state.gender == "Male"?(<Avatar.Image 
+          source={require('../../assets/images/man.png')}
+          size={80}
+        />):(<Avatar.Image 
+          source={require('../../assets/images/woman.png')}
+          size={80}
+        />)}
         </View>
         <View style={{}}>
             <Title style={[styles.title, {
@@ -287,13 +291,13 @@ export default class ManageProfileScreen extends React.Component {
                   <View style={{backgroundColor:'white',display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',flex:1,padding:12,marginRight:10}}>
                     <DatePicker
                       style={{width:'100%'}}
-                      date={this.state.DOB}
-                      placeholder={this.getDate()}
+                      date={this.state.dob}
+                      placeholder={this.state.dob}
                       format="YYYY-MM-DD"
                       confirmBtnText="Confirm"
                       cancelBtnText="Cancel"
                     
-                      onDateChange={(date) => this.setState({DOB: date})}
+                      onDateChange={(date) => this.setState({dob: date})}
                     />
                   </View>
               </View>
@@ -316,8 +320,8 @@ export default class ManageProfileScreen extends React.Component {
                             theme={{ colors: { primary: theme.colors.primary}}}
                             right={<TextInput.Icon name="border-color" />}
                             label="Relationship"
-                            value={this.state.emergencyRelationship}
-                            onChangeText={(value) => this.setState({ emergencyRelationship : value })}
+                            value={this.state.emergencyRelationShip}
+                            onChangeText={(value) => this.setState({ emergencyRelationShip : value })}
                           />
                     <TextInput
                             mode="flat"

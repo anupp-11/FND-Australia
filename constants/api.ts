@@ -8,7 +8,7 @@ export const API_TYPE = API.SERVER;
 
 export const BASE_URL ="http://ec2-44-200-60-14.compute-1.amazonaws.com:8080";
 
-export const USER_ADD = "/UserInfo/add";
+export const USER_ADD = "/UserInfo/save";
 export const USER_EDIT = "/UserInfo/update";
 export const USER_GET = "/UserInfo/get-by-userid";
 export const USER_DELETE = "/UserInfo/delete";

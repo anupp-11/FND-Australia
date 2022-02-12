@@ -1,5 +1,5 @@
 import {
-  Text, View, StyleSheet, Platform, FlatList, Alert, ActivityIndicator
+  Text, View, StyleSheet, Platform, FlatList, Alert, ActivityIndicator, LogBox
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, Dialog, Portal, RadioButton,Checkbox, TextInput, Button as RButton, Provider } from 'react-native-paper';

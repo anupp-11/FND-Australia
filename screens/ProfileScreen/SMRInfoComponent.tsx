@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import {
   StyleSheet, 
@@ -8,6 +9,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { theme } from "../../components/LoginComponents/theme";
+import * as Print from 'expo-print';
+import { shareAsync } from "expo-sharing";
+import Button from "../../components/LoginComponents/Button";
 
 
 let width = Dimensions.get("screen").width / 2;
@@ -46,6 +50,71 @@ export default class SMRInfoComponent extends React.Component{
     debugger;
     return time;
     
+  }
+
+  printToFile = async () => {
+    const html = `
+    <h1 style="text-align: center;">
+    <strong>Seizure Monitoring Record</strong>
+  </h1>
+  <div style="display:flex;flex-direction:column;padding-inline:30px">
+    <p >
+      <strong>Date of Seizure :</strong> ${this.getDate(this.state.form.dateOfSeizure)} 
+    </p>
+    <p >
+      <strong>Time of Seizure :</strong>  ${this.getTime(this.state.form.timeOfSeizure)}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>What were you doing when Seizure started?</strong>
+  ${this.state.form.whatDoingSeizureStarted}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>How were you feeling before Seizure started? </strong>
+  ${this.arrayData(this.state.form.howFeelingSeizureStarted)}, 
+  ${this.state.form.howFeelingSeizureStartedText}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>What actions were taken?</strong>
+  ${this.arrayData(this.state.form.actionTaken)}, 
+  ${this.state.form.actionTakenText}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>How did the seizure present?</strong>
+  ${this.arrayData(this.state.form.seizurePresent)}, 
+  ${this.state.form.seizurePresentText}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>How did the seizure resolve?</strong>
+  ${this.state.form.seizureResolve}
+  
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>How did you feel after the Seizure?</strong>
+  ${this.arrayData(this.state.form.feelingAfterSeizure)}, 
+  ${this.state.form.feelingAfterSeizureText}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>Were emergency services involved?</strong>
+  ${this.state.form.emergencyService}
+ 
+    </p>
+
+   
+  </div>
+    `;
+ 
+    const { uri } = await Print.printToFileAsync(
+      {html}
+    );
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
   }
 
  
@@ -112,8 +181,11 @@ export default class SMRInfoComponent extends React.Component{
               <Text style={styles.data}>{this.state.form.emergencyService}</Text>
             </View>
           </Card>
-          
-          
+        </View>
+        <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+          <Button  style={{width:'80%'}} mode="contained" onPress={this.printToFile} >
+            Download PDF
+          </Button>
         </View>
       </ScrollView>
     );

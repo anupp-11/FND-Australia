@@ -51,6 +51,7 @@ const Mood = () => {
           <RadioButton data={data} onSelect={(value) => changeValue(value)} />
         </View>
         <TextInput
+          returnKeyType="next"
           value={textValue}
           onChangeText={text => changeText(text)}
           style={[

@@ -28,8 +28,8 @@ export default class MWBSScreen extends React.Component {
           <TouchableOpacity onPress={()=> this.props.navigation.navigate("Exercise")} style= {styles.userInfoSection}>
             <View >
               <Image
-              style={{height: 150, width :150, borderRadius:10, marginBottom: 20 }}
-              source={require('../../assets/images/exercise.png')}
+              style={{height: 150, width :150, borderRadius:10, marginBottom: 20}}
+              source={require('../../assets/images/exercise.jpeg')}
             />
             </View>
             <View>

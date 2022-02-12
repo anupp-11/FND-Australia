@@ -4,7 +4,7 @@ import { View } from '../../Themed';
 import Paragraph from '../../LoginComponents/Paragraph';
 import styles from './styles';
 import { Picker, PickerIOS } from '@react-native-picker/picker';
-import RNPickerSelect from "react-native-picker-select"
+import RNPickerSelect from "react-native-picker-select";
 import { HOURS, MINUTES } from '../../../service/utils';
 import { theme } from '../../LoginComponents/theme';
 import { saveDataToDevice } from '../../../service/DailyLogsService';
@@ -64,47 +64,47 @@ export default class SleepDuration  extends React.Component {
       </View>
       );
     }
-    else{
-      return (
-        <View style={styles.selectSize}>
-          <RNPickerSelect
-            style={{
-              inputIOS:{
-                //width: 150, flex: 1
-                backgroundColor: '#fff',
-                borderWidth: 1,
-                borderRadius: 10,
-                //borderColor: PRIMARY_TEXT_GRAY_COLOR,
-                marginTop: 10,
-                height: 40
-              }
-            }}
-            // placeholder={{
-            //   label:"Select State",
-            //   value:null,
-            //   color:PRIMARY_COLOR
-            // }}
-            value={this.state.hours}
-            onValueChange={(itemValue, itemIndex) =>{
+    // else{
+    //   return (
+    //     <View style={styles.selectSize}>
+    //       <RNPickerSelect
+    //         style={{
+    //           inputIOS:{
+    //             //width: 150, flex: 1
+    //             backgroundColor: '#fff',
+    //             borderWidth: 1,
+    //             borderRadius: 10,
+    //             //borderColor: PRIMARY_TEXT_GRAY_COLOR,
+    //             marginTop: 10,
+    //             height: 40
+    //           }
+    //         }}
+    //         // placeholder={{
+    //         //   label:"Select State",
+    //         //   value:null,
+    //         //   color:PRIMARY_COLOR
+    //         // }}
+    //         value={this.state.hours}
+    //         onValueChange={(itemValue, itemIndex) =>{
               
-              this.setState({hours:itemValue})
-            }
+    //           this.setState({hours:itemValue})
+    //         }
               
-            }
-            items={HOURS.map(x => {
-              const sta ={
-                label: x,
-                value: x
-              };
-              return sta;
-            })}
+    //         }
+    //         items={HOURS.map(x => {
+    //           const sta ={
+    //             label: x,
+    //             value: x
+    //           };
+    //           return sta;
+    //         })}
             
             
-          />
-        </View>
+    //       />
+    //     </View>
 
-      )
-    }
+    //   )
+    // }
   }
   getMinutePicker(){
 
@@ -201,6 +201,7 @@ export default class SleepDuration  extends React.Component {
           </View>
           
           <TextInput
+          returnKeyType="next"
              value={this.state.textValue}
              onChangeText={text => this.changeText(text)}
             style={[

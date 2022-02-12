@@ -42,6 +42,7 @@ const PhysicalActivityLevel = () => {
         </View>
         
         <TextInput
+        returnKeyType="next"
           value={textValue}
           onChangeText={text => changeText(text)}
           style={[

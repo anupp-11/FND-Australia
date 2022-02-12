@@ -22,7 +22,7 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
-import { getUserFromDevice, saveUserToDevice } from '../../service/AccountService';
+import { getUserFromDevice, getUserInfoFromDevice, saveUserToDevice } from '../../service/AccountService';
 import { clearDailyLogs } from '../../service/DailyLogsService';
 
 const ProfileScreen = () => {
@@ -35,10 +35,16 @@ const ProfileScreen = () => {
 
   const [userName, setuserName] = useState("User");
   const [email, setEmail] = useState("");
-
+  const [gender, setGender] = useState("Male");
   useEffect(() => {
     async function getUser() {
       const user = await getUserFromDevice();
+      const userInfo = await getUserInfoFromDevice();
+      if(userInfo){
+        setGender(userInfo.gender);
+      }else{
+        setGender("Male");
+      }
       setuserName(user?.name);
       setEmail(user?.email);
       debugger;
@@ -68,12 +74,14 @@ const ProfileScreen = () => {
     <View style={styles.head}>
       
       <View style={{flexDirection: 'row', marginTop: 15}}>
-        <Avatar.Image 
-          source={{
-            uri: 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
-          }}
+        {gender == "Male"?(<Avatar.Image 
+          source={require('../../assets/images/man.png')}
           size={80}
-        />
+        />):(<Avatar.Image 
+          source={require('../../assets/images/woman.png')}
+          size={80}
+        />)}
+        
         <View style={{marginLeft: 20}}>
           <Title style={[styles.title, {
             marginTop:15,

@@ -1,14 +1,14 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   StyleSheet, 
   Dimensions,
   View, Text, ScrollView
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { theme } from "../../components/LoginComponents/theme";
-
+import * as Print from 'expo-print';
+import { shareAsync } from "expo-sharing";
+import Button from "../../components/LoginComponents/Button";
 
 let width = Dimensions.get("screen").width / 2;
 
@@ -48,6 +48,94 @@ export default class SMPInfoComponent extends React.Component{
     }
     
   }
+
+  printToFile = async () => {
+    const html = `
+    <h1 style="text-align: center;">
+    <strong>Seizure Management Plan</strong>
+  </h1>
+  <div style="display:flex;flex-direction:column;padding-inline:30px">
+    <p >
+      <strong>Date of Birth:</strong> ${this.getDate(this.state.form.dateOfBirth)} 
+    </p>
+    <p >
+      <strong>Date of Plan:</strong>  ${this.getDate(this.state.form.dateOfPlan)}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>Medication you are on:</strong>
+  ${this.state.form.onMedication}, ${this.state.form.medication}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>Medical Conditions:</strong>
+  ${this.arrayData(this.state.form.medicalConditions)}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>Other relevant medical history:</strong>
+  ${this.state.form.medicalHistory}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>>Warning signs prior to a Seizure:</strong>
+  ${this.arrayData(this.state.form.warningSigns)}, 
+  ${this.state.form.warningSignsText}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>Types of Seizure you have:</strong>
+  ${this.state.form.seizureType}
+  ${this.state.form.seizureTypeText}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>How does your seizures typically present?</strong>
+  ${this.arrayData(this.state.form.seizurePresent)}, 
+  ${this.state.form.seizurePresentText}
+    </p>
+    
+     <p style="display:flex;flex-direction:column;">
+      <strong>Typical Duration of Seizure:</strong>
+  ${this.state.form.durationOfSeizure}
+ 
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>Typical Frequency of Seizure:</strong>
+  ${this.state.form.frequency} times a ${this.state.form.frequencyUnit}
+ 
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>Assistance required from people?</strong>
+  ${this.arrayData(this.state.form.notDo)}, 
+  ${this.state.form.notDoText}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>What you may need after a seizure?</strong>
+  ${this.state.form.needAfterSeizure}, 
+  ${this.state.form.needAfterSeizureText}
+    </p>
+    
+    <p style="display:flex;flex-direction:column;">
+      <strong>An ambulance may be needed in the event of?</strong>
+  ${this.arrayData(this.state.form.ambulanceNeeded)}, 
+  ${this.state.form.ambulanceNeededText}
+    </p>
+
+
+   
+  </div>`;
+ 
+    const { uri } = await Print.printToFileAsync(
+      {html}
+    );
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+  }
+
 
  
   render() {
@@ -101,7 +189,7 @@ export default class SMPInfoComponent extends React.Component{
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
-              <Text style={styles.title}>How does your seizures typically present?: </Text>
+              <Text style={styles.title}>How does your seizures typically present? </Text>
               {this.state.form.seizurePresent? ( <Text style={styles.data}>{this.arrayData(this.state.form.seizurePresent)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.seizurePresentText}</Text>
             </View>
@@ -120,7 +208,7 @@ export default class SMPInfoComponent extends React.Component{
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
-              <Text style={styles.title}>Assistance required from people?: </Text>
+              <Text style={styles.title}>Assistance required from people? </Text>
               {this.state.form.assistanceRequired? ( <Text style={styles.data}>{this.arrayData(this.state.form.assistanceRequired)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.assistanceRequiredText}</Text>
             </View>
@@ -134,19 +222,24 @@ export default class SMPInfoComponent extends React.Component{
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
-              <Text style={styles.title}>What you may need after a seizure?: </Text>
+              <Text style={styles.title}>What you may need after a seizure? </Text>
               <Text style={styles.data}>{this.state.form.needAfterSeizure}</Text>
               <Text style={styles.data}>{this.state.form.needAfterSeizureText}</Text>
             </View>
           </Card>
           <Card style={{padding:10,marginVertical:5}}>
             <View style={styles.col}>
-              <Text style={styles.title}>An ambulance may be needed in the event of?: </Text>
+              <Text style={styles.title}>An ambulance may be needed in the event of? </Text>
               {this.state.form.ambulanceNeeded? ( <Text style={styles.data}>{this.arrayData(this.state.form.ambulanceNeeded)}</Text>):(<View></View>)}
               <Text style={styles.data}>{this.state.form.ambulanceNeededText}</Text>
             </View>
           </Card>
           
+        </View>
+        <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+          <Button  style={{width:'80%'}} mode="contained" onPress={this.printToFile} >
+            Download PDF
+          </Button>
         </View>
       </ScrollView>
     );

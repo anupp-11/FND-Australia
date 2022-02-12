@@ -34,17 +34,18 @@ export async function registerUser(userInfo : RegUserInfo) {
  
 }
 
-export async function updateUserInfo(userInfo : RegsUserInfo) {
+export async function updateUserInfo(userInfo : UserInfo) {
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
   debugger;
-  const response = await axios.post<RegsUserInfo>(ADD_USER_URL, userInfo, 
+  const response = await axios.post<UserInfo>(ADD_USER_URL, userInfo, 
     { 
       headers: {
           "Authorization": `Bearer ${token}`
         }
     });
   debugger;
+  saveUserInfoToDevice(response.data);
   return response.data;
 }
 

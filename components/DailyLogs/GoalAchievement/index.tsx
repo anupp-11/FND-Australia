@@ -20,6 +20,7 @@ const GoalAchievement = () => {
           source={require('../../../assets/images/GA.png')}
         />
         <TextInput
+        returnKeyType="next"
           value={textValue}
           onChangeText={text => changeText(text)}
           style={[

@@ -61,7 +61,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
 
   onChange = (event, selectedDate) => {
     const currentDate = selectedDate || this.state.date;
-    this.setState({show:(Platform.OS ==='ios')});
+    this.setState({show:Platform.OS ==='ios'});
     this.setState({date:currentDate});
   };
 
@@ -75,76 +75,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
     this.showMode('date');
   };
 
-  //  const getStatePicker = () => {
-
-  //   if(Platform.OS === "android"){
-  //     return(
-  //       <View
-  //         style={{
-  //         //paddingVertical: 2,
-  //         //backgroundColor: '#fff',
-  //         borderWidth: 1,
-  //         borderRadius: 10,
-  //         borderColor: 'gray',
-  //         marginTop: 10
-  //     }}>
-  //       <SelectPicker
-  //               selectedValue={hour}
-  //               style={{ width: 150, flex: 1}}
-  //               onValueChange={(itemValue, itemIndex) =>
-  //                 setHour(itemValue)
-  //               }
-  //             >
-  //               {HOURS.map((x) => (
-  //                 <SelectPicker.Item key={x} label={x} value={x} />
-  //               ))}
-  //       </SelectPicker>
-  //     </View>
-  //     );
-  //   }else{
-  //     return (
-  //       <View style={{}}>
-  //         <RNPickerSelect
-  //           style={{
-  //             inputIOS:{
-  //               //width: 150, flex: 1
-  //               backgroundColor: '#fff',
-  //               borderWidth: 1,
-  //               borderRadius: 10,
-  //               //borderColor: PRIMARY_TEXT_GRAY_COLOR,
-  //               marginTop: 10,
-  //               height: 40
-  //             }
-  //           }}
-  //           // placeholder={{
-  //           //   label:"Select State",
-  //           //   value:null,
-  //           //   color:PRIMARY_COLOR
-  //           // }}
-  //           value={hour}
-  //           onValueChange={(itemValue, itemIndex) =>{
-              
-  //             setHour(itemValue)
-  //           }
-              
-  //           }
-  //           items={HOURS.map(x => {
-  //             const sta ={
-  //               label: x,
-  //               value: x
-  //             };
-  //             return sta;
-  //           })}
-            
-            
-  //         />
-  //       </View>
-
-  //     )
-  //   }
-  // }
   
-
 
   showTimepicker = () => {
     this.showMode('time');
@@ -248,6 +179,18 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
   }
   renderItem = ({ item }) => <CheckboxComponent data={item} navigation={this.props.navigation} />;
 
+  getDate(dateTime: Date){
+    const date = new Date(dateTime).toLocaleDateString();
+    debugger;
+    return date;
+    
+  }
+  getTime(dateTime: Date){
+    const time = new Date(dateTime).toLocaleTimeString();
+    debugger;
+    return time;
+    
+  }
   //const navigation = useNavigation();
   render(){
     return (
@@ -271,7 +214,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
             <Card style = {styles.card}>
               <View style = {{marginHorizontal:10}}>
                 <Button mode="contained" onPress={this.showDatepicker} >
-                  Date of Seizure
+                  Date of Seizure 
                 </Button>
               </View>
               <View style = {{marginHorizontal:10}}>
@@ -279,7 +222,9 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                   Time Seizure Started
                 </Button>
               </View>
-              {this.state.show && (
+              
+            </Card>
+            {this.state.show && (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={this.state.date}
@@ -287,9 +232,9 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                   is24Hour={true}
                   display="default"
                   onChange={this.onChange}
+                  style={{width: 320, backgroundColor: "white"}}
                 />
               )}
-            </Card>
           
           {/* Question 1 */}
           <Card style = {styles.card}>

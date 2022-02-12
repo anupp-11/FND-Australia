@@ -76,6 +76,7 @@ const SleepQuality = () => {
             
     
         <TextInput
+        returnKeyType="next"
           value={sleepQualityText}
           onChangeText={text => changeText(text)}
           style={[

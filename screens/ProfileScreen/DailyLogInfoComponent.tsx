@@ -6,24 +6,21 @@ import {
 } from "react-native";
 import { Card, ProgressBar } from "react-native-paper";
 import { theme } from "../../components/LoginComponents/theme";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
+import Button from "../../components/LoginComponents/Button";
+import * as Print from 'expo-print';
+import { shareAsync } from 'expo-sharing';
 
 
-let width = Dimensions.get("screen").width / 2;
 
 export default class SMRInfoComponent extends React.Component{
     
   constructor(props) {
     super(props);
     this.state = {
-       form : props.route.params.form
+       form : props.route.params.form,
+       
     };
     debugger;
   }
@@ -58,11 +55,68 @@ export default class SMRInfoComponent extends React.Component{
     
   }
 
+  
+  printToFile = async () => {
+    const html = `
+    <h1 style="text-align: center;">
+    <strong>Daily Log</strong>
+  </h1>
+  <div style="display:flex;flex-direction:column;padding-inline:30px">
+    <p >
+      <strong>Recorded At :</strong> ${this.getDate(this.state.form.createdAt)} ${this.getTime(this.state.form.createdAt)}
+    </p>
+    <p >
+      <strong>Mood :</strong>
+      
+      ${this.state.form.moodText}
+    </p>
+
+    <p >
+      <strong>Sleep Quality : (${this.state.form.sleepQualityValue})</strong>
+      ${this.state.form.sleepQualityText}
+    </p>
+    
+    <p >
+      <strong>Stress Level : (${this.state.form.stressLevelValue})</strong>
+      ${this.state.form.stressLevelText}
+    </p>
+    
+    <p >
+      <strong>Physical Wellbeing Rating : (${this.state.form.pwrValue})</strong>
+      ${this.state.form.pwrText}
+    </p>
+    
+    <p >
+      <strong>Sleep Duration : (${this.state.form.sleepDurationValue})</strong>
+      ${this.state.form.sleepDurationText}
+    </p>
+    
+    <p >
+      <strong>Physical Activity Level : (${this.state.form.palValue})</strong>
+      ${this.state.form.palText}
+    </p>
+    
+    <p >
+      <strong>Daily Achievement : </strong>
+      ${this.state.form.dailyAchievementText}
+    </p>
+    
+  </div>
+    `;
+ 
+    const { uri } = await Print.printToFileAsync(
+      {html}
+    );
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+  }
 
  
   render() {
     return (
       <ScrollView >
+        
+
         <Card style={styles.card}>
           <Text style={styles.title}>Recorded At</Text>
             <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',paddingHorizontal:10}}>
@@ -144,46 +198,14 @@ export default class SMRInfoComponent extends React.Component{
               <View style={{}}><Text style={{fontSize:16,fontWeight:'600'}}>{this.state.form.dailyAchievementText}</Text></View>
             </View>
         </Card>
+        <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+          <Button  style={{width:'80%'}} mode="contained" onPress={this.printToFile} >
+            Download PDF
+          </Button>
+        </View>
+        
 
-
-        {/* <LineChart
-    data={{
-      labels: ["Mood", "Sleep Quality", "Stress Level", "PWR"],
-      datasets: [
-        {
-          data: [
-            0,6,5,10
-          ]
-        }
-      ]
-    }}
-    width={Dimensions.get("window").width} // from react-native
-    height={220}
-    //yAxisLabel="Hr"
-    yAxisSuffix="Hr"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#e26a00",
-      backgroundGradientFrom: "#fb8c00",
-      backgroundGradientTo: "#ffa726",
-      decimalPlaces: 0, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16
-    }}
-  /> */}
+       
       </ScrollView>
     );
   }
