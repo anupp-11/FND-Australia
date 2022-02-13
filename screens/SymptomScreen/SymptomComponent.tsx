@@ -26,7 +26,7 @@ export default class SymptomComponent extends React.Component{
   }
   handleOnPress (){
     
-    this.props.navigation.navigate("SymptomInfo", {
+    this.props.navigation.navigate("Symptom Info", {
       symptom: this.state.symptom,
     });
    

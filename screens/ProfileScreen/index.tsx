@@ -22,7 +22,7 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { theme } from '../../components/LoginComponents/theme';
-import { getUserFromDevice, getUserInfoFromDevice, saveUserToDevice } from '../../service/AccountService';
+import { getUserFromDevice, getUserInfo, getUserInfoFromDevice, saveUserToDevice } from '../../service/AccountService';
 import { clearDailyLogs } from '../../service/DailyLogsService';
 
 const ProfileScreen = () => {
@@ -39,12 +39,18 @@ const ProfileScreen = () => {
   useEffect(() => {
     async function getUser() {
       const user = await getUserFromDevice();
-      const userInfo = await getUserInfoFromDevice();
-      if(userInfo){
-        setGender(userInfo.gender);
-      }else{
-        setGender("Male");
+      try {
+        const userInfo = await getUserInfo(user?.id);
+        debugger;
+        if(userInfo){
+          setGender(userInfo.gender);
+        }else{
+          setGender("Male");
+        }
+      } catch (error) {
+        console.log("Error:",error.message);
       }
+      
       setuserName(user?.name);
       setEmail(user?.email);
       debugger;

@@ -28,7 +28,7 @@ const DashboardScreen = () => {
 
       {/* <Paragraph> Login or SignUp </Paragraph> */}
       <Button mode="contained" onPress={Login}>
-        Login
+        Sign In
       </Button>
       <Button mode="outlined" labelStyle = {{color : theme.colors.primary}} onPress={Signup} >
         Sign Up

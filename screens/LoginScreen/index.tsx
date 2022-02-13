@@ -296,15 +296,18 @@ const LoginScreen = () => {
                 <Text style={styles.link}>Sign up</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.row}>
-              <Text style={{marginVertical:10, color:theme.colors.secondary}}>OR</Text>
-            </View>
+           
             {isBiometricSupported ? (
               <View >
-                <TouchableOpacity style={styles.row} onPress={handleBiometricAuth}>
-                  <IoIcon name="finger-print-outline" color={theme.colors.primary} size={20} style={{marginRight:10}} />
-                  <Text style={styles.label}>Tap to sign in with biometric</Text>
-                </TouchableOpacity>
+                <View style={styles.row}>
+                  <Text style={{marginVertical:10, color:theme.colors.secondary}}>OR</Text>
+                </View>
+                <View>
+                  <TouchableOpacity style={styles.row} onPress={handleBiometricAuth}>
+                    <IoIcon name="finger-print-outline" color={theme.colors.primary} size={20} style={{marginRight:10}} />
+                    <Text style={styles.label}>Tap to sign in with biometric</Text>
+                  </TouchableOpacity>
+                </View>
               </View>)
               : (
                 <View></View>
