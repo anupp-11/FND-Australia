@@ -23,7 +23,7 @@ export default function SymptomNavigator() {
         
       />
       <SymptomStack.Screen
-        name="SymptomInfo"
+        name="Symptom Info"
         component={SymptomInfoComponent}
         options = {{
           // headerShown: false,

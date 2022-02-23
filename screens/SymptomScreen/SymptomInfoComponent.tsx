@@ -34,7 +34,7 @@ export default class SymptomInfoComponent extends React.Component{
         <View style={{padding:10}}>
           <Text style={{fontSize:18,fontWeight:'700',color:theme.colors.primary}}>{this.props.route.params.symptom.title}:</Text>
           <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.symptom.detail}</Text>
-          <Text style={{fontSize:16,textAlign: 'justify'}}>{this.props.route.params.symptom.detail2}</Text>
+          <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.symptom.detail2}</Text>
 
           {(this.props.route.params.symptom.S1)?(<Text style={{marginTop:10,fontSize:18,fontWeight:'600',paddingHorizontal:10,color:theme.colors.primary}}>{this.props.route.params.symptom?.S1}</Text>):(<View></View>)}
           <Text style={{fontSize:16,lineHeight: 25,textAlign: 'justify'}}>{this.props.route.params.symptom?.S1P1}</Text>

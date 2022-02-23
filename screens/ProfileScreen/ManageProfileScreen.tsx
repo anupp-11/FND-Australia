@@ -20,6 +20,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Contact, DoctorDetail, EmergencyContact, RegsUserInfo, UserInfo } from '../../models/BaseModel';
 import DatePicker from 'react-native-datepicker';
 import { getUserFromDevice, getUserInfo, getUserInfoFromDevice, saveUserInfoToDevice, updateExistingUserInfo, updateUserInfo } from '../../service/AccountService';
+import { NavigationRouteContext, StackActions } from '@react-navigation/native';
 
 export default class ManageProfileScreen extends React.Component {
   constructor(props) {
@@ -162,6 +163,11 @@ export default class ManageProfileScreen extends React.Component {
         if(response?.isSuccess){
           Alert.alert("","Data Updated Successfully.");
           saveUserInfoToDevice(response.result);
+          this.props.navigation.dispatch(
+            StackActions.replace('Home',{
+            })
+          );
+          // this.props.navigation.navigate("BHome");
         }else {
           Alert.alert("","Update Unsuccessful");
         }
@@ -288,15 +294,15 @@ export default class ManageProfileScreen extends React.Component {
                     disabled={true}
                     //onChangeText={(value) => this.setState({ mobileNumber: value })}
                   />
-                  <View style={{backgroundColor:'white',display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',flex:1,padding:12,marginRight:10}}>
+                  <View style={{backgroundColor:'white',display:'flex', flexDirection:'column',justifyContent:'center',flex:1,padding:2,marginRight:10,paddingHorizontal:10}}>
+                    <Text style={{fontSize:12,color:'gray'}}>Date of Birth</Text>
                     <DatePicker
-                      style={{width:'100%'}}
+                      style={{width:'100%', outerHeight:'50%'}}
                       date={this.state.dob}
                       placeholder={this.state.dob}
                       format="YYYY-MM-DD"
                       confirmBtnText="Confirm"
                       cancelBtnText="Cancel"
-                    
                       onDateChange={(date) => this.setState({dob: date})}
                     />
                   </View>
