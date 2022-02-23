@@ -163,11 +163,11 @@ export default class ManageProfileScreen extends React.Component {
         if(response?.isSuccess){
           Alert.alert("","Data Updated Successfully.");
           saveUserInfoToDevice(response.result);
-          // this.props.navigation.dispatch(
-          //   StackActions.replace('Home',{
-          //   })
-          // );
-          //this.props.navigation.navigate("BHome");
+          this.props.navigation.dispatch(
+            StackActions.replace('Home',{
+            })
+          );
+          // this.props.navigation.navigate("BHome");
         }else {
           Alert.alert("","Update Unsuccessful");
         }

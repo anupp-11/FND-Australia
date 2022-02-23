@@ -31,7 +31,7 @@ export default class MusicScreen extends React.Component {
   renderItem = ({ item }) => <VideoComponent video={item} navigation={this.props.navigation} />;
   render(){
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <Text style={{fontSize:16,lineHeight: 25,fontWeight:'600',paddingHorizontal:10,paddingVertical:5,textAlign: 'justify'}}>Many people with FND experience sensory sensitivities. Some people are acutely sensitive to 
           sounds. Some sounds may trigger and overload a person’s nervous system, leading to 
           symptom exacerbation and functional seizures. Other sounds, may be healing and soothing 
@@ -56,7 +56,7 @@ export default class MusicScreen extends React.Component {
                 marginTop: 10,
                }}
              />
-    </ScrollView>
+    </View>
     );
   }
   

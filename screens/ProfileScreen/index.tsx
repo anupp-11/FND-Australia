@@ -107,6 +107,8 @@ const ProfileScreen = () => {
     />
 
 
+
+
     <View style={styles.menuWrapper}>
       <TouchableRipple onPress={() => navigation.navigate('Manage Profile')}>
         <View style={styles.menuItem}>

@@ -26,11 +26,11 @@ import { dailyLogsAdd } from '../../service/FormService';
 
 const content = [
   <Mood/>,
-  <SleepQuality/>,
-  <StressLevel/>,
-  <PhysicalHealthRating/>,
   <SleepDuration/>,
+  <SleepQuality/>,
+  <PhysicalHealthRating/>,
   <PhysicalActivityLevel/>,
+  <StressLevel/>, 
   <GoalAchievement/>,
 ];
 
@@ -90,7 +90,7 @@ const DailyLogsScreen = () => {
       else{
         Alert.alert(
           "Successful",
-          "Your Daily Log Has been Submitted.",
+          "Your Daily Log has been submitted.",
           [
             {
               text: "Cancel",
