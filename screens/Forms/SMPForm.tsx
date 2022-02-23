@@ -70,7 +70,7 @@ export default class SMPForm extends React.Component {
   }
   getHourPicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "android"){
       return(
         <View
           style={{
@@ -95,7 +95,7 @@ export default class SMPForm extends React.Component {
         <Text style={{marginRight:10,fontWeight:'700'}}>Hr</Text>
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>
@@ -140,7 +140,7 @@ export default class SMPForm extends React.Component {
   }
   getMinutePicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "android"){
       return(
         <View
           style={{
@@ -165,7 +165,7 @@ export default class SMPForm extends React.Component {
         <Text style={{marginRight:10,fontWeight:'700'}}>Min</Text>
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>
@@ -210,7 +210,7 @@ export default class SMPForm extends React.Component {
   }
   getFrequencyPicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "android"){
       return(
         <View
           style={{
@@ -235,7 +235,7 @@ export default class SMPForm extends React.Component {
         
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>
@@ -280,7 +280,7 @@ export default class SMPForm extends React.Component {
   }
   getDurationPicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "android"){
       return(
         <View
           style={{
@@ -304,7 +304,7 @@ export default class SMPForm extends React.Component {
         </SelectPicker>
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>

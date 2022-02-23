@@ -36,7 +36,7 @@ export default class SleepDuration  extends React.Component {
   };
   getHourPicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "ios"){
       return(
         <View
           style={{
@@ -63,7 +63,7 @@ export default class SleepDuration  extends React.Component {
         <Text style={{marginRight:10,fontWeight:'700'}}>Hr</Text>
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>
@@ -108,7 +108,7 @@ export default class SleepDuration  extends React.Component {
   }
   getMinutePicker(){
 
-    if(Platform.OS === "android"){
+    //if(Platform.OS === "ios"){
       return(
         <View
           style={{
@@ -134,7 +134,7 @@ export default class SleepDuration  extends React.Component {
         <Text style={{marginRight:10,fontWeight:'700'}}>Min</Text>
       </View>
       );
-    }
+    //}
     // else{
     //   return (
     //     <View style={styles.selectSize}>

@@ -212,19 +212,37 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
         
             {/* Date and Time Picker */}
             <Card style = {styles.card}>
-              <View style = {{marginHorizontal:10}}>
-                <Button mode="contained" onPress={this.showDatepicker} >
-                  Date of Seizure 
-                </Button>
+              <View style = {{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:20}}>
+             
+                <Text style={styles.questions}>Date of Seizure :</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={this.state.date}
+                  mode={'date'}
+                  is24Hour={true}
+                  display="default"
+                  onChange={this.onChange}
+                  style={{width: "40%", backgroundColor: "white"}}
+                />
+              
               </View>
-              <View style = {{marginHorizontal:10}}>
-                <Button mode="contained" onPress={this.showTimepicker} >
-                  Time Seizure Started
-                </Button>
+              <View style = {{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:20}}>
+             
+                <Text style={styles.questions}>Time Seizure Started :</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={this.state.date}
+                  mode={'time'}
+                  is24Hour={true}
+                  display="default"
+                  onChange={this.onChange}
+                  style={{width: "40%", backgroundColor: "white"}}
+                />
+              
               </View>
               
             </Card>
-            {this.state.show && (
+            {/* {this.state.show && (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={this.state.date}
@@ -234,7 +252,7 @@ export default class SymptomMonitoringRecordScreen extends React.Component {
                   onChange={this.onChange}
                   style={{width: 320, backgroundColor: "white"}}
                 />
-              )}
+              )} */}
           
           {/* Question 1 */}
           <Card style = {styles.card}>
