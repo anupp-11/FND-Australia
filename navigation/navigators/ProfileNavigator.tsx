@@ -29,6 +29,7 @@ import SMRList from "../../screens/ProfileScreen/SMRList";
 import StoryScreen from "../../screens/ProfileScreen/Stories";
 import StoryInfoComponent from "../../screens/ProfileScreen/StoryInfoComponent";
 import UsefulLinksScreen from "../../screens/ProfileScreen/UsefulLinksScreen";
+import ReferenceScreen from "../../screens/ProfileScreen/ReferenceScreen";
 
 import { ProfileTabParamList } from "../../types";
 
@@ -131,6 +132,11 @@ export default function ProfileNavigator() {
        <ProfileStack.Screen
         name="Daily Log"
         component={DailyLogInfoComponent}
+      />
+
+      <ProfileStack.Screen
+        name="References"
+        component={ReferenceScreen}
       />
       
     </ProfileStack.Navigator>

@@ -21,7 +21,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "fndaustralia.com"
+      "bundleIdentifier": "fndaustralia.com",
+      "buildNumber": "2"
     },
     "android": {
       "versionCode":3,

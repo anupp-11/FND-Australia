@@ -171,12 +171,12 @@ const ProfileScreen = () => {
           <Text style={styles.menuItemText}>Useful Links</Text>
         </View>
       </TouchableRipple>
-      <TouchableRipple onPress={() => navigation.navigate('Donation')}>
+      {/* <TouchableRipple onPress={() => navigation.navigate('Donation')}>
         <View style={styles.menuItem}>
           <FAIcon name="donate" color="#28cd00" size={25}/>
           <Text style={styles.menuItemText}>Donation</Text>
         </View>
-      </TouchableRipple>
+      </TouchableRipple> */}
       <TouchableRipple onPress={() => navigation.navigate('Stories')}>
         <View style={styles.menuItem}>
           <Icon name="camera-party-mode" color="#28cd00" size={27} style={{marginLeft:-2,marginRight:1}}/>
@@ -193,6 +193,12 @@ const ProfileScreen = () => {
         <View style={styles.menuItem}>
           <Icons name="settings" color="#28cd00" size={23} style={{marginRight:3}}/>
           <Text style={styles.menuItemText}>App Settings</Text>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => navigation.navigate('References')}>
+        <View style={styles.menuItem}>
+          <Icons name="book-open" color="#28cd00" size={23} style={{marginRight:3}}/>
+          <Text style={styles.menuItemText}>References</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple onPress={showDialog}>

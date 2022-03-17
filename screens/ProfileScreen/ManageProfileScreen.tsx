@@ -265,15 +265,15 @@ export default class ManageProfileScreen extends React.Component {
                         <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-around',height:50,borderColor:'gray', borderWidth:1, borderRadius:4}}>
                           <View style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
                             <Text>Male</Text>
-                            <RadioButton color={theme.colors.primary} value="Male" />
+                            <RadioButton.Android color={theme.colors.primary} value="Male" />
                           </View> 
                           <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                             <Text>Female</Text>
-                            <RadioButton color={theme.colors.primary} value="Female" />
+                            <RadioButton.Android color={theme.colors.primary} value="Female" />
                           </View>
                           <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                             <Text>Other</Text>
-                            <RadioButton color={theme.colors.primary} value="Other" />
+                            <RadioButton.Android color={theme.colors.primary} value="Other" />
                           </View>
                         </View>
                       </RadioButton.Group>
