@@ -49,7 +49,7 @@ const ProfileScreen = () => {
       </View>
     </View>
 
-    {/* <View style={styles.userInfoSection}>
+    <View style={styles.userInfoSection}>
       <View style={styles.row}>
         <Icon name="map-marker-radius" color="#777777" size={20}/>
         <Text style={{color:"#777777", marginLeft: 20}}>Dhapakhel, Lalitpur</Text>
@@ -62,7 +62,7 @@ const ProfileScreen = () => {
         <Icon name="email" color="#777777" size={20}/>
         <Text style={{color:"#777777", marginLeft: 20}}>rame@email.com</Text>
       </View>
-    </View> */}
+    </View>
     <View
       style={{
       borderBottomColor: theme.colors.surface,
@@ -74,92 +74,7 @@ const ProfileScreen = () => {
 
 
     <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="user-edit" color="#28cd00" size={20}/>
-          <Text style={styles.menuItemText}>Manage Profile</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="user-md" color="#28cd00" size={20}/>
-          <Text style={styles.menuItemText}>Diagnosis</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() =>{}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="briefcase-medical" color="#28cd00" size={20}/>
-          <Text style={styles.menuItemText}>Medication</Text>
-        </View>
-      </TouchableRipple>
       
-     
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Symptom Management Plan</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={_onSMRPressed}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Symptom Monitoring Record</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Potential Strategies</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Daily Log</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Exercise</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Self-Referral Form</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="donate" color="#28cd00" size={25}/>
-          <Text style={styles.menuItemText}>Donation</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#28cd00" size={27}/>
-          <Text style={styles.menuItemText}>Stories</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FAIcon name="question-circle" color="#28cd00" size={23}/>
-          <Text style={styles.menuItemText}>FAQ</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <Icons name="settings" color="#28cd00" size={23}/>
-          <Text style={styles.menuItemText}>App Settings</Text>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => navigation.navigate('Dashboard')}>
-        <View style={styles.menuItem}>
-          <Icon name="logout" color="#28cd00" size={23}/>
-          <Text style={styles.menuItemText}>Logout</Text>
-        </View>
-      </TouchableRipple>
 
   
     </View>

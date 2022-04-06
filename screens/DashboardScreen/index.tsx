@@ -18,10 +18,10 @@ const DashboardScreen = () => {
   };
   return (
     <Background>
+      
+      <Header>Welcome To</Header>
       <Logo />
-      <Header>Welcome To FND</Header>
-
-      {/* <Paragraph> Login or SignUp </Paragraph> */}
+      <Header>SECC APP</Header>
       <Button mode="contained" onPress={Login}>
         Login
       </Button>

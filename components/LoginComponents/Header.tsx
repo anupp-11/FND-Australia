@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
     fontWeight: 'bold',
     paddingVertical: 14,
-    fontFamily : 'space-mono'
   },
 });
 

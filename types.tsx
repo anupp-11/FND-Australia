@@ -16,6 +16,10 @@ export type AccountTabParamList = {
   AccountScreen: undefined;
 };
 
+export type HomeTabParamList = {
+  HomeScreen: undefined;
+};
+
 export type CartTabParamList = {
   CartScreen: undefined;
 };

@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "FNDAustralia",
-    "slug": "FNDAustralia",
+    "name": "SECCApp",
+    "slug": "SECCApp",
     "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -21,14 +21,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "fndaustralia.com"
+      "bundleIdentifier": "SECCApp.com"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "fndaustralia.com"
+      "package": "SECCApp.com"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

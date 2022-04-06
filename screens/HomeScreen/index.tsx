@@ -2,73 +2,92 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  SectionList,
-  FlatList,
-  ScrollView,
   Image,
+  TouchableOpacity
 } from 'react-native';
-
 import styles from './styles';
-import HomeImageCarousel from '../../components/HomeImageCarousel';
-import ImageCarousal from '../../data/ImageCarousal';
-import Background from '../../components/LoginComponents/Background';
-import Header from '../../components/LoginComponents/Header';
-import { theme } from '../../components/LoginComponents/theme';
-import SleepDuration from '../../components/DailyLogs/Sleep';
-import Mood from '../../components/DailyLogs/Mood';
+import { useNavigation } from '@react-navigation/native';
 
+const HomeScreen = () => {
+  const navigation = useNavigation();
 
-const HomeScreen = ({searchValue}: {searchValue: string}) => {
-  console.log(searchValue);
+  
   return (
-    <View  >
-      <View style = {styles.container}>
-
-        <Text style = {styles.header}>
-          My FND Australia
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("News")}>
+        <View style={styles.cardBody}>
+        <Image
+          style={{height:40,width:40}}
+          source={require('../../assets/icons/news.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          News
         </Text>
-
-        <Text style = {styles.name}>
-          <Text style = {{color : theme.colors.secondary}}>
-            Welcome 
-          </Text>
-          {" "}
-          <Text style = {{color : theme.colors.primary}}>
-              Anup ! 
-          </Text>
+      </TouchableOpacity>
+  
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("Services")}>
+        <View style={styles.cardBody}>
+          <Image
+          style={{height:50,width:50}}
+          source={require('../../assets/icons/service.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          Services
         </Text>
+      </TouchableOpacity>
 
-        <Text style = {{marginTop: 10 ,color : theme.colors.secondary, fontSize : 20, fontWeight: '600', }}>
-          How are you feeling today?
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("ContactUs")}>
+        <View style={styles.cardBody}>
+        <Image
+          style={{height:50,width:50}}
+          source={require('../../assets/icons/support.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          Support Us
         </Text>
-
-        </View>
-        <View style= {styles.mood}>
-          <Text></Text>
-        </View>
-        <Mood/>
-        <SleepDuration/>
+      </TouchableOpacity>
 
       
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("ContactUs")}>
+        <View style={styles.cardBody}>
+        <Image
+          style={{height:50,width:50}}
+          source={require('../../assets/icons/contact-mail.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          Contact Us
+        </Text>
+      </TouchableOpacity>
       
-      {/* <ScrollView>
-        <CarouselCards />
-        <ScrollView>
-          <FlatList
-            data={categories.category}
-            renderItem={({item}) => <HomeCategory category={item} />}
-          />
-        </ScrollView>
-        <ScrollView>
-          <Text style={styles.root}>All Products</Text>
-          <FlatList
-            data={products}
-            renderItem={({item}) => <ProductItem item={item} />}
-            showsVerticalScrollIndicator={false}
-          />
-        </ScrollView>
-      </ScrollView> */}
+
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("FollowUs")}>
+        <View style={styles.cardBody}>
+        <Image
+          style={{height:50,width:50}}
+          source={require('../../assets/icons/follow.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          Follow Us
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate("ContactUs")}>
+        <View style={styles.cardBody}>
+        <Image
+          style={{height:50,width:50}}
+          source={require('../../assets/icons/pantry.png')}
+        />
+        </View>  
+        <Text style={{textAlign:'center',marginTop:10,fontWeight: '700',fontSize: 16,}}>
+          People's Pantry
+        </Text>
+      </TouchableOpacity>
+      
     </View>
   );
 };

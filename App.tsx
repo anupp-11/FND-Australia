@@ -12,22 +12,14 @@ import Navigation from './navigation';
 
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-    'Montserrat-Light': require('./assets/fonts/Montserrat-Light.ttf'),
-    'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
-  });
+  
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
-  if (!fontsLoaded ) {
-    return null;
-  } else {
+  
     return (
       <SafeAreaProvider>
         <Navigation  />
         <StatusBar />
       </SafeAreaProvider>
     );
-  }
 }

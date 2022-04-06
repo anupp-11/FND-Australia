@@ -1,5 +1,5 @@
 import { StyleSheet, ImageBackground } from 'react-native';
-import { theme } from '../../components/LoginComponents/theme';
+import { theme } from '../../../components/LoginComponents/theme';
 
 const styles = StyleSheet.create({
 
@@ -10,14 +10,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    //alignContent: 'space-around',
+    alignContent: 'space-around',
     height: '100%',
   },
   card: {
-    marginVertical:20,
     width: '40%',
     height:180,
-    margin: 15,
+    margin: 10,
   },
 
 

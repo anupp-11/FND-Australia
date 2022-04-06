@@ -8,6 +8,8 @@ import Header from '../../components/LoginComponents/Header';
 import Logo from '../../components/LoginComponents/Logo';
 import TextInput from '../../components/LoginComponents/TextInput';
 import {theme} from '../../components/LoginComponents/theme';
+import Title from '../../components/LoginComponents/Title';
+
 import {
   emailValidator,
   nameValidator,
@@ -43,7 +45,13 @@ const RegisterScreen = () => {
     <Background>
       <BackButton goBack={() => navigation.navigate('Login')} />
 
-      <Logo />
+      <View style={styles.logo}>
+        <Logo />
+        <View style={{display:'flex', flexDirection:'column',alignItems:'flex-start'}}>
+          <Title>South Eastern</Title>
+          <Title>Community Connect</Title>
+        </View>
+      </View>
 
       <Header>Create Account</Header>
 
@@ -79,30 +87,66 @@ const RegisterScreen = () => {
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
-        Sign Up
-      </Button>
-
-      <View style={styles.row}>
+      <View style={styles.roww}>
         <Text style={styles.label}>Already have an account? </Text>
         <TouchableOpacity onPress={Login}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
+
+
+      <View style={styles.row}>
+        <Text style={styles.label}>By continuing you agree to our </Text>
+        <TouchableOpacity >
+          <Text style={styles.link}>Terms of Services</Text>
+        </TouchableOpacity>
+        <Text style={styles.label}> and </Text>
+        <TouchableOpacity>
+          <Text style={styles.link}>Privacy Policy.</Text>
+        </TouchableOpacity>
+      </View>
+      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+        Sign Up
+      </Button>
+
+      
     </Background>
   );
 };
 
 const styles = StyleSheet.create({
-  label: {
-    color: theme.colors.secondary,
+  logo: {
+    display:'flex',
+    flexDirection:'row', 
+    width:'100%',
+    alignItems:'center',
+    justifyContent: 'space-around',
+    marginBottom:30
   },
+  
   button: {
     marginTop: 24,
   },
   row: {
     flexDirection: 'row',
     marginTop: 4,
+    flexWrap:'wrap',
+    width: '100%',
+  },
+  roww: {
+    flexDirection: 'row',
+    marginTop: 4,
+    flexWrap:'wrap',
+    width: '100%',
+    marginBottom:40
+  },
+  col: {
+    flexDirection: 'column',
+    flexWrap:'wrap',
+    width: '100%',
+    },
+  label: {
+    color: theme.colors.secondary,
   },
   link: {
     fontWeight: 'bold',
