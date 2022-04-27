@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_USER_URL, API, API_TYPE, GET_USER_URL, LOGIN_URL, REGISTER_URL, UPDATE_USER_URL } from "../constants/api";
+import { ADD_USER_URL, API, API_TYPE, FORGOTPASS_URL, GET_USER_URL, LOGIN_URL, REGISTER_URL, RESETPASS_URL, UPDATE_USER_URL, VERIFYOTP_URL } from "../constants/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthUserInfo, LoginDetail, RegsUserInfo, RegUserInfo, UserInfo } from "../models/BaseModel";
 
@@ -91,7 +91,7 @@ export async function getUserInfoFromDevice() {
   }
 }
 
-export async function getUserInfo(userId) {
+export async function getUserInfo(userId:any) {
 
   const user = await getUserFromDevice();
   const token = user?.jwtToken;
@@ -123,4 +123,45 @@ export async function getLoginDetailFromDevice() {
     return loginDetail;
   }
  // return new OrderStorageModel([]);
+}
+
+
+
+export async function forgetPassword(email:string) {
+  
+  const url =  FORGOTPASS_URL+`?userEmail=`+encodeURIComponent(email);
+  debugger;
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  const response = await fetch(url,requestOptions);
+  const data = await response.json();
+  debugger;
+  return data;
+}
+export async function verifyOtp(email:string,token:string) {
+  debugger;
+  const url =  VERIFYOTP_URL+`?userEmail=`+encodeURIComponent(email)+`&token=`+token;
+  debugger;
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  const response = await fetch(url,requestOptions);
+  const data = await response.json();
+  debugger;
+  return data;
+}
+
+export async function resetPassword(email:string,token:string,newPassword:string) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ emailId: email, token:token, newPassword: newPassword })
+  };
+  const response = await fetch(RESETPASS_URL,requestOptions);
+  const data = await response.json();
+  debugger;
+  return data;
 }

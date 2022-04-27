@@ -9,6 +9,8 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import BottomTabNav from './BottomTabNav';
+import OtpScreen from '../screens/ForgotPasswordScreen/OtpScreen';
+import ChangePasswordScreen from '../screens/ForgotPasswordScreen/ChangePasswordScreen';
 
 const Root = createStackNavigator();
 
@@ -32,6 +34,8 @@ function Login() {
       <Stack.Screen component={LoginScreen} name="Login" options={{gestureEnabled: false}} />
       <Stack.Screen component={RegisterScreen} name="Register" />
       <Stack.Screen component={ForgotPasswordScreen} name="ForgotPassword" />
+      <Stack.Screen component={OtpScreen} name="OtpScreen" />
+      <Stack.Screen component={ChangePasswordScreen} name="ChangePassword" />
       {/* <Stack.Screen component={LoginScreen} name="Login" options={{gestureEnabled: false}}/>
       <Stack.Screen component={RegisterScreen} name="Register" />
       <Stack.Screen component={ForgotPasswordScreen} name="ForgotPassword" />
